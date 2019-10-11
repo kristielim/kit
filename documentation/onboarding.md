@@ -34,23 +34,25 @@ If you have XCode, you already have an iOS simulator so just select "Run on iOS 
 
 ## Make your first PR
 
-9. Create a new branch.
+9. Create a new branch with ```git checkout -b your-name/documentation```.
 
 10. Edit the `documentation/onboarding.md` file. Add explanations for what you thought was confusing or update anything incorrect. Screenshots are helpful. 
 Also, this is a markdown file, so search up "markdown" to learn what all the strange symbols mean. 
 
-11. Add your changes.
+11. Add your changes with ```git add .```.
 
-12. Commit your changes. Write a descriptive message such as "Added xyz to onboarding doc".
+12. Commit your changes. Write a descriptive message such as "Added xyz to onboarding doc". ```git commit -m 'Added xyz to onboarding doc```. Everytime you make a change and you feel like you've reached a good stopping point, add and commit your new changes. 
 
-13. Push your changes.
+13. Push your changes with ```git push```. This will take the changes on your local computer and push them to GitHub. 
+You probably will get an error message saying you need to run ```git push --set-upstream```. Copy and run that command. 
+This happens the first time you try to push to your branch.
 
-14. Go to GitHub and click "Open a new pull request".
+14. Go to GitHub and click "Open a new pull request" for the branch that you just pushed to.
 
 15. Fill out the descriptions. This is more for complex features/code and not for really updating documentation, so you might think "Why are there so many explanation things I have to fill out?" But this PR is just for practice. 
 Usually, you'll want to explain what feature you added, add screenshots, and explain what you tested.
 
 16. Request a reviewer. Choose someone that you haven't asked to review your code before. Wait for a reviewer to get back to you.
-If you're the reviewer, write comments on anything you're confused about. This step is also generally unnecessary for updating documentation and is also just for practice.
+If you're the reviewer, write comments on anything you're confused about or you think is incorrect.
 
 17. Once your change is approved, merge to the master branch. 
