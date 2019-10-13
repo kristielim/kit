@@ -22,7 +22,7 @@ Click the big green button that says "Clone or download" on the first page of th
 ## Run the app
 
 5. The first time you clone the repository, run ```npm install```.
-This will download all dependencies into a folder called `node_modules`. Dependencies are other libraries of code that were written by other people that are used in the project.
+This will download all dependencies into a folder called `node_modules`. Dependencies are libraries of code written by other people that are used in the project.
 
 6. Start the app by running ```npm start```.
 You should see your browser open a new window and a QR code in your terminal. 
@@ -55,4 +55,4 @@ Usually, you'll want to explain what feature you added, add screenshots, and exp
 16. Request a reviewer. Choose someone that you haven't asked to review your code before. Wait for a reviewer to get back to you.
 If you're the reviewer, write comments on anything you're confused about or you think is incorrect.
 
-17. Once your change is approved, merge to the master branch. 
+17. Once your change is approved, merge to the master branch. You might have some merge conflicts, which means someone else already made a change somewhere you made a change. Use the GitHub editor to fix the conflicts. You might need to coordinate with whoever made the conflicting change.
