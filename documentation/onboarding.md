@@ -55,4 +55,4 @@ Usually, you'll want to explain what feature you added, add screenshots, and exp
 16. Request a reviewer. Choose someone that you haven't asked to review your code before. Wait for a reviewer to get back to you.
 If you're the reviewer, write comments on anything you're confused about or you think is incorrect.
 
-17. Once your change is approved, merge to the master branch. 
+17. Once your change is approved, merge to the master branch.
