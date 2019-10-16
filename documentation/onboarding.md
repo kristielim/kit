@@ -10,6 +10,9 @@ If you don't have a text editor installed, I recommend VS Code. Install the Pret
 2. Install Node
 Choose the LTS version. Node is a JavaScript runtime environment so you can run JavaScript on your computer, outside of the browser. 
 
+3. Install Expo CLI, or get the Expo client on your phone
+```npm install -g expo-cli```
+[Expo Docs](https://docs.expo.io/versions/v35.0.0/introduction/installation/)
 ## GitHub setup
 
 3. Make a Github account and send your username to the owner of the repository (Kristie).
