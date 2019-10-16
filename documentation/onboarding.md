@@ -25,7 +25,8 @@ Click the big green button that says "Clone or download" on the first page of th
 This will download all dependencies into a folder called `node_modules`. Dependencies are libraries of code written by other people that are used in the project.
 
 6. Start the app by running ```npm start```.
-You should see your browser open a new window and a QR code in your terminal. 
+You should see your browser open a new window and a QR code in your terminal. If you have problems with installing the expo client, try using the alternative line command provided after receiving errors or the command line found on the React Native Tutorial. If there are still problems, try installing using the command ```sudo``` before using the expo command (on the same line).
+
 
 7. Take your phone and follow the instructions in scanning the QR code. If you want to develop just on your computer, you can download an iOS or Android simulator. 
 If you have XCode, you already have an iOS simulator so just select "Run on iOS simulator." You should see the app come up on your phone or simulator.
