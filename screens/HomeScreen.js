@@ -12,6 +12,8 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
+import signInWithFacebook from "../utils/auth/auth";
+
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
@@ -48,6 +50,14 @@ export default function HomeScreen() {
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
             <Text style={styles.helpLinkText}>
               Help, it didn’t automatically reload!
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.helpContainer}>
+          <TouchableOpacity onPress={signInWithFacebook} style={styles.helpLink}>
+            <Text style={styles.helpLinkText}>
+              Sign-up with FB
             </Text>
           </TouchableOpacity>
         </View>

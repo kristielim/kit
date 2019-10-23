@@ -2,11 +2,10 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
 import firebase from "./utils/firebase/firebase";
-import signInWithFacebook from "./utils/auth/auth";
 
 function storeHighScore(userId, score) {
   firebase
@@ -35,13 +34,6 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         <AppNavigator />
-        <View>
-          <TouchableOpacity onPress={handleTouch}>
-            <Text>
-              handleTouch
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -71,10 +63,6 @@ function handleLoadingError(error) {
 
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
-}
-
-function handleTouch() {
-  signInWithFacebook()
 }
 
 const styles = StyleSheet.create({
