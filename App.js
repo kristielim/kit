@@ -18,7 +18,11 @@ function storeHighScore(userId, score) {
   console.log('finished store')
 }
 
+<<<<<<< HEAD
 storeHighScore("hullo_test", 420);
+=======
+storeHighScore("shrek", 69);
+>>>>>>> trying to add screens and navigation
 
 export default function App(props) {
 
