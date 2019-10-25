@@ -16,7 +16,7 @@ function storeHighScore(userId, score) {
     });
 }
 
-storeHighScore("ghijk", 121);
+storeHighScore("shrek", 69);
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
