@@ -38,8 +38,7 @@ export default function TeamsScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FCB26D',
   },
   contentContainer: {
     paddingTop: 30,
@@ -47,6 +46,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   logoText: {
     fontFamily: 'space-mono', //EVAN TODO: Design hand-off
