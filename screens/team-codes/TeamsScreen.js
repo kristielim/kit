@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Image,
   Platform,
   ScrollView,
@@ -9,14 +10,14 @@ import {
   View,
 } from 'react-native';
 
+import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
+
 export default function TeamsScreen() {
   return (
-    <View>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
+    <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        {/*EVAN TODO: iso this header view, reused on all screens*/}
         <View style={styles.header}>
-          <Text>{/*EVAN TODO: iso this header view, reused on all screens*/}</Text>
           <Text style={styles.logoText}>KIT</Text>
           <Image
             source={
@@ -27,9 +28,8 @@ export default function TeamsScreen() {
             style={styles.logo}
           />
         </View>
-
-        <View>
-          <Text>Add a new team</Text>
+        <View style={styles.mainBody}>
+          <MainTeamComponent />
         </View>
       </ScrollView>
     </View>
@@ -38,10 +38,8 @@ export default function TeamsScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#FCB26D',
-  },
-  contentContainer: {
-    paddingTop: 30,
   },
   header: {
     flex: 1,
@@ -59,5 +57,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+  },
+  mainBody: {
+    flex: 3,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#FCF1E9',
+    margin: 15,
   },
 });
