@@ -22,12 +22,12 @@ export function MainTeamComponent() {
 
           <View>
             {/* EVAN TODO: These Button comps are just a placeholder for now, we will need a custom comp in the future */}
-            <View style={styles.buttonWrapper}>
-              <Button title={"Share"} color={"black"} onPress={() => {alert('Share button')}} />
-            </View>
-            <View style={styles.buttonWrapper}>
-              <Button title={"Copy"} color={"black"} onPress={() => {alert('Copy button')}} />
-            </View>
+            <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {alert('Share button')}}>
+              <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Share</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {alert('Copy button')}}>
+              <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Copy</Text>
+            </TouchableOpacity>
           </View>
 
           <View>
@@ -57,12 +57,14 @@ export function MainTeamComponent() {
       return (
         <View>
           {/* EVAN TODO: These Button comps are just a placeholder for now, we will need a custom comp in the future */}
-          <View style={styles.buttonWrapper}>
-            <Button title={"Create new team"} color={"black"} onPress={() => {switchToView(1)}} />
-          </View>
-          <View style={styles.buttonWrapper}>
-            <Button title={"Join a team"} color={"black"} onPress={() => {switchToView(2)}} />
-          </View>
+          <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {switchToView(1)}}>
+            <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Create new team</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {switchToView(2)}}>
+            <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Join a team</Text>
+          </TouchableOpacity>
+            
           {/* EVAN TODO: make the below teams view dynamic */}
           <Text style={styles.text}>No Teams Yet</Text>
         </View>
@@ -85,10 +87,11 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     backgroundColor: "#FFCEBE",
-    width: 250,
+    width: 302,
+    height: 68,
     marginTop: 5,
     marginLeft: 'auto',
     marginRight: 'auto',
-    borderRadius: 5,
+    borderRadius: 30,
   }
 });
