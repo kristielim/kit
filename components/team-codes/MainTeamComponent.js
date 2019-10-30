@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
   },
   buttonWrapper: {
-    flex: 1,
     backgroundColor: "#FFCEBE",
     width: 250,
     marginTop: 5,

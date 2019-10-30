@@ -11,27 +11,26 @@ import {
 } from 'react-native';
 
 import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
+import { AuthSession } from 'expo';
 
 export default function TeamsScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {/*EVAN TODO: iso this header view, reused on all screens*/}
-        <View style={styles.header}>
-          <Text style={styles.logoText}>KIT</Text>
-          <Image
-            source={
-              __DEV__
-                ? require('../../assets/images/robot-dev.png')
-                : require('../../assets/images/robot-prod.png')
-            }
-            style={styles.logo}
-          />
-        </View>
-        <View style={styles.mainBody}>
-          <MainTeamComponent />
-        </View>
-      </ScrollView>
+      {/*EVAN TODO: iso this header view, reused on all screens*/}
+      <View style={styles.header}>
+        <Text style={styles.logoText}>KIT</Text>
+        <Image
+          source={
+            __DEV__
+              ? require('../../assets/images/robot-dev.png')
+              : require('../../assets/images/robot-prod.png')
+          }
+          style={styles.logo}
+        />
+      </View>
+      <View style={styles.mainBody}>
+        <MainTeamComponent />
+      </View>
     </View>
   );
 }
@@ -59,7 +58,10 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   },
   mainBody: {
+    flex: 9,
     backgroundColor: '#FCF1E9',
-    margin: 15,
+    margin: 25,
+    paddingVertical: 25,
+    borderRadius: 10,
   },
 });
