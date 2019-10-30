@@ -15,7 +15,7 @@ import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent
 export default function TeamsScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container}>
+      <ScrollView>
         {/*EVAN TODO: iso this header view, reused on all screens*/}
         <View style={styles.header}>
           <Text style={styles.logoText}>KIT</Text>
@@ -59,9 +59,6 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   },
   mainBody: {
-    flex: 3,
-    flexDirection: 'column',
-    justifyContent: 'center',
     backgroundColor: '#FCF1E9',
     margin: 15,
   },
