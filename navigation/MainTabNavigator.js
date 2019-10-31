@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import TeamsScreen from '../screens/team-codes/TeamsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -34,6 +35,30 @@ HomeStack.navigationOptions = {
 };
 
 HomeStack.path = '';
+
+const TeamsStack = createStackNavigator(
+  {
+    Teams: TeamsScreen,
+  },
+  config
+);
+
+TeamsStack.navigationOptions = {
+  tabBarLabel: 'Teams',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      // EVAN TODO: Design hand-off for icon
+      // name={
+      //   Platform.OS === 'ios'
+      //     ? `ios-information-circle${focused ? '' : '-outline'}`
+      //     : 'md-information-circle'
+      // }
+    />
+  ),
+};
+
+TeamsStack.path = '';
 
 const LinksStack = createStackNavigator(
   {
@@ -71,6 +96,7 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  TeamsStack,
 });
 
 tabNavigator.path = '';
