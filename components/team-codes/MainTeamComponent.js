@@ -3,6 +3,7 @@ import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'reac
 
 import { Create } from './Create';
 import { Join } from './Join';
+import { MyTeams } from './MyTeams';
 
 export function MainTeamComponent() {
   const [componentView, setComponentView] = useState(0)
@@ -35,13 +36,13 @@ export function MainTeamComponent() {
           <TouchableOpacity style={[styles.buttonWrapper, {flex: 1}]} onPress={() => {switchToView(2)}}>
             <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Join a team</Text>
           </TouchableOpacity>
-            
-          {/* EVAN TODO: make the below teams view dynamic */}
-          <Text style={styles.text}>No Teams Yet</Text>
+
+          <MyTeams />
         </View>
       );
   }
 }
+//EVAN TODO: merge all stylesheets for team-codes into singular one referenced by all
 const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
