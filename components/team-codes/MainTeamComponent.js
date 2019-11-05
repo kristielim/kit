@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import KitButton from '../KitButton';
+import KitText from '../KitText';
 
 import { Create } from './Create';
 import { Join } from './Join';
-import { MyTeams } from './MyTeams';
 
-export function MainTeamComponent() {
+export function MainTeamComponent(props) {
   const [componentView, setComponentView] = useState(0)
   const [teamNameText, setTeamNameText] = useState('')
 
@@ -27,17 +28,11 @@ export function MainTeamComponent() {
     default:
       return (
         <View style={{flex: 1}}>
-          {/* EVAN TODO: These Button comps are just a placeholder for now, we will need a custom comp in the future */}
-          <TouchableOpacity style={[styles.buttonWrapper, {flex: 1, flexDirection: 'row'}]} onPress={() => {switchToView(1)}}>
-            <Image source={placeholderImage} style={{marginTop: 'auto', marginBottom: 'auto'}} />
-            <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Create new team</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={[styles.buttonWrapper, {flex: 1}]} onPress={() => {switchToView(2)}}>
-            <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Join a team</Text>
-          </TouchableOpacity>
-
-          <MyTeams />
+          <View style={{flex: 1, justifyContent: "center", alignItems: "flex-start", backgroundColor: "#569684", maxHeight: 200}}>
+            <KitButton style={{button: styles.buttonWrapper}} onPress={() => {switchToView(2)}} buttonTextColor={"#E17327"} buttonFontWeight={"medium"} buttonFontSize={15} buttonTextStyle={{}} buttonBackgroundColor={"#FFFFFF"} image={placeholderImage}>JOIN TEAM</KitButton>
+            
+            <KitButton style={{button: styles.buttonWrapper}} onPress={() => {switchToView(1)}} buttonTextColor={"#569684"} buttonFontWeight={"medium"} buttonFontSize={15} buttonTextStyle={{}} buttonBackgroundColor={"#FFFFFF"} image={placeholderImage}>CREATE NEW TEAM</KitButton>
+          </View>
         </View>
       );
   }
@@ -59,11 +54,10 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     backgroundColor: "#FFCEBE",
-    width: 302,
-    maxHeight: 68,
-    marginTop: 5,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    borderRadius: 30,
+    width: 268,
+    maxHeight: 48,
+    marginTop: 8,
+    marginBottom: 8,
+    borderRadius: 20,
   }
 });
