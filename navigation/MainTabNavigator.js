@@ -5,19 +5,12 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
-<<<<<<< HEAD
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import LoginScreen from '../screens/LoginScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import TeamsScreen from '../screens/team-codes/TeamsScreen';
-=======
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import LinksScreen from "../screens/LinksScreen";
+import LoginScreen from "../screens/LoginScreen";
 import SettingsScreen from "../screens/SettingsScreen";
->>>>>>> trying to add screens and navigation
+import TeamsScreen from "../screens/team-codes/TeamsScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -49,18 +42,13 @@ HomeStack.path = "";
 
 const TeamsStack = createStackNavigator(
   {
-<<<<<<< HEAD
-    Teams: TeamsScreen,
-=======
-    Links: LinksScreen
->>>>>>> trying to add screens and navigation
+    Teams: TeamsScreen
   },
   config
 );
 
-<<<<<<< HEAD
 TeamsStack.navigationOptions = {
-  tabBarLabel: 'Teams',
+  tabBarLabel: "Teams",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -71,24 +59,20 @@ TeamsStack.navigationOptions = {
       //     : 'md-information-circle'
       // }
     />
-  ),
+  )
 };
 
-TeamsStack.path = '';
+TeamsStack.path = "";
 
 const LoginStack = createStackNavigator(
   {
-    Login: LoginScreen,
+    Login: LoginScreen
   },
   config
 );
 
 LoginStack.navigationOptions = {
-  tabBarLabel: 'Login',
-=======
-LinksStack.navigationOptions = {
-  tabBarLabel: "Links",
->>>>>>> trying to add screens and navigation
+  tabBarLabel: "Login",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -97,11 +81,7 @@ LinksStack.navigationOptions = {
   )
 };
 
-<<<<<<< HEAD
-LoginStack.path = '';
-=======
-LinksStack.path = "";
->>>>>>> trying to add screens and navigation
+LoginStack.path = "";
 
 const SettingsStack = createStackNavigator(
   {
@@ -124,14 +104,9 @@ SettingsStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-<<<<<<< HEAD
   LoginStack,
   SettingsStack,
-  TeamsStack,
-=======
-  LinksStack,
-  SettingsStack
->>>>>>> trying to add screens and navigation
+  TeamsStack
 });
 
 tabNavigator.path = "";
