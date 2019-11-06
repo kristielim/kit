@@ -7,37 +7,6 @@ export function Create(props) {
   const placeholderImage = require('../../assets/images/40by40.png')
 
   return (
-    // <View>
-    //   <View>
-    //     <Text style={styles.text}>Team Code:</Text>
-    //     <View>
-    //       <Text style={[styles.text, styles.codeBox]}>47VK0A</Text>
-    //     </View>
-    //     <Text style={styles.text}>You can have up to 5 people on a team</Text>
-    //   </View>
-
-    //   <View>
-    //     {/* EVAN TODO: These Button comps are just a placeholder for now, we will need a custom comp in the future */}
-    //     <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {alert('Share button')}}>
-    //       <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Share</Text>
-    //     </TouchableOpacity>
-    //     <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {alert('Copy button')}}>
-    //       <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Copy</Text>
-    //     </TouchableOpacity>
-    //   </View>
-
-    //   <View>
-    //     <Text style={styles.text}>Set a team name:</Text>
-    //     <TextInput style={{backgroundColor: 'white', width: 244, height: 41,borderWidth: 1, borderColor: 'black',marginTop: 5, marginLeft: 'auto', marginRight: 'auto',}} placeholder="Set a team name:" onChangeText={props.onChangeText} value={props.teamNameText} />
-    //     <Text style={styles.text}>This can always be changed later</Text>
-    //   </View>
-
-    //   <TouchableOpacity onPress={props.back}>
-    //     <Text style={{color: '#E17327', fontSize: 20, textAlign: 'center',}}>
-    //       back
-    //     </Text>
-    //   </TouchableOpacity>
-    // </View>
     <View style={{flex:1,backgroundColor: "#569684",padding: 20,}}>
       <View style={{flex:1, borderRadius: 30, backgroundColor: "#FFFFFF"}}>
         <KitButton style={{maxHeight: 40, marginLeft: 0, marginRight: 0, justifyContent: "flex-start"}} image={placeholderImage}></KitButton>
