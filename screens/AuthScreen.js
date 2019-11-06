@@ -1,33 +1,74 @@
+// import React from "react";
+// import { View } from "react-native";
+// import { Card, Button, FormLabel, FormInput } from "react-native-elements";
+import { onSignIn } from "../utils/auth/auth";
+
+// export default ({ navigation }) => (
+//   <View style={{ paddingVertical: 20 }}>
+//     <Card>
+//       <FormLabel>Email</FormLabel>
+//       <FormInput placeholder="Email address..." />
+//       <FormLabel>Password</FormLabel>
+//       <FormInput secureTextEntry placeholder="Password..." />
+//       <FormLabel>Confirm Password</FormLabel>
+//       <FormInput secureTextEntry placeholder="Confirm Password..." />
+
+//       <Button
+//         buttonStyle={{ marginTop: 20 }}
+//         backgroundColor="#03A9F4"
+//         title="SIGN UP"
+//         onPress={() => {
+//           onSignIn().then(() => navigation.navigate("Main"));
+//         }}
+//       />
+//       <Button
+//         buttonStyle={{ marginTop: 20 }}
+//         backgroundColor="transparent"
+//         textStyle={{ color: "#bcbec1" }}
+//         title="Sign In"
+//         onPress={() => navigation.navigate("SignIn")}
+//       />
+//     </Card>
+//   </View>
+// );
+
 import React from "react";
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View
-} from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
-export default class AuthLoadingScreen extends React.Component {
-  componentDidMount() {
-    this._bootstrapAsync();
-  }
-
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem("userToken");
-
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? "App" : "Auth");
+export default function SignUp(props) {
+  const { navigation } = props;
+  const goToSignIn = () => {
+    navigation.navigate("SignIn");
   };
-
-  // Render any loading content that you like here
-  render() {
-    return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <Text>Signup</Text>
+      <Button title="Go to Sign In" onPress={goToSignIn} />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+// export default AuthScreen = () => {
+//   return <Button />;
+// };
+
+// export default class SignUp extends React.Component {
+//   goToLogin = () => this.props.navigation.navigate("Login");
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <Text>Signup</Text>
+//         <Button title="Go to Login" onPress={this.goToLogin} />
+//       </View>
+//     );
+//   }
+// }
