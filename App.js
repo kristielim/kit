@@ -8,17 +8,20 @@ import AppNavigator from "./navigation/AppNavigator";
 import firebase from "./utils/firebase/firebase";
 
 function storeHighScore(userId, score) {
+  console.log('entered store')
   firebase
     .database()
     .ref("users/" + userId)
     .set({
       highscore: score
     });
+  console.log('finished store')
 }
 
-storeHighScore("ghijk", 121);
+storeHighScore("hullo_test", 420);
 
 export default function App(props) {
+
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -37,6 +40,7 @@ export default function App(props) {
       </View>
     );
   }
+
 }
 
 async function loadResourcesAsync() {
