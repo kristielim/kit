@@ -8,20 +8,17 @@ import AppNavigator from "./navigation/AppNavigator";
 import firebase from "./utils/firebase/firebase";
 
 function storeHighScore(userId, score) {
-  console.log('entered store')
   firebase
     .database()
     .ref("users/" + userId)
     .set({
       highscore: score
     });
-  console.log('finished store')
 }
 
-storeHighScore("hullo_test", 420);
+storeHighScore("ghijk", 121);
 
 export default function App(props) {
-
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -40,7 +37,6 @@ export default function App(props) {
       </View>
     );
   }
-
 }
 
 async function loadResourcesAsync() {
@@ -52,7 +48,30 @@ async function loadResourcesAsync() {
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
-      
+      'poligon-black-italic': require('./assets/fonts/Poligon/poligon-black-italic.otf'),
+      'poligon-black-link': require('./assets/fonts/Poligon/poligon-black-link.otf'),
+      'poligon-black': require('./assets/fonts/Poligon/poligon-black.otf'),
+      'poligon-bold-italic': require('./assets/fonts/Poligon/poligon-bold-italic.otf'),
+      'poligon-bold-link': require('./assets/fonts/Poligon/poligon-bold-link.otf'),
+      'poligon-bold': require('./assets/fonts/Poligon/poligon-bold.otf'),
+      'poligon-extrabold-italic': require('./assets/fonts/Poligon/poligon-extrabold-italic.otf'),
+      'poligon-extrabold-link': require('./assets/fonts/Poligon/poligon-extrabold-link.otf'),
+      'poligon-extrabold': require('./assets/fonts/Poligon/poligon-extrabold.otf'),
+      'poligon-light-italic': require('./assets/fonts/Poligon/poligon-light-italic.otf'),
+      'poligon-light-link': require('./assets/fonts/Poligon/poligon-light-link.otf'),
+      'poligon-light': require('./assets/fonts/Poligon/poligon-light.otf'),
+      'poligon-medium-italic': require('./assets/fonts/Poligon/poligon-medium-italic.otf'),
+      'poligon-medium-link': require('./assets/fonts/Poligon/poligon-medium-link.otf'),
+      'poligon-medium': require('./assets/fonts/Poligon/poligon-medium.otf'),
+      'poligon-regular-italic': require('./assets/fonts/Poligon/poligon-regular-italic.otf'),
+      'poligon-regular-link': require('./assets/fonts/Poligon/poligon-regular-link.otf'),
+      'poligon-regular': require('./assets/fonts/Poligon/poligon-regular.otf'),
+      'poligon-semibold-italic': require('./assets/fonts/Poligon/poligon-semibold-italic.otf'),
+      'poligon-semibold-link': require('./assets/fonts/Poligon/poligon-semibold-link.otf'),
+      'poligon-semibold': require('./assets/fonts/Poligon/poligon-semibold.otf'),
+      'poligon-thin-italic': require('./assets/fonts/Poligon/poligon-thin-italic.otf'),
+      'poligon-thin-link': require('./assets/fonts/Poligon/poligon-thin-link.otf'),
+      'poligon-thin': require('./assets/fonts/Poligon/poligon-thin.otf'),
     })
   ]);
 }

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logoText: {
-    fontFamily: 'space-mono', //EVAN TODO: Design hand-off
+    fontFamily: 'poligon-black-bold', //EVAN TODO: Design hand-off
     fontSize: 35,
     // lineHeight: 24,
   },

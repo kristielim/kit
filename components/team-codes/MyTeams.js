@@ -5,7 +5,6 @@ import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'reac
 import { getTeamsForUserId } from '../../utils/db/handle'
 import KitText from '../KitText';
 
-const _ = require("lodash");
 const myUserId = 'user_id_1'; //EVAN TODO. This is hardcoded for now, just to see if linkup to firebase will work. We can use var userId = firebase.auth().currentUser.uid; later
 
 export function MyTeams(props) {
