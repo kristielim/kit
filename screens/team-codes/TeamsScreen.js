@@ -15,6 +15,7 @@ import KitButton from '../../components/KitButton';
 import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
 import { MyTeams } from '../../components/team-codes/MyTeams';
 import { AuthSession } from 'expo';
+import Colors from '../../constants/Colors';
 
 export default function TeamsScreen() {
   const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
@@ -23,9 +24,25 @@ export default function TeamsScreen() {
 
   return (
     <View style={styles.container}>
-      <KitText style={{paddingTop: 10, paddingBottom: 10}} size={24} fontWeight={"bold"} color={"black"}>My Teams</KitText>
+      <KitText 
+        style={styles.header} 
+        size={24} 
+        fontWeight={"bold"} 
+        color={Colors.KIT_BLACK}>
+          My Teams
+      </KitText>
 
-      <KitButton style={{button: {maxHeight: 50, marginLeft: 15, justifyContent: "flex-start"}}} onPress={() => {setShowAddTeamMenu(!showAddTeamMenu)}} buttonTextColor={"#569684"} buttonFontWeight={"regular"} buttonFontSize={24} buttonTextStyle={{}} buttonBackgroundColor={"#FFFFFF"} image={placeholderImage}>Add Team</KitButton>
+      <KitButton 
+        style={{button: styles.addTeamButton}} 
+        onPress={() => {setShowAddTeamMenu(!showAddTeamMenu)}} 
+        buttonTextColor={Colors.KIT_GREEN} 
+        buttonFontWeight={"regular"} 
+        buttonFontSize={24} 
+        buttonTextStyle={{}} 
+        buttonBackgroundColor={Colors.KIT_WHITE} 
+        image={placeholderImage}>
+          Add Team
+      </KitButton>
 
       <View style={styles.mainBody}>
         {showAddTeamMenu && <MainTeamComponent />}
@@ -39,27 +56,19 @@ export default function TeamsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.KIT_WHITE,
   },
   header: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  logoText: {
-    fontFamily: 'poligon-black-bold', //EVAN TODO: Design hand-off
-    fontSize: 35,
-    // lineHeight: 24,
-  },
-  logo: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+    paddingTop: 10, 
+    paddingBottom: 10
   },
   mainBody: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.KIT_WHITE,
   },
+  addTeamButton: {
+    maxHeight: 50,
+    marginLeft: 15, 
+    justifyContent: "flex-start"
+  }
 });

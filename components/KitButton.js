@@ -19,6 +19,7 @@ props expected:
   buttonTextColor
   buttonFontWeight
   buttonFontSize
+  buttonFontCalligraphy
   buttonTextStyle
 */
 export default function KitButton(props) {
@@ -36,9 +37,21 @@ export default function KitButton(props) {
   }
   
   return (
-    <TouchableOpacity style={[defaultButtonWrapperStyles, props.style.button, {backgroundColor: props.buttonBackgroundColor}]} onPress={props.onPress}>
-      {props.image && <Image source={props.image} style={[defaultButtonImageStyles, props.style.image,]} />}
-      {props.children && <KitText style={props.buttonTextStyle ? props.buttonTextStyle : {}} color={props.buttonTextColor ? props.buttonTextColor : "black"} fontWeight={props.buttonFontWeight} size={props.buttonFontSize}>{props.children}</KitText>}
+    <TouchableOpacity style={[defaultButtonWrapperStyles, //Defaults coming first in array allows for custom overwriting by props.style.button
+                              props.style.button, 
+                              {backgroundColor: props.buttonBackgroundColor}]} 
+                      onPress={props.onPress}>
+
+      {props.image && <Image source={props.image} style={[defaultButtonImageStyles, //Defaults coming first
+                                                          props.style.image,]} />}
+
+      {props.children && <KitText style={props.buttonTextStyle ? props.buttonTextStyle : {}} 
+                                  color={props.buttonTextColor ? props.buttonTextColor : "black"} 
+                                  fontWeight={props.buttonFontWeight} 
+                                  fontCalligraphy={props.buttonFontCalligraphy ? props.buttonFontCalligraphy : ""}
+                                  size={props.buttonFontSize}>
+                                    {props.children}
+                          </KitText>}
     </TouchableOpacity>
   );
 }

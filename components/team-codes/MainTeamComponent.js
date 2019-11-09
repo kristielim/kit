@@ -5,6 +5,7 @@ import KitText from '../KitText';
 
 import { Create } from './Create';
 import { Join } from './Join';
+import Colors from '../../constants/Colors';
 
 export function MainTeamComponent(props) {
   const [componentView, setComponentView] = useState(0)
@@ -29,9 +30,29 @@ export function MainTeamComponent(props) {
       return (
         <View style={{flex: 1}}>
           <View style={{flex: 1, justifyContent: "center", alignItems: "flex-start", backgroundColor: "#569684", maxHeight: 200}}>
-            <KitButton style={{button: styles.buttonWrapper}} onPress={() => {switchToView(2)}} buttonTextColor={"#E17327"} buttonFontWeight={"medium"} buttonFontSize={15} buttonTextStyle={{}} buttonBackgroundColor={"#FFFFFF"} image={placeholderImage}>JOIN TEAM</KitButton>
+            <KitButton 
+              style={{button: styles.buttonWrapper}} 
+              onPress={() => {switchToView(2)}} 
+              buttonTextColor={Colors.KIT_ORANGE} 
+              buttonFontWeight={"medium"} 
+              buttonFontSize={15}
+              buttonTextStyle={{}}
+              buttonBackgroundColor={Colors.KIT_WHITE} 
+              image={placeholderImage}>
+                JOIN TEAM
+            </KitButton>
             
-            <KitButton style={{button: styles.buttonWrapper}} onPress={() => {switchToView(1)}} buttonTextColor={"#569684"} buttonFontWeight={"medium"} buttonFontSize={15} buttonTextStyle={{}} buttonBackgroundColor={"#FFFFFF"} image={placeholderImage}>CREATE NEW TEAM</KitButton>
+            <KitButton 
+              style={{button: styles.buttonWrapper}} 
+              onPress={() => {switchToView(1)}} 
+              buttonTextColor={Colors.KIT_GREEN} 
+              buttonFontWeight={"medium"} 
+              buttonFontSize={15}
+              buttonTextStyle={{}}
+              buttonBackgroundColor={Colors.KIT_WHITE} 
+              image={placeholderImage}>
+                CREATE NEW TEAM
+            </KitButton>
           </View>
         </View>
       );

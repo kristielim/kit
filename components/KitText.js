@@ -16,7 +16,7 @@ props expected
     bold
     extrabold
     black
-  fontCaligraphy
+  fontCalligraphy
     italic
     link
     none
@@ -65,13 +65,13 @@ export default function KitText(props) {
     }
   }
 
-  const pickFontCaligraphy = () => {
-    switch (props.fontCaligraphy) {
+  const pickFontCalligraphy = () => {
+    switch (props.fontCalligraphy) {
       case "italic":
         setFontToUse(fontToUse + "-italic")
         break
       case "link":
-        setFontToUse(fontToUse + "-italic")
+        setFontToUse(fontToUse + "-link")
         break
       default:
         break
@@ -82,15 +82,16 @@ export default function KitText(props) {
   useEffect(() => { //Same effect as componentDidMount
     loadFontAssets()
     pickFontWeight()
-    pickFontCaligraphy()
+    pickFontCalligraphy()
   }, []);
 
   return (fontLoaded ? (
-    <Text style={[defaultFontStyles, props.style, { fontFamily: fontToUse,
-                                                    fontSize: props.size, 
-                                                    color: props.color ? props.color : "black"}]}>
+    <Text style={[defaultFontStyles, //Defaults come first so can be overwritten by props.style
+                  props.style,
+                  { fontFamily: fontToUse,
+                    fontSize: props.size, 
+                    color: props.color }]}>
       {props.children}
     </Text>) : null
-    
   );
 }

@@ -13,7 +13,11 @@ export function MyTeams(props) {
 
   return (
     <View style={{marginTop: 10,}}>
-      {myTeams.length == 0 && <KitText style={{}} size={36}>No Teams Yet</KitText>}
+      {myTeams.length == 0 && <KitText 
+                                style={{}} 
+                                size={36}>
+                                  No Teams Yet
+                              </KitText>}
     </View>
   );
 }
