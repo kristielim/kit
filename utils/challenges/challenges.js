@@ -34,16 +34,3 @@ export async function setCurrentChallenge(teamId) {
       currentChallenge: assignedChallengeId
     });
 }
-
-export async function createTeam(teamId) {
-  firebase
-    .database()
-    .ref(`/teams/${teamId}`)
-    .set({
-      archivedChallenges: ["hellohello", "ldjflskd"],
-      code: "wxyz",
-      name: "Udon",
-      score: 0,
-      users: ["1234", "5678"]
-    });
-}
