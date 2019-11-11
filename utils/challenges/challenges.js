@@ -10,14 +10,14 @@ export async function setCurrentChallenge(teamId) {
   // challenge ids are indexed at 0
   const challengeId = Math.floor(Math.random() * challengeCount);
 
-  const time = firebase.database.ServerValue.TIMESTAMP;
+  const assignedTime = firebase.database.ServerValue.TIMESTAMP;
   // time since the Unix epoch, in milliseconds) as determined by the Firebase servers
   // see https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
 
   const newChallenge = {
     challengeId,
     teamId,
-    assignedTime: time
+    assignedTime
   };
 
   const assignedChallengeRef = await firebase
