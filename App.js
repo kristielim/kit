@@ -8,7 +8,6 @@ import AppNavigator from "./navigation/AppNavigator";
 
 import { setCurrentChallenge, createTeam } from "./utils/challenges/challenges";
 
-createTeam("teamteam");
 setCurrentChallenge("teamteam");
 
 export default function App(props) {

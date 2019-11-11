@@ -1,8 +1,11 @@
 import firebase from "../firebase/firebase";
 
 export async function setCurrentChallenge(teamId) {
-  const challengeId = 0; // TODO: change to random number from 0 to challenges.length
-  const time = 0; // TODO: use moments or other api to get current time
+  const challengeId = 1; // TODO: change to random number from 0 to challenges.length
+  const time = firebase.database.ServerValue.TIMESTAMP;
+  // time since the Unix epoch, in milliseconds) as determined by the Firebase servers
+  // see https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
+
   const newChallenge = {
     challengeId,
     teamId,
