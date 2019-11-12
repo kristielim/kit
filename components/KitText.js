@@ -23,69 +23,58 @@ props expected
   size
 */
 export default function KitText(props) {
-  const [fontLoaded, setFontLoaded] = useState("");
+  const [fontLoaded, setFontLoaded] = useState("poligon"); //Defaulted to poligon for now, leaving hook in case we want to load different fonts in the future. ()
   const [fontToUse, setFontToUse] = useState("");
 
   const defaultFontStyles = {marginTop: "auto", marginBottom: "auto", textAlign: "center"}; //EVAN TODO: move this to constants
 
-  const loadFontAssets = async () => {
-    await Font.loadAsync({
-      // Reload the defaults just in case loading for App.js doesn't work, remove later if needed for performance
-      'poligon-regular': require('../assets/fonts/Poligon/poligon-regular.otf'),
-    });
-    setFontLoaded("poligon");
-  }
-
-  const pickFontWeight = () => {
-    switch (props.fontWeight) {
+  const pickFont = (fW, fC) => {
+    let fontWeight = fW
+    switch (fontWeight) {
       case "thin":
-        setFontToUse("poligon" + "-thin")
         break;
       case "light":
-        setFontToUse("poligon" + "-light")
         break;
       default:
-        setFontToUse("poligon" + "-regular")
+        fontWeight = "regular"
         break;
       case "medium":
-        setFontToUse("poligon" + "-medium")
         break;
       case "semibold":
-        setFontToUse("poligon" + "-semibold")
         break;
       case "bold":
-        setFontToUse("poligon" + "-bold")
         break;
       case "extrabold":
-        setFontToUse("poligon" + "-extrabold")
         break;
       case "black":
-        setFontToUse("poligon" + "-black")
         break;
     }
-  }
-
-  const pickFontCalligraphy = () => {
-    switch (props.fontCalligraphy) {
+  
+    let fontCalligraphy = fC
+    switch (fontCalligraphy) {
       case "italic":
-        setFontToUse(fontToUse + "-italic")
         break
       case "link":
-        setFontToUse(fontToUse + "-link")
         break
       default:
+        fontCalligraphy = ""
         break
     }
+
+    const newFontToUse = fontCalligraphy ? `${fontLoaded}-${fontWeight}-${fontCalligraphy}` : `${fontLoaded}-${fontWeight}` //If calligraphy is specified, set it. If not, do not set it
+    setFontToUse(newFontToUse)
   }
 
 
-  useEffect(() => { //Same effect as componentDidMount
-    loadFontAssets()
-    pickFontWeight()
-    pickFontCalligraphy()
+
+  useEffect(() => {
+    // loadFontAssets()
+    console.log(props.fontWeight)
+    console.log(props.fontCalligraphy)
+    pickFont(props.fontWeight, props.fontCalligraphy)
   }, []);
 
-  return (fontLoaded ? (
+  return (fontLoaded && fontToUse ? (
     <Text style={[defaultFontStyles, //Defaults come first so can be overwritten by props.style
                   props.style,
                   { fontFamily: fontToUse,
