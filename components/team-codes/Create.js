@@ -3,6 +3,7 @@ import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'reac
 import KitButton from '../KitButton';
 import KitText from '../KitText';
 import Colors from '../../constants/Colors';
+import FontStyles from '../../constants/FontStyles'
 
 export function Create(props) {
   const placeholderImage = require('../../assets/images/40by40.png')
@@ -20,7 +21,7 @@ export function Create(props) {
             style={{}} 
             size={18} 
             color={Colors.KIT_DARKEST_BLACK} 
-            fontWeight={"light"}>
+            fontWeight={FontStyles.FONT_WEIGHT_LIGHT}>
               Set Team Name
           </KitText>
 
@@ -34,7 +35,7 @@ export function Create(props) {
         <View style={{flex:4,justifyContent:"flex-start"}}>
           <KitText 
             style={{}} 
-            fontWeight={"bold"} 
+            fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
             color={Colors.KIT_DARKEST_BLACK} 
             size={53}>
               47VK0A
@@ -45,7 +46,7 @@ export function Create(props) {
             onPress={()=>alert("pressed!")} 
             buttonBackgroundColor={Colors.KIT_GREEN} 
             buttonTextColor={Colors.KIT_WHITE} 
-            buttonFontWeight={"medium"} 
+            buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
             buttonFontSize={18} 
             buttonTextStyle={{}}>
               SHARE
@@ -56,7 +57,7 @@ export function Create(props) {
             onPress={()=>alert("pressed!")} 
             buttonBackgroundColor={Colors.KIT_WHITE} 
             buttonTextColor={Colors.KIT_GREEN} 
-            buttonFontWeight={"medium"} 
+            buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
             buttonFontSize={18} 
             buttonTextStyle={{}}>
               COPY
@@ -65,7 +66,7 @@ export function Create(props) {
           <KitText 
             style={{}} 
             color={Colors.KIT_DARKEST_BLACK} 
-            fontWeight={"light"} 
+            fontWeight={FontStyles.FONT_WEIGHT_LIGHT} 
             size={14}>
               Invite up to 5 friends per team
           </KitText>

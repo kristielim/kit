@@ -6,6 +6,7 @@ import KitText from '../KitText';
 import { Create } from './Create';
 import { Join } from './Join';
 import Colors from '../../constants/Colors';
+import FontStyles from '../../constants/FontStyles';
 
 export function MainTeamComponent(props) {
   const [componentView, setComponentView] = useState(0)
@@ -34,7 +35,7 @@ export function MainTeamComponent(props) {
               style={{button: styles.buttonWrapper}} 
               onPress={() => {switchToView(2)}} 
               buttonTextColor={Colors.KIT_ORANGE} 
-              buttonFontWeight={"medium"} 
+              buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
               buttonFontSize={15}
               buttonTextStyle={{}}
               buttonBackgroundColor={Colors.KIT_WHITE} 
@@ -46,7 +47,7 @@ export function MainTeamComponent(props) {
               style={{button: styles.buttonWrapper}} 
               onPress={() => {switchToView(1)}} 
               buttonTextColor={Colors.KIT_GREEN} 
-              buttonFontWeight={"medium"} 
+              buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
               buttonFontSize={15}
               buttonTextStyle={{}}
               buttonBackgroundColor={Colors.KIT_WHITE} 

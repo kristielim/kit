@@ -16,6 +16,7 @@ import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent
 import { MyTeams } from '../../components/team-codes/MyTeams';
 import { AuthSession } from 'expo';
 import Colors from '../../constants/Colors';
+import FontStyles from '../../constants/FontStyles';
 
 export default function TeamsScreen() {
   const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
@@ -27,7 +28,7 @@ export default function TeamsScreen() {
       <KitText 
         style={styles.header} 
         size={24} 
-        fontWeight={"bold"} 
+        fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
         color={Colors.KIT_BLACK}>
           My Teams
       </KitText>
@@ -36,7 +37,7 @@ export default function TeamsScreen() {
         style={{button: styles.addTeamButton}} 
         onPress={() => {setShowAddTeamMenu(!showAddTeamMenu)}} 
         buttonTextColor={Colors.KIT_GREEN} 
-        buttonFontWeight={"regular"} 
+        buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
         buttonFontSize={24} 
         buttonTextStyle={{}} 
         buttonBackgroundColor={Colors.KIT_WHITE} 
