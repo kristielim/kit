@@ -69,8 +69,6 @@ export default function KitText(props) {
 
   useEffect(() => {
     // loadFontAssets()
-    console.log(props.fontWeight)
-    console.log(props.fontCalligraphy)
     pickFont(props.fontWeight, props.fontCalligraphy)
   }, []);
 
