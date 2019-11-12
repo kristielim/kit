@@ -14,6 +14,8 @@ import {
 
 import { MonoText } from "../components/StyledText";
 
+import signInWithFacebook from "../utils/auth/auth";
+
 export default function HomeScreen() {
   return (
     <View style={styles.container}>

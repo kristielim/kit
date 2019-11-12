@@ -24,17 +24,80 @@ import { onSignIn } from "../utils/auth/auth";
 // );
 
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { Input } from "../components/input";
+import { Button } from "../components/button";
+import * as firebase from "firebase";
 
 export default function SignIn(props) {
   const { navigation } = props;
   const goToMain = () => {
     navigation.navigate("Main");
   };
+  const goToSignUp = () => {
+    navigation.navigate("SignUp");
+    // <View style={styles.container}>
+    //   <Text>Signup</Text>
+    //   <Button title="Go to Sign Up" onPress={goToSignUp} />
+    // </View>;
+  };
+  this.state = {
+    email: "",
+    password: ""
+  };
+
+  SignUp = (email, password) => {
+    try {
+      firebase.auth().createUserWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error.toString(error));
+    }
+  };
+
+  Login = (email, password) => {
+    try {
+      firebase.auth().signInWithEmailAndPassword(email, password);
+      firebase.auth().onAuthStateChanged(user => {
+        alert(user.email);
+      });
+    } catch (error) {
+      console.log(error.toString(error));
+    }
+  };
   return (
-    <View style={styles.container}>
-      <Text>Sign In</Text>
-      <Button title="Sign In" onPress={goToMain} />
+    <View>
+      <Input
+        label="Email Address"
+        placeholder="you@domain.com"
+        onChangeText={email => {
+          this.state.email = email;
+        }}
+        value={this.email}
+      />
+      <Input
+        label="Password"
+        autoCorrect={false}
+        placeholder="*******"
+        secureTextEntry
+        onChangeText={password => {
+          this.state.password = password;
+        }}
+        value={this.password}
+      />
+      <Button
+        onPress={
+          (() => this.Login(this.state.email, this.state.password), goToMain)
+        }
+      >
+        Log In{" "}
+      </Button>
+      <Button
+        onPress={
+          (() => this.SignUp(this.state.email, this.state.password), goToSignUp)
+        }
+      >
+        Don't have an account? Sign up{" "}
+      </Button>
     </View>
   );
 }
