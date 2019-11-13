@@ -1,6 +1,32 @@
 import firebase from "../firebase/firebase";
 
+async function getCurrentValue(url) {
+  const snapshot = await firebase
+    .database()
+    .ref(url)
+    .once("value");
+  return snapshot.val();
+}
+
+export async function getCurrentChallengeId(teamId) {
+  return await getCurrentValue(`/teams/${teamId}/currentChallenge`);
+}
+
+export async function getChallenge(challengeId) {
+  return await getCurrentValue(`assignedChallenges/${challengeId}`);
+}
+
 export async function setCurrentChallenge(teamId) {
+  // archive challenge if challenge has at least one submission
+  const currentChallengeId = await getCurrentChallengeId(teamId);
+  const challenge = await getChallenge(currentChallengeId);
+  if (challenge.hasOwnProperty("submissions")) {
+    firebase
+      .database()
+      .ref(`/teams/${teamId}/archivedChallenges`)
+      .push(currentChallengeId);
+  }
+
   // pick a random challenge
   const challengeCountSnapshot = await firebase
     .database()
@@ -22,7 +48,7 @@ export async function setCurrentChallenge(teamId) {
 
   const assignedChallengeRef = await firebase
     .database()
-    .ref(`/assignedChallenges/`)
+    .ref("/assignedChallenges/")
     .push(newChallenge);
 
   const assignedChallengeId = assignedChallengeRef.key;
