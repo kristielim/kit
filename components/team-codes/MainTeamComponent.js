@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import KitButton from '../KitButton';
+import KitText from '../KitText';
 
 import { Create } from './Create';
 import { Join } from './Join';
+import Colors from '../../constants/Colors';
+import FontStyles from '../../constants/FontStyles';
 
-export function MainTeamComponent() {
+export function MainTeamComponent(props) {
   const [componentView, setComponentView] = useState(0)
   const [teamNameText, setTeamNameText] = useState('')
 
@@ -26,22 +30,36 @@ export function MainTeamComponent() {
     default:
       return (
         <View style={{flex: 1}}>
-          {/* EVAN TODO: These Button comps are just a placeholder for now, we will need a custom comp in the future */}
-          <TouchableOpacity style={[styles.buttonWrapper, {flex: 1, flexDirection: 'row'}]} onPress={() => {switchToView(1)}}>
-            <Image source={placeholderImage} style={{marginTop: 'auto', marginBottom: 'auto'}} />
-            <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Create new team</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={[styles.buttonWrapper, {flex: 1}]} onPress={() => {switchToView(2)}}>
-            <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Join a team</Text>
-          </TouchableOpacity>
+          <View style={{flex: 1, justifyContent: "center", alignItems: "flex-start", backgroundColor: "#569684", maxHeight: 200}}>
+            <KitButton 
+              style={{button: styles.buttonWrapper}} 
+              onPress={() => {switchToView(2)}} 
+              buttonTextColor={Colors.KIT_ORANGE} 
+              buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
+              buttonFontSize={15}
+              buttonTextStyle={{}}
+              buttonBackgroundColor={Colors.KIT_WHITE} 
+              image={placeholderImage}>
+                JOIN TEAM
+            </KitButton>
             
-          {/* EVAN TODO: make the below teams view dynamic */}
-          <Text style={styles.text}>No Teams Yet</Text>
+            <KitButton 
+              style={{button: styles.buttonWrapper}} 
+              onPress={() => {switchToView(1)}} 
+              buttonTextColor={Colors.KIT_GREEN} 
+              buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
+              buttonFontSize={15}
+              buttonTextStyle={{}}
+              buttonBackgroundColor={Colors.KIT_WHITE} 
+              image={placeholderImage}>
+                CREATE NEW TEAM
+            </KitButton>
+          </View>
         </View>
       );
   }
 }
+//EVAN TODO: merge all stylesheets for team-codes into singular one referenced by all
 const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
@@ -58,11 +76,10 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     backgroundColor: "#FFCEBE",
-    width: 302,
-    maxHeight: 68,
-    marginTop: 5,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    borderRadius: 30,
+    width: 268,
+    maxHeight: 48,
+    marginTop: 8,
+    marginBottom: 8,
+    borderRadius: 20,
   }
 });
