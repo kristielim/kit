@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
 
 export default function App(props) {
+
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -25,6 +26,7 @@ export default function App(props) {
       </View>
     );
   }
+
 }
 
 async function loadResourcesAsync() {
