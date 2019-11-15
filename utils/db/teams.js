@@ -10,7 +10,9 @@ async function addUserToTeam(teamId, userId) {
   const teamIds = await getCurrentValue(`/users/${userId}/teams`);
   // Filter for uniqueness just in case
   const newTeams = teamIds
-    ? [teamId, ...teamIds].filter((v, i, a) => a.indexOf(v) === i)
+    ? [teamId, ...teamIds].filter(
+        (value, index, self) => self.indexOf(value) === index
+      )
     : [teamId];
   firebase
     .database()
