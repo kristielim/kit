@@ -1,12 +1,5 @@
 import firebase from "../firebase/firebase";
-
-async function getCurrentValue(url) {
-  const snapshot = await firebase
-    .database()
-    .ref(url)
-    .once("value");
-  return snapshot.val();
-}
+import { getCurrentValue } from "./helper";
 
 export async function getCurrentChallengeId(teamId) {
   return await getCurrentValue(`/teams/${teamId}/currentChallenge`);
@@ -20,7 +13,7 @@ export async function setCurrentChallenge(teamId) {
   // archive challenge if challenge has at least one submission
   const currentChallengeId = await getCurrentChallengeId(teamId);
   const challenge = await getChallenge(currentChallengeId);
-  if (challenge.hasOwnProperty("submissions")) {
+  if (challenge && challenge.hasOwnProperty("submissions")) {
     firebase
       .database()
       .ref(`/teams/${teamId}/archivedChallenges`)
