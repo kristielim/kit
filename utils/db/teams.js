@@ -1,5 +1,3 @@
-import shortid from "shortid";
-
 import firebase from "../firebase/firebase";
 import { setCurrentChallenge } from "./challenges";
 import { getCurrentValue } from "./helper";
@@ -8,7 +6,22 @@ async function getTeamIdFromTeamCode(teamCode) {
   return getCurrentValue(`/teamCodes/${teamCode}`);
 }
 
-export async function createTeam(teamName, userId) {
+async function addUserToTeam(teamId, userId) {
+  const teamIds = await getCurrentValue(`/users/${userId}/teams`);
+  // Filter for uniqueness just in case
+  const newTeams = teamIds
+    ? [teamId, ...teamIds].filter((v, i, a) => a.indexOf(v) === i)
+    : [teamId];
+  firebase
+    .database()
+    .ref(`/users/${userId}`)
+    .update({
+      teams: newTeams
+    });
+}
+
+// Helper create team function that creates a new team without any checks
+async function _createTeam(teamName, userId) {
   const team = {
     name: teamName,
     score: 0,
@@ -25,26 +38,26 @@ export async function createTeam(teamName, userId) {
 
   // Use the last six digits of team id for the team code
   let teamCode = teamId.slice(-6);
+  return [teamId, teamCode];
+}
+
+export async function createTeam(teamName, userId) {
+  let [teamId, teamCode] = await _createTeam(teamName, userId);
 
   // Race condition in the event that two users generate the same team code and check for existence at the same time
   // Very unlikely but might want to come up with a solution for this eventually
   let teamCodeExists = await getTeamIdFromTeamCode(teamCode);
+
   while (teamCodeExists) {
     // Delete team
     firebase
       .database()
       .ref(`/teams/${teamId}`)
       .remove();
-    // Create another team
-    teamRef = await firebase
-      .database()
-      .ref("/teams/")
-      .push(team);
 
-    teamId = teamRef.key;
-
-    // Use the last six digits of team id for the team code
-    teamCode = teamId.slice(-6);
+    const [newTeamId, newTeamCode] = await _createTeam(teamName, userId);
+    teamId = newTeamId;
+    teamCode = newTeamCode;
     teamCodeExists = await getTeamIdFromTeamCode(teamCode);
   }
 
@@ -56,18 +69,7 @@ export async function createTeam(teamName, userId) {
 
   setCurrentChallenge(teamId);
 
-  // Add to user's team list
-  const teamIds = await getCurrentValue(`/users/${userId}/teams`);
-  // Filter for uniqueness just in case
-  const newTeams = teamIds
-    ? [teamId, ...teamIds].filter((v, i, a) => a.indexOf(v) === i)
-    : [teamId];
-  firebase
-    .database()
-    .ref(`/users/${userId}`)
-    .update({
-      teams: newTeams
-    });
+  addUserToTeam(teamId, userId);
 
   return teamCode;
 }
