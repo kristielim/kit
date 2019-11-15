@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import KitButton from '../KitButton';
 import KitText from '../KitText';
+import KitSvg from '../KitSvg';
+import { Circle, Path } from 'react-native-svg';
 
 import { Create } from './Create';
 import { Join } from './Join';
@@ -15,8 +17,6 @@ export function MainTeamComponent(props) {
   const switchToView = function (view) {
     setComponentView(view)
   }
-
-  const placeholderImage = require('../../assets/images/40by40.png')
 
   switch (componentView) {
     case 1:
@@ -38,8 +38,14 @@ export function MainTeamComponent(props) {
               buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
               buttonFontSize={15}
               buttonTextStyle={{}}
-              buttonBackgroundColor={Colors.KIT_WHITE} 
-              image={placeholderImage}>
+              buttonBackgroundColor={Colors.KIT_WHITE}>
+                <KitSvg width={9} height={12} scale={1}>
+                  <Circle cx={4.5} cy={2.5} r={2.5} fill="#E17327" />
+                  <Path
+                    d="M4.5 5.667c-2.485 0-4.5 2.76-4.5 6.166h9c0-3.405-2.015-6.166-4.5-6.166z"
+                    fill="#E17327"
+                  />
+                </KitSvg>
                 JOIN TEAM
             </KitButton>
             
@@ -50,8 +56,11 @@ export function MainTeamComponent(props) {
               buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM} 
               buttonFontSize={15}
               buttonTextStyle={{}}
-              buttonBackgroundColor={Colors.KIT_WHITE} 
-              image={placeholderImage}>
+              buttonBackgroundColor={Colors.KIT_WHITE}>
+                <KitSvg width={16} height={16} scale={1}>
+                  <Path d="M0 5.622h16v4.756H0V5.622z" fill="#569684" />
+                  <Path d="M5.622 16V0h4.756v16H5.622z" fill="#569684" />
+                </KitSvg>
                 CREATE NEW TEAM
             </KitButton>
           </View>

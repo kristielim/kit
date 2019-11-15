@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Circle, Path } from 'react-native-svg';
 
 import KitText from '../../components/KitText';
 import KitButton from '../../components/KitButton';
+import KitSvg from '../../components/KitSvg';
 import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
 import { MyTeams } from '../../components/team-codes/MyTeams';
 import { AuthSession } from 'expo';
@@ -20,8 +22,6 @@ import FontStyles from '../../constants/FontStyles';
 
 export default function TeamsScreen() {
   const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
-
-  const placeholderImage = require('../../assets/images/40by40.png')
 
   return (
     <View style={styles.container}>
@@ -40,8 +40,11 @@ export default function TeamsScreen() {
         buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
         buttonFontSize={24} 
         buttonTextStyle={{}} 
-        buttonBackgroundColor={Colors.KIT_WHITE} 
-        image={placeholderImage}>
+        buttonBackgroundColor={Colors.KIT_WHITE}>
+          <KitSvg width={16} height={16} scale={2}>
+            <Path d="M0 5.622h16v4.756H0V5.622z" fill="#569684" />
+            <Path d="M5.622 16V0h4.756v16H5.622z" fill="#569684" />
+          </KitSvg>
           Add Team
       </KitButton>
 
