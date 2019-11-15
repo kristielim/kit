@@ -58,7 +58,6 @@ export async function createTeam(teamName, userId) {
 
   // Add to user's team list
   const teamIds = await getCurrentValue(`/users/${userId}/teams`);
-  console.log(teamIds);
   // Filter for uniqueness just in case
   const newTeams = teamIds
     ? [teamId, ...teamIds].filter((v, i, a) => a.indexOf(v) === i)
