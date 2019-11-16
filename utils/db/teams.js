@@ -80,7 +80,6 @@ export async function getTeamsForUserId(userId) {
   let teams = [];
 
   const teamIds = await getCurrentValue(`/users/${userId}/teams`);
-
   teams = await Promise.all(
     teamIds.map(teamId => {
       //Using Promise.all avoids making the _.map an async function
@@ -89,10 +88,27 @@ export async function getTeamsForUserId(userId) {
         .ref("/teams/" + teamId)
         .once("value")
         .then(returned => {
-          return returned;
+          return returned.val();
         });
     })
   );
+  //Augment team objects with user's names
+  await Promise.all(teams.map(async team => {
+    const augmentedUsersArr = 
+      await Promise.all(team.users.map(async userId => {
+        let augmentedObj = {}
+        augmentedObj["id"] = userId
+        augmentedObj["name"] = await firebase
+          .database()
+          .ref("/users/" + userId)
+          .once("value")
+          .then(returned => {
+            return returned.val().name
+          });
+        return augmentedObj
+      }));
+    team.users = augmentedUsersArr;
+  }));
   // console.log(teams)
   return teams;
 }
