@@ -31,6 +31,8 @@ export function MyTeams(props) {
     if (myTeams.length > 0) {
       for (let myTeam of myTeams) {
         // console.log(myTeam)
+
+        //Extract user's names for display
         const teamUsers = myTeam.users.map(user => {
           return user.name
         }).join(", ")

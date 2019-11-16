@@ -92,7 +92,7 @@ export async function getTeamsForUserId(userId) {
         });
     })
   );
-  //Augment team objects with user's names
+  //Augment team objects with user's names, can be isolated to helper function in future
   await Promise.all(teams.map(async team => {
     const augmentedUsersArr = 
       await Promise.all(team.users.map(async userId => {
