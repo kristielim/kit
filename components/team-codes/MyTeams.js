@@ -36,12 +36,27 @@ export function MyTeams(props) {
         }).join(", ")
 
         components.push(
-          <TouchableOpacity key={myTeam.code} onPress={()=>{alert('touched')}} style={{flex:1, flexDirection: "row", alignItems: "center", justifyContent: "center", width: 320, maxHeight: 74, marginLeft: "auto", marginRight: "auto", marginVertical: 5, padding: 15, borderRadius: 10, backgroundColor: "#D65044"}}>
+          <TouchableOpacity key={myTeam.code} onPress={()=>{alert('touched')}} style={styles.teamBar}>
               <View style={{flex:4, alignItems: "flex-start"}}>
-                <KitText style={{paddingBottom: 10}} color={Color.KIT_WHITE} fontWeight={FontStyles.FONT_WEIGHT_SEMIBOLD} fontCalligraphy={FontStyles.FONT_CALLIGRAPHY_NONE} size={15}>{myTeam.name}</KitText>
-                <KitText style={{lineHeight: 11, textAlign: "left"}} color={Color.KIT_WHITE} fontWeight={FontStyles.FONT_WEIGHT_REGULAR} fontCalligraphy={FontStyles.FONT_CALLIGRAPHY_NONE} size={12} >{teamUsers}</KitText>
+                <KitText 
+                  style={styles.teamName} 
+                  color={Color.KIT_WHITE} 
+                  fontWeight={FontStyles.FONT_WEIGHT_SEMIBOLD} 
+                  fontCalligraphy={FontStyles.FONT_CALLIGRAPHY_NONE} 
+                  size={15}>
+                    {myTeam.name}
+                </KitText>
+                <KitText 
+                  style={styles.teamUsernames} 
+                  color={Color.KIT_WHITE} 
+                  fontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
+                  fontCalligraphy={FontStyles.FONT_CALLIGRAPHY_NONE} 
+                  size={12}>
+                    {teamUsers}
+                </KitText>
               </View>
-              <View style={{flex:1, alignItems: "center", justifyContent: "center"}}>
+
+              <View style={styles.teamBarIcon}>
                 <Image source={placeholderImage}></Image>
               </View>
           </TouchableOpacity>
@@ -65,4 +80,31 @@ export function MyTeams(props) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  teamBar: {
+    flex:1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 320,
+    maxHeight: 74,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginVertical: 5,
+    padding: 15,
+    borderRadius: 10,
+    backgroundColor: "#D65044" //EVAN TODO: hardcoded until design decision on how team color works
+  },
+  teamName: {
+    paddingBottom: 10
+  },
+  teamUsernames: {
+    lineHeight: 11, 
+    textAlign: "left"
+  },
+  teamBarIcon: {
+    flex:1, 
+    alignItems: "center", 
+    justifyContent: "center"
+  }
+});
