@@ -13,10 +13,11 @@ import {
 import KitText from '../../components/KitText';
 import KitButton from '../../components/KitButton';
 import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
-import { MyTeams } from '../../components/team-codes/MyTeams';
+import MyTeams from '../../components/team-codes/MyTeams';
 import { AuthSession } from 'expo';
 import Colors from '../../constants/Colors';
 import FontStyles from '../../constants/FontStyles';
+import { setRecoveryProps } from 'expo/build/ErrorRecovery/ErrorRecovery';
 
 export default function TeamsScreen() {
   const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);

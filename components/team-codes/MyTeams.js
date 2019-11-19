@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput
 } from "react-native";
+import { withNavigation } from 'react-navigation';
 
 import { getTeamsForUserId } from "../../utils/db/teams";
 import KitText from "../KitText";
@@ -15,7 +16,7 @@ import FontStyles from "../../constants/FontStyles"
 
 const myUserId = "user_id_1"; //EVAN TODO. This is hardcoded for now, just to see if linkup to firebase will work. We can use var userId = firebase.auth().currentUser.uid; later
 
-export function MyTeams(props) {
+function MyTeams(props) {
   const [myTeams, setMyTeam] = useState([]);
 
   const placeholderImage = require("../../assets/images/40by40.png");
@@ -38,7 +39,7 @@ export function MyTeams(props) {
         }).join(", ")
 
         components.push(
-          <TouchableOpacity key={myTeam.code} onPress={()=>{alert('touched')}} style={styles.teamBar}>
+          <TouchableOpacity key={myTeam.code} onPress={() => props.navigation.navigate('Team')} style={styles.teamBar}>
               <View style={{flex:4, alignItems: "flex-start"}}>
                 <KitText 
                   style={styles.teamName} 
@@ -110,3 +111,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+export default withNavigation(MyTeams);

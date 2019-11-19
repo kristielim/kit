@@ -8,6 +8,7 @@ import LinksScreen from '../screens/LinksScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import TeamsScreen from '../screens/Teams/TeamsScreen';
+import SpecificTeamScreen from '../screens/Teams/SpecificTeamScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -40,6 +41,7 @@ HomeStack.path = '';
 const TeamsStack = createStackNavigator(
   {
     Teams: TeamsScreen,
+    Team: SpecificTeamScreen,
   },
   config
 );
