@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import TeamsScreen from '../screens/team-codes/TeamsScreen';
+import TeamsScreen from '../screens/Teams/TeamsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
