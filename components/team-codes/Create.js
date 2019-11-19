@@ -1,63 +1,137 @@
-import React from 'react';
-import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from "react";
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput
+} from "react-native";
+import KitButton from "../KitButton";
+import KitText from "../KitText";
+import Colors from "../../constants/Colors";
+import FontStyles from "../../constants/FontStyles";
+import { createTeam } from "../../utils/db/teams";
 
 export function Create(props) {
+  const [teamName, setTeamName] = useState("");
+  const [teamCode, setTeamCode] = useState("");
+
+  const placeholderImage = require("../../assets/images/40by40.png");
+
   return (
-    <View>
-      <View>
-        <Text style={styles.text}>Team Code:</Text>
-        <View>
-          <Text style={[styles.text, styles.codeBox]}>47VK0A</Text>
+    <View style={styles.background}>
+      <View style={styles.main}>
+        <KitButton
+          style={{
+            maxHeight: 40,
+            marginLeft: 0,
+            marginRight: 0,
+            justifyContent: "flex-start"
+          }}
+          image={placeholderImage}
+        ></KitButton>
+
+        <View style={{ flex: 2, justifyContent: "center" }}>
+          <KitText
+            style={{}}
+            size={18}
+            color={Colors.KIT_DARKEST_BLACK}
+            fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
+          >
+            Set Team Name
+          </KitText>
+
+          {/* Evan TODO: Make this input a separate compo */}
+          <TextInput
+            style={styles.textInput}
+            placeholder="Ex) Team One"
+            onChangeText={setTeamName}
+            value={teamName}
+          />
         </View>
-        <Text style={styles.text}>You can have up to 5 people on a team</Text>
-      </View>
 
-      <View>
-        {/* EVAN TODO: These Button comps are just a placeholder for now, we will need a custom comp in the future */}
-        <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {alert('Share button')}}>
-          <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Share</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonWrapper]} onPress={() => {alert('Copy button')}}>
-          <Text style={[styles.text, {fontSize: 24, color: 'black', marginTop: 'auto', marginBottom: 'auto'}]}>Copy</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={{ flex: 4, justifyContent: "flex-start" }}>
+          <KitButton
+            style={{ button: styles.button }}
+            onPress={async () => {
+              const teamCode = await createTeam(teamName, "TODO: add userid");
+              setTeamCode(teamCode);
+            }}
+            buttonBackgroundColor={Colors.KIT_GREEN}
+            buttonTextColor={Colors.KIT_WHITE}
+            buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM}
+            buttonFontSize={18}
+            buttonTextStyle={{}}
+          >
+            CREATE
+          </KitButton>
+          <KitText
+            style={{}}
+            fontWeight={FontStyles.FONT_WEIGHT_BOLD}
+            color={Colors.KIT_DARKEST_BLACK}
+            size={53}
+          >
+            {teamCode}
+          </KitText>
 
-      <View>
-        <Text style={styles.text}>Set a team name:</Text>
-        <TextInput style={{backgroundColor: 'white', width: 244, height: 41,borderWidth: 1, borderColor: 'black',marginTop: 5, marginLeft: 'auto', marginRight: 'auto',}} placeholder="Set a team name:" onChangeText={props.onChangeText} value={props.teamNameText} />
-        <Text style={styles.text}>This can always be changed later</Text>
-      </View>
+          <KitButton
+            style={{ button: styles.button }}
+            onPress={() => alert("pressed!")}
+            buttonBackgroundColor={Colors.KIT_WHITE}
+            buttonTextColor={Colors.KIT_GREEN}
+            buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM}
+            buttonFontSize={18}
+            buttonTextStyle={{}}
+          >
+            COPY
+          </KitButton>
 
-      <TouchableOpacity onPress={props.back}>
-        <Text style={{color: '#E17327', fontSize: 20, textAlign: 'center',}}>
-          back
-        </Text>
-      </TouchableOpacity>
+          <KitText
+            style={{}}
+            color={Colors.KIT_DARKEST_BLACK}
+            fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
+            size={14}
+          >
+            Invite up to 5 friends per team
+          </KitText>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'center',
-  },
-  codeBox: {
-    backgroundColor: '#FFFFFF',
-    fontSize: 50,
-    borderWidth: 1,
-    borderColor: 'black',
-    width: 250,
+  button: {
+    width: 203,
+    maxHeight: 40,
     marginTop: 5,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginBottom: 8,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: Colors.KIT_GREEN
   },
-  buttonWrapper: {
-    backgroundColor: "#FFCEBE",
-    width: 302,
-    maxHeight: 68,
-    marginTop: 5,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+  textInput: {
+    backgroundColor: "white",
+    width: 268,
+    height: 48,
+    borderWidth: 2,
+    borderColor: Colors.KIT_ORANGE,
+    borderRadius: 20,
+    paddingLeft: 15,
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontSize: 24,
+    color: Colors.KIT_DARK_GREY
+  },
+  background: {
+    flex: 1,
+    backgroundColor: Colors.KIT_GREEN,
+    padding: 20
+  },
+  main: {
+    flex: 1,
     borderRadius: 30,
+    backgroundColor: Colors.KIT_WHITE
   }
 });

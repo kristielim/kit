@@ -12,9 +12,8 @@ import {
   View
 } from "react-native";
 
-import { MonoText } from "../components/StyledText";
-
 import signInWithFacebook from "../utils/auth/auth";
+import  KitText from "../components/KitText";
 
 export default function HomeScreen() {
   return (
@@ -35,11 +34,12 @@ export default function HomeScreen() {
 
       <View style={styles.tabBarInfoContainer}>
         <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}
-        >
-          <MonoText style={styles.codeHighlightText}>
+
+          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
+          <KitText style={styles.codeHighlightText}>
+
             navigation/MainTabNavigator.js
-          </MonoText>
+          </KitText>
         </View>
       </View>
     </View>

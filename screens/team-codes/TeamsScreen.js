@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Image,
@@ -10,27 +10,46 @@ import {
   View,
 } from 'react-native';
 
+import KitText from '../../components/KitText';
+import KitButton from '../../components/KitButton';
 import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
+import { MyTeams } from '../../components/team-codes/MyTeams';
 import { AuthSession } from 'expo';
+import Colors from '../../constants/Colors';
+import FontStyles from '../../constants/FontStyles';
 
 export default function TeamsScreen() {
+  const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
+
+  const placeholderImage = require('../../assets/images/40by40.png')
+
   return (
     <View style={styles.container}>
-      {/*EVAN TODO: iso this header view, reused on all screens*/}
-      <View style={styles.header}>
-        <Text style={styles.logoText}>KIT</Text>
-        <Image
-          source={
-            __DEV__
-              ? require('../../assets/images/robot-dev.png')
-              : require('../../assets/images/robot-prod.png')
-          }
-          style={styles.logo}
-        />
-      </View>
+      <KitText 
+        style={styles.header} 
+        size={24} 
+        fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
+        color={Colors.KIT_BLACK}>
+          My Teams
+      </KitText>
+
+      <KitButton 
+        style={{button: styles.addTeamButton}} 
+        onPress={() => {setShowAddTeamMenu(!showAddTeamMenu)}} 
+        buttonTextColor={Colors.KIT_GREEN} 
+        buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
+        buttonFontSize={24} 
+        buttonTextStyle={{}} 
+        buttonBackgroundColor={Colors.KIT_WHITE} 
+        image={placeholderImage}>
+          Add Team
+      </KitButton>
+
       <View style={styles.mainBody}>
-        <MainTeamComponent />
+        {showAddTeamMenu && <MainTeamComponent />}
+        <MyTeams />
       </View>
+    
     </View>
   );
 }
@@ -38,30 +57,19 @@ export default function TeamsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FCB26D',
+    backgroundColor: Colors.KIT_WHITE,
   },
   header: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  logoText: {
-    fontFamily: 'space-mono', //EVAN TODO: Design hand-off
-    fontSize: 35,
-    // lineHeight: 24,
-  },
-  logo: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+    paddingTop: 10, 
+    paddingBottom: 10
   },
   mainBody: {
-    flex: 9,
-    backgroundColor: '#FCF1E9',
-    margin: 25,
-    paddingVertical: 25,
-    borderRadius: 30,
+    flex: 1,
+    backgroundColor: Colors.KIT_WHITE,
   },
+  addTeamButton: {
+    maxHeight: 50,
+    marginLeft: 15, 
+    justifyContent: "flex-start"
+  }
 });
