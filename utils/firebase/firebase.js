@@ -14,7 +14,7 @@ const firebaseConfig = {
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
   projectId: PROJECT_ID,
-  storageBucket: "",
+  storageBucket: "kit-app-54bc0.appspot.com",
   messagingSenderId: MESSAGE_SENDER_ID,
   appId: APP_ID
 };

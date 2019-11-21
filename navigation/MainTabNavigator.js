@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import ImageScreen from '../screens/ImageScreen'
 import LoginScreen from '../screens/LoginScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
@@ -52,12 +53,37 @@ LoginStack.navigationOptions = {
 
 LoginStack.path = '';
 
+const ImageStack = createStackNavigator(
+  {
+    Image: ImageScreen,
+  },
+  config
+);
+
+ImageStack.navigationOptions = {
+  tabBarLabel: 'Image Upload',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+ImageStack.path = '';
+
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
   config
 );
+
+
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
@@ -71,6 +97,7 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LoginStack,
+  ImageStack,
   SettingsStack,
 });
 
