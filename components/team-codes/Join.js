@@ -31,10 +31,8 @@ export function Join(props) {
           setTextValue(text);
           if (text.length == 6) {
             const teamId = await getTeamIdFromTeamCode(text);
-            console.log("teamid", teamId);
             if (teamId) {
               const team = await getTeam(teamId);
-              console.log("team", team);
               setTeamName(team.name);
               setTeamFound(true);
             } else {

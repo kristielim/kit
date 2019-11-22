@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput
-} from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import KitButton from "../KitButton";
 import KitText from "../KitText";
 import Colors from "../../constants/Colors";
 import FontStyles from "../../constants/FontStyles";
 import { createTeam } from "../../utils/db/teams";
+import KitBackgroundScreen from "../KitBackgroundScreen";
 
 export function Create(props) {
   const [teamName, setTeamName] = useState("");
@@ -20,84 +14,82 @@ export function Create(props) {
   const placeholderImage = require("../../assets/images/40by40.png");
 
   return (
-    <View style={styles.background}>
-      <View style={styles.main}>
-        <KitButton
-          style={{
-            maxHeight: 40,
-            marginLeft: 0,
-            marginRight: 0,
-            justifyContent: "flex-start"
-          }}
-          image={placeholderImage}
-        ></KitButton>
+    <KitBackgroundScreen>
+      <KitButton
+        style={{
+          maxHeight: 40,
+          marginLeft: 0,
+          marginRight: 0,
+          justifyContent: "flex-start"
+        }}
+        image={placeholderImage}
+      ></KitButton>
 
-        <View style={{ flex: 2, justifyContent: "center" }}>
-          <KitText
-            style={{}}
-            size={18}
-            color={Colors.KIT_DARKEST_BLACK}
-            fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
-          >
-            Set Team Name
-          </KitText>
+      <View style={{ flex: 2, justifyContent: "center" }}>
+        <KitText
+          style={{}}
+          size={18}
+          color={Colors.KIT_DARKEST_BLACK}
+          fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
+        >
+          Set Team Name
+        </KitText>
 
-          {/* Evan TODO: Make this input a separate compo */}
-          <TextInput
-            style={styles.textInput}
-            placeholder="Ex) Team One"
-            onChangeText={setTeamName}
-            value={teamName}
-          />
-        </View>
-
-        <View style={{ flex: 4, justifyContent: "flex-start" }}>
-          <KitButton
-            style={{ button: styles.button }}
-            onPress={async () => {
-              const teamCode = await createTeam(teamName, "TODO: add userid");
-              setTeamCode(teamCode);
-            }}
-            buttonBackgroundColor={Colors.KIT_GREEN}
-            buttonTextColor={Colors.KIT_WHITE}
-            buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM}
-            buttonFontSize={18}
-            buttonTextStyle={{}}
-          >
-            CREATE
-          </KitButton>
-          <KitText
-            style={{}}
-            fontWeight={FontStyles.FONT_WEIGHT_BOLD}
-            color={Colors.KIT_DARKEST_BLACK}
-            size={53}
-          >
-            {teamCode}
-          </KitText>
-
-          <KitButton
-            style={{ button: styles.button }}
-            onPress={() => alert("pressed!")}
-            buttonBackgroundColor={Colors.KIT_WHITE}
-            buttonTextColor={Colors.KIT_GREEN}
-            buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM}
-            buttonFontSize={18}
-            buttonTextStyle={{}}
-          >
-            COPY
-          </KitButton>
-
-          <KitText
-            style={{}}
-            color={Colors.KIT_DARKEST_BLACK}
-            fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
-            size={14}
-          >
-            Invite up to 5 friends per team
-          </KitText>
-        </View>
+        {/* Evan TODO: Make this input a separate compo */}
+        <TextInput
+          style={styles.textInput}
+          placeholder="Ex) Team One"
+          onChangeText={setTeamName}
+          value={teamName}
+        />
       </View>
-    </View>
+
+      <View style={{ flex: 4, justifyContent: "flex-start" }}>
+        <KitButton
+          style={{ button: styles.button }}
+          onPress={async () => {
+            const teamCode = await createTeam(teamName, "TODO: add userid");
+            setTeamCode(teamCode);
+          }}
+          buttonBackgroundColor={Colors.KIT_GREEN}
+          buttonTextColor={Colors.KIT_WHITE}
+          buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM}
+          buttonFontSize={18}
+          buttonTextStyle={{}}
+        >
+          CREATE
+        </KitButton>
+        <KitText
+          style={{}}
+          fontWeight={FontStyles.FONT_WEIGHT_BOLD}
+          color={Colors.KIT_DARKEST_BLACK}
+          size={53}
+        >
+          {teamCode}
+        </KitText>
+
+        <KitButton
+          style={{ button: styles.button }}
+          onPress={() => alert("pressed!")}
+          buttonBackgroundColor={Colors.KIT_WHITE}
+          buttonTextColor={Colors.KIT_GREEN}
+          buttonFontWeight={FontStyles.FONT_WEIGHT_MEDIUM}
+          buttonFontSize={18}
+          buttonTextStyle={{}}
+        >
+          COPY
+        </KitButton>
+
+        <KitText
+          style={{}}
+          color={Colors.KIT_DARKEST_BLACK}
+          fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
+          size={14}
+        >
+          Invite up to 5 friends per team
+        </KitText>
+      </View>
+    </KitBackgroundScreen>
   );
 }
 
@@ -123,15 +115,5 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     fontSize: 24,
     color: Colors.KIT_DARK_GREY
-  },
-  background: {
-    flex: 1,
-    backgroundColor: Colors.KIT_GREEN,
-    padding: 20
-  },
-  main: {
-    flex: 1,
-    borderRadius: 30,
-    backgroundColor: Colors.KIT_WHITE
   }
 });
