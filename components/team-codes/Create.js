@@ -14,27 +14,8 @@ export function Create(props) {
   const placeholderImage = require("../../assets/images/40by40.png");
 
   return (
-    <KitBackgroundScreen>
-      <KitButton
-        style={{
-          maxHeight: 40,
-          marginLeft: 0,
-          marginRight: 0,
-          justifyContent: "flex-start"
-        }}
-        image={placeholderImage}
-      ></KitButton>
-
+    <KitBackgroundScreen title="Set Team Name:">
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <KitText
-          style={{}}
-          size={18}
-          color={Colors.KIT_DARKEST_BLACK}
-          fontWeight={FontStyles.FONT_WEIGHT_LIGHT}
-        >
-          Set Team Name
-        </KitText>
-
         {/* Evan TODO: Make this input a separate compo */}
         <TextInput
           style={styles.textInput}

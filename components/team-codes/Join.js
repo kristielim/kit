@@ -20,9 +20,8 @@ export function Join(props) {
   const [teamFound, setTeamFound] = useState(false);
 
   return (
-    <KitBackgroundScreen onPressBack={props.back}>
+    <KitBackgroundScreen onPressBack={props.back} title="Enter Code:">
       <View style={styles.container}>
-        <KitText>Enter Code:</KitText>
         <TextInput
           style={styles.textInput}
           onChangeText={async text => {
@@ -40,9 +39,17 @@ export function Join(props) {
           }}
           value={textValue}
         />
+
         {textValue.length >= 6 &&
           (teamFound ? (
             <>
+              <KitText
+                style={styles.infoMessage}
+                fontCalligraphy="italic"
+                color={Colors.KIT_GREEN}
+              >
+                Team Found!
+              </KitText>
               <KitText>Do you want to join {teamName}?</KitText>
               <TouchableOpacity
                 onPress={() => {
@@ -64,7 +71,13 @@ export function Join(props) {
               </TouchableOpacity>
             </>
           ) : (
-            <KitText>Team not found</KitText>
+            <KitText
+              style={styles.infoMessage}
+              fontCalligraphy="italic"
+              color={Colors.KIT_RED}
+            >
+              Invalid Code
+            </KitText>
           ))}
       </View>
     </KitBackgroundScreen>
@@ -72,17 +85,6 @@ export function Join(props) {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    backgroundColor: Colors.KIT_GREEN,
-    padding: 20
-  },
-  main: {
-    flex: 1,
-    borderRadius: 30,
-    backgroundColor: Colors.KIT_WHITE,
-    padding: 16
-  },
   backButton: {
     position: "absolute",
     top: 16,
@@ -90,9 +92,21 @@ const styles = StyleSheet.create({
     zIndex: 100
   },
   container: {
-    display: "flex"
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  infoMessage: {
+    padding: 8
   },
   textInput: {
-    margin: "20% 0%"
+    borderBottomColor: "black",
+    borderBottomWidth: 6,
+    marginTop: "20%",
+    minWidth: 180,
+    textAlign: "center",
+    fontWeight: FontStyles.FONT_WEIGHT_BOLD,
+    color: Colors.KIT_DARKEST_BLACK,
+    fontSize: 53
   }
 });
