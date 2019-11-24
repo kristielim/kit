@@ -12,6 +12,7 @@ import LoginScreen from "../screens/LoginScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import TeamsScreen from "../screens/team-codes/TeamsScreen";
 import JoinScreen from "../screens/team-codes/JoinScreen";
+import CreateScreen from "../screens/team-codes/CreateScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -46,6 +47,14 @@ const TeamsStack = createStackNavigator(
     Teams: TeamsScreen,
     Join: {
       screen: JoinScreen,
+      navigationOptions: () => {
+        return {
+          headerLeft: <></>
+        };
+      }
+    },
+    Create: {
+      screen: CreateScreen,
       navigationOptions: () => {
         return {
           headerLeft: <></>

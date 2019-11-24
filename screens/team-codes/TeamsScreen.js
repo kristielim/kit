@@ -66,6 +66,9 @@ export default function TeamsScreen(props) {
               image={plusImage}
               type="outline"
               color={Colors.KIT_GREEN}
+              onPress={() => {
+                props.navigation.navigate("Create");
+              }}
             >
               CREATE NEW TEAM
             </KitButtonSupreme>
