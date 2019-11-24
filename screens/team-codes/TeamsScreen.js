@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Button,
   Image,
@@ -7,49 +7,72 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
+  View
+} from "react-native";
 
-import KitText from '../../components/KitText';
-import KitButton from '../../components/KitButton';
-import { MainTeamComponent } from '../../components/team-codes/MainTeamComponent';
-import { MyTeams } from '../../components/team-codes/MyTeams';
-import { AuthSession } from 'expo';
-import Colors from '../../constants/Colors';
-import FontStyles from '../../constants/FontStyles';
+import KitText from "../../components/KitText";
+import KitButton from "../../components/KitButton";
+import { MainTeamComponent } from "../../components/team-codes/MainTeamComponent";
+import { MyTeams } from "../../components/team-codes/MyTeams";
+import { AuthSession } from "expo";
+import Colors from "../../constants/Colors";
+import FontStyles from "../../constants/FontStyles";
+import KitButtonSupreme from "../../components/KitButtonSupreme";
 
-export default function TeamsScreen() {
+export default function TeamsScreen(props) {
   const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
 
-  const placeholderImage = require('../../assets/images/40by40.png')
+  const plusImage = require("../../assets/images/plus.png");
+  const personImage = require("../../assets/images/person.png");
 
   return (
     <View style={styles.container}>
-      <KitText 
-        style={styles.header} 
-        size={24} 
-        fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
-        color={Colors.KIT_BLACK}>
-          My Teams
+      <KitText
+        style={styles.header}
+        size={24}
+        fontWeight={FontStyles.FONT_WEIGHT_BOLD}
+        color={Colors.KIT_BLACK}
+      >
+        My Teams
       </KitText>
-
-      <KitButton 
-        style={{button: styles.addTeamButton}} 
-        onPress={() => {setShowAddTeamMenu(!showAddTeamMenu)}} 
-        buttonTextColor={Colors.KIT_GREEN} 
-        buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
-        buttonFontSize={24} 
-        buttonTextStyle={{}} 
-        buttonBackgroundColor={Colors.KIT_WHITE} 
-        image={placeholderImage}>
+      <TouchableOpacity
+        onPress={() => {
+          setShowAddTeamMenu(!showAddTeamMenu);
+        }}
+        style={styles.addTeam}
+      >
+        <Image source={plusImage} />
+        <KitText style={styles.addTeamText} color={Colors.KIT_GREEN} size={24}>
           Add Team
-      </KitButton>
+        </KitText>
+      </TouchableOpacity>
 
       <View style={styles.mainBody}>
-        {showAddTeamMenu && <MainTeamComponent />}
+        {showAddTeamMenu && (
+          <View style={styles.addTeamMenu}>
+            <KitButtonSupreme
+              style={styles.button}
+              image={personImage}
+              type="outline"
+              color={Colors.KIT_ORANGE}
+              onPress={() => {
+                props.navigation.navigate("Join");
+              }}
+            >
+              JOIN TEAM
+            </KitButtonSupreme>
+            <KitButtonSupreme
+              style={styles.button}
+              image={plusImage}
+              type="outline"
+              color={Colors.KIT_GREEN}
+            >
+              CREATE NEW TEAM
+            </KitButtonSupreme>
+          </View>
+        )}
         <MyTeams />
       </View>
-    
     </View>
   );
 }
@@ -57,19 +80,39 @@ export default function TeamsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.KIT_WHITE,
+    backgroundColor: Colors.KIT_WHITE
   },
   header: {
-    paddingTop: 10, 
-    paddingBottom: 10
+    paddingTop: 6,
+    paddingBottom: 6
   },
   mainBody: {
     flex: 1,
-    backgroundColor: Colors.KIT_WHITE,
+    backgroundColor: Colors.KIT_WHITE
   },
-  addTeamButton: {
-    maxHeight: 50,
-    marginLeft: 15, 
-    justifyContent: "flex-start"
+  addTeam: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 32,
+    paddingTop: 8,
+    paddingBottom: 8
+  },
+  addTeamMenu: {
+    display: "flex",
+    flexDirection: "column",
+    height: 168,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.KIT_GREEN
+  },
+  button: {
+    margin: 12
+  },
+  addTeamText: {
+    paddingLeft: 8,
+    paddingTop: 8
+    // Kristie: not sure why but there is some padding on the bottom by default,
+    // added this paddingTop to balance
   }
 });
