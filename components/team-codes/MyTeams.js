@@ -39,7 +39,9 @@ function MyTeams(props) {
         }).join(", ")
 
         components.push(
-          <TouchableOpacity key={myTeam.code} onPress={() => props.navigation.navigate('Team')} style={styles.teamBar}>
+          <TouchableOpacity key={myTeam.code} 
+                            style={styles.teamBar}
+                            onPress={() => {props.navigation.navigate('Team', {team: myTeam})}}>
               <View style={{flex:4, alignItems: "flex-start"}}>
                 <KitText 
                   style={styles.teamName} 
@@ -112,4 +114,5 @@ const styles = StyleSheet.create({
   }
 });
 
+//Calling withNavigation() because props.navigation is only accessible for Screens
 export default withNavigation(MyTeams);
