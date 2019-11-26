@@ -7,6 +7,7 @@ import MainTabNavigator from "./MainTabNavigator";
 
 import SignUp from "../screens/SignUpScreen";
 import SignIn from "../screens/SignInScreen";
+import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -43,6 +44,7 @@ export const SignedOut = createStackNavigator({
 
 export default createAppContainer(
   createSwitchNavigator({
+    Loading: AuthLoadingScreen,
     SignedOut: SignedOut,
     Main: MainTabNavigator
   })
