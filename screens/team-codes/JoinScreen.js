@@ -12,6 +12,7 @@ import KitText from "../../components/KitText";
 import Colors from "../../constants/Colors";
 import FontStyles from "../../constants/FontStyles";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
+import KitButtonSupreme from "../../components/KitButtonSupreme";
 
 export default function JoinScreen(props) {
   const [textValue, setTextValue] = useState("");
@@ -54,25 +55,26 @@ export default function JoinScreen(props) {
               >
                 Team Found!
               </KitText>
-              <KitText>Do you want to join {teamName}?</KitText>
-              <TouchableOpacity
+              <KitText style={styles.joinText} size={26}>
+                Do you want to join{" "}
+                <KitText fontWeight={FontStyles.FONT_WEIGHT_BOLD} size={26}>
+                  {teamName}
+                </KitText>
+                ?
+              </KitText>
+              <KitButtonSupreme
                 onPress={() => {
                   joinTeam(textValue, "TODO: real user").then(() => {
                     setTextValue("");
                     setTeamFound(false);
+                    props.navigation.navigate("Teams");
                   });
+                  // TODO: Kristie handle error case
                 }}
+                style={styles.joinButton}
               >
-                <Text
-                  style={{
-                    color: "#E17327",
-                    fontSize: 20,
-                    textAlign: "center"
-                  }}
-                >
-                  Join
-                </Text>
-              </TouchableOpacity>
+                JOIN
+              </KitButtonSupreme>
             </>
           ) : (
             <KitText
@@ -98,10 +100,17 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
   infoMessage: {
-    padding: 8
+    padding: 16
+  },
+  joinButton: {
+    marginTop: 24
+  },
+  joinText: {
+    marginTop: 24
   },
   textInput: {
     borderBottomColor: "black",
