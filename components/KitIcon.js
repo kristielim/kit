@@ -1,5 +1,7 @@
 import React from "react";
-import { Image } from "react-native";
+import { View, Image } from "react-native";
+import Colors from "../constants/Colors";
+import KitText from "../components/KitText";
 
 // Icon
 export default function KitIcon(props) {
@@ -7,5 +9,15 @@ export default function KitIcon(props) {
   if (props.focused) {
     source = props.activeImage;
   }
-  return <Image source={source} />;
+  return (
+    <View>
+      <Image source={source} />
+      <KitText
+        color={props.focused ? props.color : Colors.KIT_DARK_GREY}
+        size={14}
+      >
+        {props.label}
+      </KitText>
+    </View>
+  );
 }

@@ -34,6 +34,8 @@ ChallengesStack.navigationOptions = {
       focused={focused}
       activeImage={require("../assets/images/foxtail.png")}
       inactiveImage={require("../assets/images/grayfoxtail.png")}
+      label="Challenges"
+      color={Colors.KIT_RED}
     />
   )
 };
@@ -70,6 +72,8 @@ TeamsStack.navigationOptions = {
       focused={focused}
       activeImage={require("../assets/images/teams.png")}
       inactiveImage={require("../assets/images/grayteams.png")}
+      label="Teams"
+      color={Colors.KIT_GREEN}
     />
   )
 };
@@ -90,6 +94,8 @@ ProfileStack.navigationOptions = {
       focused={focused}
       activeImage={require("../assets/images/profile.png")}
       inactiveImage={require("../assets/images/grayprofile.png")}
+      label="Profile"
+      color={Colors.KIT_ORANGE}
     />
   )
 };
@@ -104,9 +110,8 @@ const tabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.KIT_RED,
-      labelStyle: { fontFamily: "poligon-regular", fontSize: 14 },
-      style: { height: 82 }
+      style: { height: 82 },
+      showLabel: false
     }
   }
 );
