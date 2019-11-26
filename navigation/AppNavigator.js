@@ -6,8 +6,6 @@ import { createStackNavigator } from "react-navigation-stack";
 import MainTabNavigator from "./MainTabNavigator";
 
 import SignUp from "../screens/AuthScreen";
-import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
 import SignIn from "../screens/SignInScreen";
 
 const headerStyle = {
