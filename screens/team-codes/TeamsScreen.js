@@ -53,7 +53,7 @@ export default function TeamsScreen(props) {
             <KitButtonSupreme
               style={styles.button}
               image={personImage}
-              type="outline"
+              type="outlined"
               color={Colors.KIT_ORANGE}
               onPress={() => {
                 props.navigation.navigate("Join");
@@ -64,7 +64,7 @@ export default function TeamsScreen(props) {
             <KitButtonSupreme
               style={styles.button}
               image={plusImage}
-              type="outline"
+              type="outlined"
               color={Colors.KIT_GREEN}
               onPress={() => {
                 props.navigation.navigate("Create");
