@@ -112,7 +112,8 @@ const tabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       style: { height: 82 },
       showLabel: false
-    }
+    },
+    initialRouteName: "ChallengesStack"
   }
 );
 
