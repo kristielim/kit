@@ -19,6 +19,7 @@ import FontStyles from '../../constants/FontStyles';
 export default function SpecificTeamsScreen(props) {
   const [team, setTeam] = useState(null);
   const placeholderImage = require('../../assets/images/40by40.png')
+  const Foxtail = require('../../assets/images/Foxtail.png')
 
   useEffect(() => { // componentDidMount
     const teamToDisplay = props.navigation.getParam('team')
@@ -44,11 +45,13 @@ export default function SpecificTeamsScreen(props) {
 
             <View>
               <View style={styles.numCompleted}>
-                <Image source={placeholderImage}/>
-                <KitText>12</KitText>
-              </View> 
-              <KitText>challenges</KitText>
-              <KitText>completed</KitText>
+                <Image source={Foxtail}/>
+                <KitText size={48} fontWeight={FontStyles.FONT_WEIGHT_BOLD} style={{paddingTop: 6}}>12</KitText>
+              </View>
+              <View>
+                <KitText>challenges</KitText>
+                <KitText>completed</KitText>
+              </View>
             </View>
 
             <View>
@@ -129,7 +132,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   numCompleted: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
   },
   superlatives: {
     flexDirection: 'column',
@@ -139,6 +145,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     maxWidth: 300,
+    marginVertical: 50,
   },
   pastChallengeCardWrapper: {
     alignItems: 'center',
