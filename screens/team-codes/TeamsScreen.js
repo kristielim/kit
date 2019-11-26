@@ -1,20 +1,8 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import KitText from "../../components/KitText";
-import KitButton from "../../components/KitButton";
-import { MainTeamComponent } from "../../components/team-codes/MainTeamComponent";
 import { MyTeams } from "../../components/team-codes/MyTeams";
-import { AuthSession } from "expo";
 import Colors from "../../constants/Colors";
 import FontStyles from "../../constants/FontStyles";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
