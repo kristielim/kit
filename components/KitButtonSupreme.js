@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 
