@@ -2,11 +2,16 @@ import firebase from "../firebase/firebase";
 import { setCurrentChallenge } from "./challenges";
 import { getCurrentValue } from "./helper";
 
-async function getTeamIdFromTeamCode(teamCode) {
+export async function getTeamIdFromTeamCode(teamCode) {
   return getCurrentValue(`/teamCodes/${teamCode}`);
 }
 
+export async function getTeam(teamId) {
+  return getCurrentValue(`/teams/${teamId}/`);
+}
+
 async function addUserToTeam(teamId, userId) {
+  // Add team to user
   const teamIds = await getCurrentValue(`/users/${userId}/teams`);
   // Filter for uniqueness just in case
   const newTeams = teamIds
@@ -20,6 +25,24 @@ async function addUserToTeam(teamId, userId) {
     .update({
       teams: newTeams
     });
+
+  // Add user to team
+  const userIds = await getCurrentValue(`/teams/${teamId}/users`);
+  // Filter for uniqueness just in case
+  const newUsers = userIds
+    ? [userId, ...userIds].filter((v, i, a) => a.indexOf(v) === i)
+    : [userId];
+  firebase
+    .database()
+    .ref(`/teams/${teamId}`)
+    .update({
+      users: newUsers
+    });
+}
+
+export async function joinTeam(teamCode, userId) {
+  const teamId = await getTeamIdFromTeamCode(teamCode);
+  addUserToTeam(teamId, userId);
 }
 
 // Helper create team function that creates a new team without any checks
@@ -93,22 +116,25 @@ export async function getTeamsForUserId(userId) {
     })
   );
   //Augment team objects with user's names, can be isolated to helper function in future
-  await Promise.all(teams.map(async team => {
-    const augmentedUsersArr = 
-      await Promise.all(team.users.map(async userId => {
-        let augmentedObj = {}
-        augmentedObj["id"] = userId
-        augmentedObj["name"] = await firebase
-          .database()
-          .ref("/users/" + userId)
-          .once("value")
-          .then(returned => {
-            return returned.val().name
-          });
-        return augmentedObj
-      }));
-    team.users = augmentedUsersArr;
-  }));
+  await Promise.all(
+    teams.map(async team => {
+      const augmentedUsersArr = await Promise.all(
+        team.users.map(async userId => {
+          let augmentedObj = {};
+          augmentedObj["id"] = userId;
+          augmentedObj["name"] = await firebase
+            .database()
+            .ref("/users/" + userId)
+            .once("value")
+            .then(returned => {
+              return returned.val().name;
+            });
+          return augmentedObj;
+        })
+      );
+      team.users = augmentedUsersArr;
+    })
+  );
   // console.log(teams)
   return teams;
 }
