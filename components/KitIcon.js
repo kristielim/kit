@@ -1,11 +1,11 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React from "react";
+import { Image } from "react-native";
 
+// Icon
 export default function KitIcon(props) {
-  return (
-    <Image
-      source={props.source}
-      style={{width: 20, height: 20}}
-    />
-  );
+  let source = props.inactiveImage;
+  if (props.focused) {
+    source = props.activeImage;
+  }
+  return <Image source={source} />;
 }
