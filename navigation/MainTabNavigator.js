@@ -6,13 +6,11 @@ import {
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
-import SettingsScreen from "../screens/SettingsScreen";
 
-import TeamsScreen from "../screens/team-codes/TeamsScreen";
-import JoinScreen from "../screens/team-codes/JoinScreen";
-import CreateScreen from "../screens/team-codes/CreateScreen";
+import TeamsScreen from "../screens/Teams/TeamsScreen";
+import JoinScreen from "../screens/Teams/JoinScreen";
+import CreateScreen from "../screens/Teams/CreateScreen";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import ChallengesScreen from "../screens/ChallengesScreen";
@@ -126,8 +124,7 @@ ProfileStack.path = "";
 const tabNavigator = createBottomTabNavigator({
   TeamsStack,
   ChallengesStack,
-  ProfileStack,
-  LoginStack
+  ProfileStack
 });
 
 tabNavigator.path = "";
