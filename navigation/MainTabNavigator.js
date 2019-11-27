@@ -46,7 +46,14 @@ HomeStack.path = "";
 const TeamsStack = createStackNavigator(
   {
     Teams: TeamsScreen,
-    Team: SpecificTeamScreen,
+    Team: {
+      screen: SpecificTeamScreen,
+      navigationOptions: () => {
+        return {
+          headerLeft: <></>
+        };
+      }
+    },
     Join: {
       screen: JoinScreen,
       navigationOptions: () => {

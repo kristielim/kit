@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 
+import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 
 import KitText from '../../components/KitText';
 import KitButton from '../../components/KitButton';
@@ -27,10 +28,10 @@ export default function SpecificTeamsScreen(props) {
   }, []);
 
   return (
-    <View style={styles.background}>
-      {
-        team && 
-        <View style={styles.inner}>
+    team && 
+    // EVAN TODO: use navigation.back instead of specific 
+    <KitBackgroundScreen color={Colors.KIT_ORANGE} title={team.name} onPressBack={() => {props.navigation.navigate("Teams")}}> 
+      <View style={styles.inner}>
           <View style={styles.topBar}>
             <Image source={placeholderImage}/>
             <Image source={placeholderImage}/>
@@ -100,18 +101,12 @@ export default function SpecificTeamsScreen(props) {
               </View>
             </View>
           </View>
-          <KitText size={50}>{team.name}</KitText>
         </View>
-      }
-    </View>
+    </KitBackgroundScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: Colors.KIT_ORANGE,
-    flex: 1,
-  },
   inner: {
     flex: 1,
     backgroundColor: Colors.KIT_WHITE,
