@@ -160,25 +160,9 @@ const styles = StyleSheet.create({
   textInputContainer: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: 318,
-    width: 268,
+    height: 340,
+    width: 300,
     alignItems: "center",
     justifyContent: "space-evenly"
   }
 });
-
-// export default AuthScreen = () => {
-//   return <Button />;
-// };
-
-// export default class SignUp extends React.Component {
-//   goToLogin = () => this.props.navigation.navigate("Login");
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>Signup</Text>
-//         <Button title="Go to Login" onPress={this.goToLogin} />
-//       </View>
-//     );
-//   }
-// }

@@ -14,15 +14,15 @@ export default function KitTextInput(props) {
       flexDirection: "row",
       alignItems: "center",
       backgroundColor: Colors.KIT_LIGHT_GREY,
-      width: 234,
-      height: 36,
+      width: 260,
+      height: 40,
       borderRadius: 20,
       borderWidth: props.errorState ? 1 : 0,
       borderColor: Colors.KIT_RED
     },
     textInput: {
       backgroundColor: Colors.KIT_LIGHT_GREY,
-      fontSize: 12,
+      fontSize: 16,
       fontFamily: "poligon-regular",
       flex: 1,
       color: Colors.BLACK,
