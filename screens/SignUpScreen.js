@@ -10,6 +10,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function SignUpScreen(props) {
   const { navigation } = props;
 
+  // TODO: Kristie eventually refactor this since there is a lot of repetitive code
+  // probably something to do with hooks
+
   const [displayName, setDisplayName] = useState("");
   const [displayNameError, setDisplayNameError] = useState("");
   const [displayNameSuccess, setDisplayNameSuccess] = useState(false);
@@ -23,13 +26,63 @@ export default function SignUpScreen(props) {
   const [passwordSuccess, setPasswordSuccess] = useState(false);
 
   const [reenteredPassword, setReenteredPassword] = useState("");
-  const [reenteredPasswordError, setreenteredPasswordError] = useState("");
-  const [reenteredPasswordSuccess, setreenteredPasswordSuccess] = useState(
+  const [reenteredPasswordError, setReenteredPasswordError] = useState("");
+  const [reenteredPasswordSuccess, setReenteredPasswordSuccess] = useState(
     false
   );
 
   const goToSignIn = () => {
     navigation.navigate("SignIn");
+  };
+
+  const checkDisplayName = () => {
+    if (displayName === "") {
+      setDisplayNameError("a display name is required");
+      return false;
+    } else {
+      setDisplayNameSuccess(true);
+      setDisplayNameError("");
+      return true;
+    }
+  };
+
+  const checkEmail = async () => {
+    if (email === "") {
+      setEmailError("an email is required");
+      return false;
+    } else {
+      const status = await checkSignUpEmail(email);
+      if (status === "valid") {
+        setEmailSuccess(true);
+        setEmailError("");
+        return true;
+      } else {
+        setEmailError(status);
+        return false;
+      }
+    }
+  };
+
+  const checkPassword = () => {
+    if (password.length < 6) {
+      setPasswordError("password must be at least six characters");
+      return false;
+    } else {
+      setPasswordSuccess(true);
+      setPasswordError("");
+      return true;
+    }
+  };
+
+  const checkReenteredPassword = () => {
+    if (reenteredPassword !== password) {
+      setReenteredPasswordError("passwords do not match");
+      return false;
+    } else if (reenteredPassword.length > 0) {
+      setReenteredPasswordSuccess(true);
+      setReenteredPasswordError("");
+      return true;
+    }
   };
 
   return (
@@ -81,15 +134,11 @@ export default function SignUpScreen(props) {
           <KitTextInput
             image={require("../assets/images/onboardingname.png")}
             placeholder="Display name"
-            onBlur={() => {
-              if (displayName === "") {
-                setDisplayNameError("a display name is required");
-              } else {
-                setDisplayNameSuccess(true);
-                setDisplayNameError("");
-              }
+            onBlur={checkDisplayName}
+            onChangeText={displayName => {
+              setDisplayName(displayName);
+              setDisplayNameError(false);
             }}
-            onChangeText={setDisplayName}
             value={displayName}
             error={displayNameError}
             success={displayNameSuccess}
@@ -97,21 +146,11 @@ export default function SignUpScreen(props) {
           <KitTextInput
             image={require("../assets/images/onboardingemail.png")}
             placeholder="Email"
-            onBlur={() => {
-              if (email === "") {
-                setEmailError("an email is required");
-              } else {
-                checkSignUpEmail(email).then(status => {
-                  if (status === "valid") {
-                    setEmailSuccess(true);
-                    setEmailError("");
-                  } else {
-                    setEmailError(status);
-                  }
-                });
-              }
+            onBlur={checkEmail}
+            onChangeText={email => {
+              setEmail(email);
+              setEmailError(false);
             }}
-            onChangeText={setEmail}
             value={email}
             error={emailError}
             success={emailSuccess}
@@ -119,7 +158,11 @@ export default function SignUpScreen(props) {
           <KitTextInput
             image={require("../assets/images/onboardingpassword.png")}
             placeholder="Password"
-            onChangeText={setPassword}
+            onBlur={checkPassword}
+            onChangeText={password => {
+              setPassword(password);
+              setPasswordError(false);
+            }}
             value={password}
             error={passwordError}
             success={passwordSuccess}
@@ -128,15 +171,26 @@ export default function SignUpScreen(props) {
           <KitTextInput
             image={require("../assets/images/onboardingpassword.png")}
             placeholder="Re-enter password"
-            onChangeText={setReenteredPassword}
+            onBlur={checkReenteredPassword}
+            onChangeText={password => {
+              setReenteredPassword(password);
+              setReenteredPasswordError(false);
+            }}
             value={reenteredPassword}
             error={reenteredPasswordError}
             success={reenteredPasswordSuccess}
             secureTextEntry
           />
           <KitButtonSupreme
-            onPress={() => {
-              signUp(email, password);
+            onPress={async () => {
+              if (
+                checkDisplayName() &&
+                (await checkEmail()) &&
+                checkPassword() &&
+                checkReenteredPassword()
+              ) {
+                signUp(email, password);
+              }
             }}
             color={Colors.KIT_LIGHT_ORANGE}
             width={233}
