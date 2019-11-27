@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 
@@ -27,26 +27,27 @@ export default function KitButtonSupreme({
       alignSelf: "center"
     },
     text: {
-      color: type === "outlined" ? color || Colors.KIT_Green : Colors.KIT_WHITE,
-      fontWeight: "700",
-      fontSize: 15,
       textAlign: "center"
     },
     textContainer: {
       alignContent: "center",
       flexDirection: "row"
+    },
+    image: {
+      marginRight: 10
     }
   });
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.textContainer}>
-        {image && <Image source={image} />}
+        {image && <Image source={image} style={styles.image} />}
         <KitText
           style={styles.text}
           color={
             type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE
           }
           size={16}
+          fontWeight="medium"
         >
           {children}
         </KitText>
