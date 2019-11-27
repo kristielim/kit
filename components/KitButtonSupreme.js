@@ -8,14 +8,16 @@ export default function KitButtonSupreme({
   children,
   color,
   image,
-  type = "filled"
+  type = "filled",
+  width,
+  height
 }) {
   const styles = StyleSheet.create({
     button: {
       backgroundColor:
         type === "filled" ? color || Colors.KIT_Green : Colors.KIT_WHITE,
-      width: 268,
-      height: 48,
+      width: width || 268,
+      height: height || 48,
       paddingTop: 8,
       marginTop: 8,
       marginBottom: 8,
