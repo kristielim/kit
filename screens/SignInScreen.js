@@ -3,7 +3,7 @@ import { StyleSheet, Image, View } from "react-native";
 import KitText from "../components/KitText";
 import KitTextInput from "../components/KitTextInput";
 import KitButtonSupreme from "../components/KitButtonSupreme";
-import { signUp, checkSignUpEmail, signIn } from "../utils/auth/auth";
+import { signIn } from "../utils/auth/auth";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -11,6 +11,7 @@ export default function SignIn(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const goToSignUp = () => {
     navigation.navigate("SignUp");
   };
@@ -75,10 +76,13 @@ export default function SignIn(props) {
               value={password}
               secureTextEntry
             />
+            <KitText color={Colors.KIT_RED} size={16}>
+              {error}
+            </KitText>
           </View>
           <KitButtonSupreme
             onPress={() => {
-              signIn(email, password);
+              signIn(email, password, setError);
             }}
             color={Colors.KIT_LIGHT_ORANGE}
             width={233}

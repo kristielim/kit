@@ -19,12 +19,27 @@ export const signOut = () => {
   }
 };
 
-export const signIn = (email, password, onSignIn) => {
-  try {
-    firebase.auth().signInWithEmailAndPassword(email, password);
-  } catch (error) {
-    console.log(error.toString(error));
-  }
+export const signIn = (email, password, setError) => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .catch(error => {
+      // see https://firebase.google.com/docs/reference/js/firebase.auth.Auth#sign-inwith-email-and-password
+      let errorCode;
+      if (error && error.hasOwnProperty("code")) {
+        errorCode = error.code;
+      }
+      console.log("errorCode", errorCode);
+      if (errorCode === "auth/invalid-email") {
+        setError("not a valid email");
+      } else if (errorCode === "auth/user-not-found") {
+        setError("user not found");
+      } else if (errorCode === "auth/wrong-password") {
+        setError("incorrect password");
+      } else {
+        setError("something went wrong");
+      }
+    });
 };
 
 export const signUp = (email, password) => {
