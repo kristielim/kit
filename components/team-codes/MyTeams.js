@@ -39,7 +39,7 @@ function MyTeams(props) {
         }).join(", ")
 
         components.push(
-          <TouchableOpacity key={myTeam.code} onPress={()=>{alert('touched')}} style={styles.teamBar}>
+          <TouchableOpacity key={myTeam.code} onPress={() => {props.navigation.navigate('Team', {team: myTeam})}} style={styles.teamBar}>
               <View style={{flex:4, alignItems: "flex-start"}}>
                 <KitText 
                   style={styles.teamName} 

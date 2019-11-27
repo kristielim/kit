@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import KitText from "../../components/KitText";
-import { MyTeams } from "../../components/team-codes/MyTeams";
+import MyTeams from "../../components/team-codes/MyTeams";
 import Colors from "../../constants/Colors";
 import FontStyles from "../../constants/FontStyles";
 import KitButtonSupreme from "../../components/KitButtonSupreme";

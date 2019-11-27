@@ -10,10 +10,10 @@ import HomeScreen from "../screens/HomeScreen";
 import LinksScreen from "../screens/LinksScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import TeamsScreen from "../screens/team-codes/TeamsScreen";
+import TeamsScreen from "../screens/Teams/TeamsScreen";
 import SpecificTeamScreen from '../screens/Teams/SpecificTeamScreen';
-import JoinScreen from "../screens/team-codes/JoinScreen";
-import CreateScreen from "../screens/team-codes/CreateScreen";
+import JoinScreen from "../screens/Teams/JoinScreen";
+import CreateScreen from "../screens/Teams/CreateScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
