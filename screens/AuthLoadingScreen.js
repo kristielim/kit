@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 import * as firebase from "firebase";
 
 export default class AuthLoadingScreen extends React.Component {
@@ -10,9 +10,24 @@ export default class AuthLoadingScreen extends React.Component {
   }
   render() {
     return (
-      <View>
-        <Image source={require("../assets/images/foxtail.png")} />
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/logo.png")}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%"
+  },
+  image: {
+    height: 200,
+    width: 200
+  }
+});
