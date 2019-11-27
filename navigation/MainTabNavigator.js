@@ -15,10 +15,17 @@ import ProfileScreen from "../screens/ProfileScreen";
 import ChallengesScreen from "../screens/ChallengesScreen";
 import Colors from "../constants/Colors";
 
-const config = Platform.select({
-  web: { headerMode: "screen" },
-  default: {}
-});
+const headerStyle = {
+  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+};
+
+const headerTitleStyle = {
+  fontFamily: "poligon-bold",
+  fontSize: 24,
+  color: Colors.KIT_BLACK
+};
+
+const config = { defaultNavigationOptions: { headerStyle, headerTitleStyle } };
 
 const ChallengesStack = createStackNavigator(
   {
@@ -47,19 +54,11 @@ const TeamsStack = createStackNavigator(
     Teams: TeamsScreen,
     Join: {
       screen: JoinScreen,
-      navigationOptions: () => {
-        return {
-          headerLeft: <></>
-        };
-      }
+      navigationOptions: { headerLeft: <></>, headerTitle: "Join Team" }
     },
     Create: {
       screen: CreateScreen,
-      navigationOptions: () => {
-        return {
-          headerLeft: <></>
-        };
-      }
+      navigationOptions: { headerLeft: <></>, headerTitle: "Create New Team" }
     }
   },
   config

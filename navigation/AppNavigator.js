@@ -9,24 +9,13 @@ import SignUp from "../screens/SignUpScreen";
 import SignIn from "../screens/SignInScreen";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 
-const headerStyle = {
-  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-};
-
 export const SignedOut = createStackNavigator({
   SignUp: {
-    screen: SignUp,
-    navigationOptions: {
-      title: "Sign Up",
-      headerStyle
-    }
+    screen: SignUp
   },
   SignIn: {
     screen: SignIn,
-    navigationOptions: {
-      title: "Sign In",
-      headerStyle
-    }
+    navigationOptions: { headerLeft: <></> }
   }
 });
 
