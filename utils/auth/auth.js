@@ -22,7 +22,6 @@ export const signOut = () => {
 export const signIn = (email, password, onSignIn) => {
   try {
     firebase.auth().signInWithEmailAndPassword(email, password);
-    firebase.auth().onAuthStateChanged(onSignIn);
   } catch (error) {
     console.log(error.toString(error));
   }

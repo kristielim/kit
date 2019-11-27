@@ -13,10 +13,6 @@ export default function SignUpScreen(props) {
     navigation.navigate("SignIn");
   };
 
-  const goToMain = () => {
-    navigation.navigate("Main");
-  };
-
   return (
     <View>
       <Input
@@ -35,7 +31,7 @@ export default function SignUpScreen(props) {
       />
       <Button
         onPress={() => {
-          signUp(email, password, goToMain);
+          signUp(email, password);
         }}
       >
         Register{" "}
