@@ -29,7 +29,6 @@ export const signIn = (email, password, setError) => {
       if (error && error.hasOwnProperty("code")) {
         errorCode = error.code;
       }
-      console.log("errorCode", errorCode);
       if (errorCode === "auth/invalid-email") {
         setError("not a valid email");
       } else if (errorCode === "auth/user-not-found") {

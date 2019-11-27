@@ -19,7 +19,6 @@ export default function HomeScreen() {
   const [currentUser, setUser] = useState(null);
   useEffect(() => {
     const currentUser = getCurrentUser();
-    console.log("current user", currentUser);
     setUser(currentUser);
   });
 
