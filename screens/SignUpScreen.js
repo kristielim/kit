@@ -3,16 +3,30 @@ import { StyleSheet, Image, View } from "react-native";
 import KitText from "../components/KitText";
 import KitTextInput from "../components/KitTextInput";
 import KitButtonSupreme from "../components/KitButtonSupreme";
-import { signUp } from "../utils/auth/auth";
+import { signUp, checkSignUpEmail } from "../utils/auth/auth";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
+
   const [displayName, setDisplayName] = useState("");
+  const [displayNameError, setDisplayNameError] = useState("");
+  const [displayNameSuccess, setDisplayNameSuccess] = useState(false);
+
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [emailSuccess, setEmailSuccess] = useState(false);
+
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
+
   const [reenteredPassword, setReenteredPassword] = useState("");
+  const [reenteredPasswordError, setreenteredPasswordError] = useState("");
+  const [reenteredPasswordSuccess, setreenteredPasswordSuccess] = useState(
+    false
+  );
 
   const goToSignIn = () => {
     navigation.navigate("SignIn");
@@ -67,22 +81,48 @@ export default function SignUpScreen(props) {
           <KitTextInput
             image={require("../assets/images/onboardingname.png")}
             placeholder="Display name"
+            onBlur={() => {
+              if (displayName === "") {
+                setDisplayNameError("a display name is required");
+              } else {
+                setDisplayNameSuccess(true);
+                setDisplayNameError("");
+              }
+            }}
             onChangeText={setDisplayName}
             value={displayName}
-            errorState={true}
+            error={displayNameError}
+            success={displayNameSuccess}
           />
           <KitTextInput
             image={require("../assets/images/onboardingemail.png")}
             placeholder="Email"
+            onBlur={() => {
+              if (email === "") {
+                setEmailError("an email is required");
+              } else {
+                checkSignUpEmail(email).then(status => {
+                  if (status === "valid") {
+                    setEmailSuccess(true);
+                    setEmailError("");
+                  } else {
+                    setEmailError(status);
+                  }
+                });
+              }
+            }}
             onChangeText={setEmail}
             value={email}
-            errorState={true}
+            error={emailError}
+            success={emailSuccess}
           />
           <KitTextInput
             image={require("../assets/images/onboardingpassword.png")}
             placeholder="Password"
             onChangeText={setPassword}
             value={password}
+            error={passwordError}
+            success={passwordSuccess}
             secureTextEntry
           />
           <KitTextInput
@@ -90,6 +130,8 @@ export default function SignUpScreen(props) {
             placeholder="Re-enter password"
             onChangeText={setReenteredPassword}
             value={reenteredPassword}
+            error={reenteredPasswordError}
+            success={reenteredPasswordSuccess}
             secureTextEntry
           />
           <KitButtonSupreme
@@ -166,6 +208,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     shadowColor: "black",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1
+    shadowOpacity: 0.1,
+    padding: 16
   }
 });

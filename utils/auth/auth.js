@@ -40,6 +40,22 @@ export const signUp = (email, password) => {
   }
 };
 
+// returns status of signup email as a string
+export const checkSignUpEmail = async email => {
+  try {
+    const signInMethods = await firebase
+      .auth()
+      .fetchSignInMethodsForEmail(email);
+    if (signInMethods.length === 0) {
+      return "valid";
+    } else {
+      return "email already in use";
+    }
+  } catch (error) {
+    return "not a valid email";
+  }
+};
+
 /* Switched to email authentication but might bring this back as an option
 import { FACEBOOK_APP_ID } from "react-native-dotenv";
 import * as Facebook from "expo-facebook";
