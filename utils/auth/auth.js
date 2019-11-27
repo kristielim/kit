@@ -1,4 +1,47 @@
 import firebase from "../firebase/firebase";
+
+export const getCurrentUser = () => {
+  return firebase.auth().currentUser;
+};
+
+export const getUserId = () => {
+  const { currentUser } = firebase.auth();
+  return currentUser.uid;
+};
+
+// TODO: Kristie actually handle all the errors
+
+export const signOut = () => {
+  try {
+    firebase.auth().signOut();
+  } catch (error) {
+    console.log(error.toString(error));
+  }
+};
+
+export const signIn = (email, password, onSignIn) => {
+  try {
+    firebase.auth().signInWithEmailAndPassword(email, password);
+    firebase.auth().onAuthStateChanged(onSignIn);
+  } catch (error) {
+    console.log(error.toString(error));
+  }
+};
+
+export const signUp = (email, password) => {
+  try {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        signIn(email, password);
+      });
+  } catch (error) {
+    console.log(error.toString(error));
+  }
+};
+
+/* Switched to email authentication but might bring this back as an option
 import { FACEBOOK_APP_ID } from "react-native-dotenv";
 import * as Facebook from "expo-facebook";
 
@@ -26,25 +69,25 @@ export default async function logIn() {
     alert(`Facebook Login Error: ${message}`);
   }
 }
+*/
+// import { AsyncStorage } from "react-native";
 
-import { AsyncStorage } from "react-native";
+// export const USER_KEY = "auth-demo-key";
 
-export const USER_KEY = "auth-demo-key";
+// export const onSignIn = () => AsyncStorage.setItem(USER_KEY, "true");
 
-export const onSignIn = () => AsyncStorage.setItem(USER_KEY, "true");
+// export const onSignOut = () => AsyncStorage.removeItem(USER_KEY);
 
-export const onSignOut = () => AsyncStorage.removeItem(USER_KEY);
-
-export const isSignedIn = () => {
-  return new Promise((resolve, reject) => {
-    AsyncStorage.getItem(USER_KEY)
-      .then(res => {
-        if (res !== null) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      })
-      .catch(err => reject(err));
-  });
-};
+// export const isSignedIn = () => {
+//   return new Promise((resolve, reject) => {
+//     AsyncStorage.getItem(USER_KEY)
+//       .then(res => {
+//         if (res !== null) {
+//           resolve(true);
+//         } else {
+//           resolve(false);
+//         }
+//       })
+//       .catch(err => reject(err));
+//   });
+// };

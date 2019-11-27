@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
-import * as firebase from "firebase";
+import { signUp } from "../utils/auth/auth";
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
@@ -13,29 +13,8 @@ export default function SignUpScreen(props) {
     navigation.navigate("SignIn");
   };
 
-  signUp = (email, password) => {
-    try {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          login(email, password);
-        });
-    } catch (error) {
-      console.log(error.toString(error));
-    }
-  };
-
-  login = (email, password) => {
-    try {
-      firebase.auth().signInWithEmailAndPassword(email, password);
-      firebase.auth().onAuthStateChanged(user => {
-        console.log(user);
-        alert(user.email);
-      });
-    } catch (error) {
-      console.log(error.toString(error));
-    }
+  const goToMain = () => {
+    navigation.navigate("Main");
   };
 
   return (
@@ -56,7 +35,7 @@ export default function SignUpScreen(props) {
       />
       <Button
         onPress={() => {
-          signUp(email, password);
+          signUp(email, password, goToMain);
         }}
       >
         Register{" "}
