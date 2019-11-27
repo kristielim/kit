@@ -15,7 +15,7 @@ import { FontAwesome } from "react-native-vector-icons";
 
 import SignIn from "./screens/SignInScreen";
 import SignUp from "./screens/AuthScreen";
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from "./screens/ChallengesScreen";
 import LinksScreen from "./screens/LinksScreen";
 
 const headerStyle = {

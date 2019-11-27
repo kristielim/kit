@@ -18,32 +18,47 @@ const config = Platform.select({
   default: {}
 });
 
-const HomeStack = createStackNavigator(
+const ChallengesStack = createStackNavigator(
   {
-    Home: HomeScreen
+    Challenges: ChallengesScreen
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
+ChallengesStack.navigationOptions = {
+  tabBarLabel: "Challenges",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <KitIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
+      activeImage={require("../assets/images/foxtail.png")}
+      inactiveImage={require("../assets/images/grayfoxtail.png")}
+      label="Challenges"
+      color={Colors.KIT_RED}
     />
   )
-};
+};gi
 
-HomeStack.path = "";
+ChallengesStack.path = "";
 
 const TeamsStack = createStackNavigator(
   {
-    Teams: TeamsScreen
+    Teams: TeamsScreen,
+    Join: {
+      screen: JoinScreen,
+      navigationOptions: () => {
+        return {
+          headerLeft: <></>
+        };
+      }
+    },
+    Create: {
+      screen: CreateScreen,
+      navigationOptions: () => {
+        return {
+          headerLeft: <></>
+        };
+      }
+    }
   },
   config
 );
@@ -51,38 +66,39 @@ const TeamsStack = createStackNavigator(
 TeamsStack.navigationOptions = {
   tabBarLabel: "Teams",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <KitIcon
       focused={focused}
-      // EVAN TODO: Design hand-off for icon
-      // name={
-      //   Platform.OS === 'ios'
-      //     ? `ios-information-circle${focused ? '' : '-outline'}`
-      //     : 'md-information-circle'
-      // }
+      activeImage={require("../assets/images/teams.png")}
+      inactiveImage={require("../assets/images/grayteams.png")}
+      label="Teams"
+      color={Colors.KIT_GREEN}
     />
   )
 };
 
 TeamsStack.path = "";
 
-const LoginStack = createStackNavigator(
+const ProfileStack = createStackNavigator(
   {
-    Login: LoginScreen
+    Profile: ProfileScreen
   },
   config
 );
 
-LoginStack.navigationOptions = {
-  tabBarLabel: "Login",
+ProfileStack.navigationOptions = {
+  tabBarLabel: "Profile",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <KitIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      activeImage={require("../assets/images/profile.png")}
+      inactiveImage={require("../assets/images/grayprofile.png")}
+      label="Profile"
+      color={Colors.KIT_ORANGE}
     />
   )
 };
 
-LoginStack.path = "";
+ProfileStack.path = "";
 
 const ImageStack = createStackNavigator(
   {
@@ -105,32 +121,18 @@ ImageStack.navigationOptions = {
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen
+    TeamsStack,
+    ChallengesStack,
+    ImageStack,
+    ProfileStack
   },
-  config
+  {
+    tabBarOptions: {
+      style: { height: 82 },
+      showLabel: false
+    }
+  }
 );
-
-
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  )
-};
-
-SettingsStack.path = "";
-
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LoginStack,
-  ImageStack,
-  SettingsStack,
-  TeamsStack
-});
 
 tabNavigator.path = "";
 
