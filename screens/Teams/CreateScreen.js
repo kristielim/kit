@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     marginBottom: 32,
     fontSize: 24,
+    fontFamily: "poligon-regular",
     color: Colors.KIT_DARK_GREY,
     textAlign: "center"
   },
