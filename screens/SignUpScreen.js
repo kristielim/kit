@@ -163,6 +163,9 @@ const styles = StyleSheet.create({
     height: 340,
     width: 300,
     alignItems: "center",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1
   }
 });
