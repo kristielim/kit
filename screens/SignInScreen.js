@@ -7,7 +7,7 @@ import { signIn } from "../utils/auth/auth";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function SignIn(props) {
+export default function SignInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,15 +29,6 @@ export default function SignIn(props) {
               style={styles.logoText}
               source={require("../assets/images/wordmark.png")}
             />
-            {/* Chose not to use because of padding issue
-          <KitText
-            style={styles.logoText}
-            color={Colors.KIT_BLACK}
-            fontWeight="bold"
-            size={100}
-          >
-            kit
-          </KitText> */}
           </View>
           <KitText color={Colors.KIT_DARK_GREY} fontWeight="semibold" size={20}>
             keep in touch

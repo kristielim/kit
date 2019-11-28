@@ -98,15 +98,6 @@ export default function SignUpScreen(props) {
               style={styles.logoText}
               source={require("../assets/images/wordmark.png")}
             />
-            {/* Chose not to use because of padding issue
-          <KitText
-            style={styles.logoText}
-            color={Colors.KIT_BLACK}
-            fontWeight="bold"
-            size={100}
-          >
-            kit
-          </KitText> */}
           </View>
           <KitText color={Colors.KIT_DARK_GREY} fontWeight="semibold" size={20}>
             keep in touch

@@ -22,7 +22,7 @@ export default function KitTextInput(props) {
       width: 260,
       height: 40,
       borderRadius: 20,
-      borderWidth: props.error ? 1 : 0,
+      borderWidth: props.errorMsg ? 1 : 0,
       borderColor: Colors.KIT_RED
     },
     textInput: {
@@ -38,7 +38,7 @@ export default function KitTextInput(props) {
   const errorImage = require("../assets/images/redx.png");
   const successImage = require("../assets/images/greencheck.png");
   let statusImage;
-  if (props.error) {
+  if (props.errorMsg) {
     statusImage = errorImage;
   } else if (props.success) {
     statusImage = successImage;
@@ -58,7 +58,7 @@ export default function KitTextInput(props) {
         <Image style={styles.statusImage} source={statusImage} />
       </View>
       <KitText color={Colors.KIT_RED} style={styles.error}>
-        {props.error}
+        {props.errorMsg}
       </KitText>
     </View>
   );

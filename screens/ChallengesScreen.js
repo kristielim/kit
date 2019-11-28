@@ -20,10 +20,11 @@ export default function HomeScreen() {
   useEffect(() => {
     const currentUser = getCurrentUser();
     setUser(currentUser);
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
+      {/* Temporary, just to check that user is logged in */}
       <KitText>{currentUser ? currentUser.email : ""}</KitText>
 
       <View style={styles.tabBarInfoContainer}>
