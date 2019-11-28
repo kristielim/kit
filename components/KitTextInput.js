@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View, Image } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "../components/KitText";
+import Fonts from "../constants/Fonts";
 
 export default function KitTextInput(props) {
   const styles = StyleSheet.create({
@@ -28,7 +29,7 @@ export default function KitTextInput(props) {
     textInput: {
       backgroundColor: Colors.KIT_LIGHT_GREY,
       fontSize: 16,
-      fontFamily: "poligon-regular",
+      fontFamily: Fonts.REGULAR,
       flex: 1,
       color: Colors.BLACK,
       paddingLeft: 14

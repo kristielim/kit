@@ -14,13 +14,14 @@ import CreateScreen from "../screens/Teams/CreateScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ChallengesScreen from "../screens/ChallengesScreen";
 import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
 
 const headerTitleStyle = {
-  fontFamily: "poligon-bold",
+  fontFamily: Fonts.BOLD,
   fontSize: 24,
   color: Colors.KIT_BLACK
 };
