@@ -1,57 +1,61 @@
+/* Use this button for any round buttons, either filled or outlined
+If you want text that acts as a button, do not use KitButtonSupreme.
+Use KitText wrapped by TouchableOpacity instead */
+
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 
-// Button can either be 'filled' or 'outlined
-// Actual correct solution is to have a type checker + documentation but it be like that
-export default function KitButtonSupreme(props) {
-  let type = props.type || "filled";
-  if (props.type !== "filled" && props.type !== "outlined") {
-    type = "filled"; //  Use filled if anything other than filled and outlined is passed in
-  }
+export default function KitButtonSupreme({
+  onPress,
+  children,
+  color,
+  image,
+  type = "filled"
+}) {
   const styles = StyleSheet.create({
     button: {
       backgroundColor:
-        type === "filled" ? props.color || Colors.KIT_GREEN : Colors.KIT_WHITE,
-      width: props.width || 220,
+        type === "filled" ? color || Colors.KIT_Green : Colors.KIT_WHITE,
+      width: 268,
       height: 48,
       paddingTop: 8,
-      paddingBottom: 8,
+      marginTop: 8,
+      marginBottom: 8,
       borderRadius: 20,
-      borderColor: props.color || Colors.KIT_GREEN,
-      borderWidth: type === "outlined" ? 2 : 0,
+      borderColor:
+        type === "outlined" ? color || Colors.KIT_Green : Colors.KIT_WHITE,
       justifyContent: "center",
-      alignItems: "center"
-    },
-    textContainer: {
-      flexDirection: "row",
-      alignItems: "center"
+      alignItems: "center",
+      alignSelf: "center"
     },
     text: {
-      paddingTop: 8,
-      marginLeft: 8,
-      marginRight: 8
+      textAlign: "center"
+    },
+    textContainer: {
+      alignContent: "center",
+      flexDirection: "row"
+    },
+    image: {
+      marginRight: 10
     }
   });
   return (
-    <View style={props.style}>
-      <TouchableOpacity style={styles.button} onPress={props.onPress}>
-        <View style={styles.textContainer}>
-          {props.image && <Image source={props.image} />}
-          <KitText
-            style={styles.text}
-            color={
-              type === "outlined"
-                ? props.color || Colors.KIT_GREEN
-                : Colors.KIT_WHITE
-            }
-            size={18}
-          >
-            {props.children}
-          </KitText>
-        </View>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      <View style={styles.textContainer}>
+        {image && <Image source={image} style={styles.image} />}
+        <KitText
+          style={styles.text}
+          color={
+            type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE
+          }
+          size={16}
+          fontWeight="medium"
+        >
+          {children}
+        </KitText>
+      </View>
+    </TouchableOpacity>
   );
 }
