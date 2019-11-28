@@ -131,7 +131,7 @@ export default function SignUpScreen(props) {
               setDisplayNameError(false);
             }}
             value={displayName}
-            error={displayNameError}
+            errorMsg={displayNameError}
             success={displayNameSuccess}
           />
           <KitTextInput
@@ -143,7 +143,7 @@ export default function SignUpScreen(props) {
               setEmailError(false);
             }}
             value={email}
-            error={emailError}
+            errorMsg={emailError}
             success={emailSuccess}
           />
           <KitTextInput
@@ -155,7 +155,7 @@ export default function SignUpScreen(props) {
               setPasswordError(false);
             }}
             value={password}
-            error={passwordError}
+            errorMsg={passwordError}
             success={passwordSuccess}
             secureTextEntry
           />
@@ -168,17 +168,22 @@ export default function SignUpScreen(props) {
               setReenteredPasswordError(false);
             }}
             value={reenteredPassword}
-            error={reenteredPasswordError}
+            errorMsg={reenteredPasswordError}
             success={reenteredPasswordSuccess}
             secureTextEntry
           />
           <KitButtonSupreme
             onPress={async () => {
+              // Checking also sets error messages on each field
+              const displayNameOk = checkDisplayName();
+              const emailOk = await checkEmail();
+              const passwordOk = checkPassword();
+              const reenteredPasswordOk = checkReenteredPassword();
               if (
-                checkDisplayName() &&
-                (await checkEmail()) &&
-                checkPassword() &&
-                checkReenteredPassword()
+                displayNameOk &&
+                emailOk &&
+                passwordOk &&
+                reenteredPasswordOk
               ) {
                 signUp(email, password);
               }
