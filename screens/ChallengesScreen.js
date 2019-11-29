@@ -1,5 +1,5 @@
 import * as WebBrowser from "expo-web-browser";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Image,
@@ -12,32 +12,26 @@ import {
   View
 } from "react-native";
 
-import signInWithFacebook from "../utils/auth/auth";
-import  KitText from "../components/KitText";
+import { getCurrentUser } from "../utils/auth/auth";
+import KitText from "../components/KitText";
 
 export default function HomeScreen() {
+  const [currentUser, setUser] = useState(null);
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+    setUser(currentUser);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <View style={styles.helpContainer}>
-          <TouchableOpacity
-            onPress={signInWithFacebook}
-            style={styles.helpLink}
-          >
-            <Text style={styles.helpLinkText}>Sign-up with FB</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+      {/* Temporary, just to check that user is logged in */}
+      <KitText>{currentUser ? currentUser.email : ""}</KitText>
 
       <View style={styles.tabBarInfoContainer}>
         <View
-
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
+          style={[styles.codeHighlightContainer, styles.navigationFilename]}
+        >
           <KitText style={styles.codeHighlightText}>
-
             navigation/MainTabNavigator.js
           </KitText>
         </View>
