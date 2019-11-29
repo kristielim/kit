@@ -23,12 +23,17 @@ export default function KitButtonSupreme({
       width: width || 268,
       height: 48,
       paddingTop: 8,
-      paddingBottom: 8,
+      marginTop: 8,
+      marginBottom: 8,
       borderRadius: 20,
       borderColor:
         type === "outlined" ? color || Colors.KIT_Green : Colors.KIT_WHITE,
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      alignSelf: "center"
+    },
+    text: {
+      textAlign: "center"
     },
     text: {
       textAlign: "center",
