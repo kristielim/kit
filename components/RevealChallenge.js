@@ -3,9 +3,6 @@ import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 import KitButtonSupreme from "../components/KitButtonSupreme";
-import { MapView } from "expo";
-import FlipComponent from "react-native-flip-component";
-import CardFlip from "react-native-card-flip";
 
 export default function RevealChallenge(props) {
   const styles = StyleSheet.create({
@@ -37,11 +34,12 @@ export default function RevealChallenge(props) {
     info: {
       position: "absolute",
       top: 25,
-      alignSelf: "center"
+      alignSelf: "center",
+      marginHorizontal: 40
     },
     button: {
       position: "absolute",
-      bottom: 38,
+      paddingTop: 400,
       alignSelf: "center"
     },
     icon: {
@@ -54,15 +52,15 @@ export default function RevealChallenge(props) {
   });
   return (
     <View style={styles.card}>
-      <View>
-        <View style={styles.contatiner}>
+      <View style={styles.contatiner}>
+        <View>
           <Image
             style={styles.icon}
             source={require("../assets/images/kit-logo.png")}
           />
           <KitText
             style={styles.title}
-            size={50}
+            size={50} // size 60 works on mobile, but 50 works on simulator
             color={Colors.KIT_BLACK}
             fontWeight="medium"
           >
@@ -72,17 +70,6 @@ export default function RevealChallenge(props) {
             {props.number}
           </KitText>
         </View>
-      </View>
-      <View style={styles.button}>
-        <KitButtonSupreme
-          style={styles.button}
-          width={200}
-          height={50}
-          color={Colors.KIT_GREEN}
-          onPress={() => this.card.flip()}
-        >
-          REVEAL
-        </KitButtonSupreme>
       </View>
       <View style={styles.info}>
         <KitText
@@ -96,7 +83,19 @@ export default function RevealChallenge(props) {
           {props.deadline}
         </KitText>
       </View>
-      <View style={styles.container}>{props.children}</View>
+      <View style={styles.button}>
+        <KitButtonSupreme
+          onPress={props.flip}
+          // onPress={() => alert("pressed!")}
+          style={styles.button}
+          width={200}
+          height={50}
+          color={Colors.KIT_GREEN}
+        >
+          REVEAL
+        </KitButtonSupreme>
+        <View style={styles.container}>{props.children}</View>
+      </View>
     </View>
   );
 }

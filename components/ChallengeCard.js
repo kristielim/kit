@@ -3,10 +3,6 @@ import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 import KitButtonSupreme from "../components/KitButtonSupreme";
-import CardFlip from "react-native-card-flip";
-import RevealChallenge from "./RevealChallenge";
-import { MapView } from "expo";
-import FlipComponent from "react-native-flip-component";
 
 export default function ChallengeCard(props) {
   const styles = StyleSheet.create({
@@ -74,10 +70,7 @@ export default function ChallengeCard(props) {
           <KitText style={styles.body} size={28} color={Colors.KIT_WHITE}>
             {props.body}
           </KitText>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => this.card.flip()}
-          >
+          <TouchableOpacity style={styles.closeButton} onPress={props.flip}>
             <Image source={require("../assets/images/x-mark.png")} />
           </TouchableOpacity>
         </View>
