@@ -38,46 +38,48 @@ export default function SpecificTeamsScreen(props) {
     <KitBackgroundScreen color={Colors.KIT_ORANGE} title={team.name} onPressBack={() => {props.navigation.navigate("Teams")}}> 
       <View style={styles.inner}>
           <View style={styles.midBar}>
-            <View>
+            <View style={styles.midBarSub}>
               <View style={styles.row}>
-                <KitText>49</KitText>
+                <KitText size={18} color={"#848383"}>49</KitText>
                 <Image source={Awws}/>
               </View>
               <View style={styles.row}>
-                <KitText>26</KitText>
+                <KitText size={18} color={"#848383"}>26</KitText>
                 <Image source={Woos}/>
               </View>
             </View>
 
-            <View>
+            <View style={styles.midBarSub}>
               <View style={styles.numCompleted}>
                 <Image source={Foxtail}/>
                 <KitText size={48} fontWeight={FontStyles.FONT_WEIGHT_BOLD} style={{paddingTop: 6}}>12</KitText>
               </View>
               <View>
-                <KitText>challenges</KitText>
-                <KitText>completed</KitText>
+                <KitText size={14} color={Colors.KIT_DARKEST_BLACK}>challenges</KitText>
+                <KitText size={14} color={Colors.KIT_DARKEST_BLACK}>completed</KitText>
               </View>
             </View>
 
-            <View>
-              <Image source={Flag} />
-              <KitText>Created</KitText>
+            <View style={styles.midBarSub}>
+              <Image source={Flag} style={{alignSelf: "center"}}/>
+              <KitText size={12} color={"#848383"}>created</KitText>
+              <KitText size={12} color={"#848383"}>October 10,</KitText>
+              <KitText size={12} color={"#848383"}>2019</KitText>
             </View>
           </View>
 
           <View style={styles.botBar}>
-            <View style={styles.superlatives}>
+            <View style={[styles.superlatives, {paddingTop: 15}]}>
               <Image source={Superlatives} />
-              <KitText>◆ most wooed ◆</KitText>
+              <KitText size={10} color={Colors.KIT_DARKEST_BLACK}>◆ most wooed ◆</KitText>
             </View>
             <View style={styles.superlatives}>
               <Image source={Superlatives} />
-              <KitText>◆ most awwed ◆</KitText>
+              <KitText size={10} color={Colors.KIT_DARKEST_BLACK}>◆ most awwed ◆</KitText>
             </View>
-            <View style={styles.superlatives}>
+            <View style={[styles.superlatives, {paddingTop: 15}]}>
               <Image source={Superlatives} />
-              <KitText>◆ most booed ◆</KitText>
+              <KitText size={10} color={Colors.KIT_DARKEST_BLACK}>◆ most booed ◆</KitText>
             </View>
           </View>
 
@@ -118,18 +120,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 15,
   },
-  topBar: {
-    flexDirection: 'row',
-    margin: 15,
-    justifyContent: 'space-between',
-  },
   midBar: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+  },
+  midBarSub: {
+    width: 75,
+    justifyContent: "center"
   },
   botBar: {
+    marginTop: 25,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
   numCompleted: {
     flexDirection: 'row',
@@ -168,5 +170,6 @@ const styles = StyleSheet.create({
   },
   row:{
     flexDirection: "row",
+    alignSelf: "center",
   }
 });
