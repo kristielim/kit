@@ -45,7 +45,7 @@ export default function KitButtonSupreme({
     },
     image: {
       marginRight: 10,
-      paddingBottom: 10
+      marginBottom: 8
     }
   });
   return (
