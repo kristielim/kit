@@ -19,8 +19,13 @@ import FontStyles from '../../constants/FontStyles';
 
 export default function SpecificTeamsScreen(props) {
   const [team, setTeam] = useState(null);
+
   const placeholderImage = require('../../assets/images/40by40.png')
   const Foxtail = require('../../assets/images/Foxtail.png')
+  const Awws = require('../../assets/images/specificTeamsPage/awws.png')
+  const Woos = require('../../assets/images/specificTeamsPage/woos.png')
+  const Flag = require('../../assets/images/specificTeamsPage/flag.png')
+  const Superlatives = require('../../assets/images/specificTeamsPage/supperlative.png')
 
   useEffect(() => { // componentDidMount
     const teamToDisplay = props.navigation.getParam('team')
@@ -32,16 +37,16 @@ export default function SpecificTeamsScreen(props) {
     // EVAN TODO: use navigation.back instead of specific 
     <KitBackgroundScreen color={Colors.KIT_ORANGE} title={team.name} onPressBack={() => {props.navigation.navigate("Teams")}}> 
       <View style={styles.inner}>
-          <View style={styles.topBar}>
-            <Image source={placeholderImage}/>
-            <Image source={placeholderImage}/>
-            <Image source={placeholderImage}/>
-          </View>
-
           <View style={styles.midBar}>
             <View>
-              <KitText>49</KitText>
-              <KitText>26</KitText>
+              <View style={styles.row}>
+                <KitText>49</KitText>
+                <Image source={Awws}/>
+              </View>
+              <View style={styles.row}>
+                <KitText>26</KitText>
+                <Image source={Woos}/>
+              </View>
             </View>
 
             <View>
@@ -56,22 +61,22 @@ export default function SpecificTeamsScreen(props) {
             </View>
 
             <View>
-              <Image source={placeholderImage} />
+              <Image source={Flag} />
               <KitText>Created</KitText>
             </View>
           </View>
 
           <View style={styles.botBar}>
             <View style={styles.superlatives}>
-              <Image source={placeholderImage} />
+              <Image source={Superlatives} />
               <KitText>◆ most wooed ◆</KitText>
             </View>
             <View style={styles.superlatives}>
-              <Image source={placeholderImage} />
+              <Image source={Superlatives} />
               <KitText>◆ most awwed ◆</KitText>
             </View>
             <View style={styles.superlatives}>
-              <Image source={placeholderImage} />
+              <Image source={Superlatives} />
               <KitText>◆ most booed ◆</KitText>
             </View>
           </View>
@@ -160,5 +165,8 @@ const styles = StyleSheet.create({
   pastChallengeText: {
     flexDirection: 'column',
     alignItems: "flex-start",
+  },
+  row:{
+    flexDirection: "row",
   }
 });
