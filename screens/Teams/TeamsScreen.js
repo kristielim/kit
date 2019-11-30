@@ -15,14 +15,6 @@ export default function TeamsScreen(props) {
 
   return (
     <View style={styles.container}>
-      <KitText
-        style={styles.header}
-        size={24}
-        fontWeight={FontStyles.FONT_WEIGHT_BOLD}
-        color={Colors.KIT_BLACK}
-      >
-        My Teams
-      </KitText>
       <TouchableOpacity
         onPress={() => {
           setShowAddTeamMenu(!showAddTeamMenu);

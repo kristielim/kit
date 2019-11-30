@@ -57,7 +57,10 @@ ChallengesStack.path = "";
 
 const TeamsStack = createStackNavigator(
   {
-    Teams: TeamsScreen,
+    Teams: {
+      screen: TeamsScreen,
+      navigationOptions: { headerTitle: "My Teams" }
+    },
     Join: {
       screen: JoinScreen,
       navigationOptions: { headerLeft: <></>, headerTitle: "Join Team" }
