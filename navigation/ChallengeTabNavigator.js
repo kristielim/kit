@@ -1,13 +1,14 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "react-navigation-tabs";
-import ChallengesScreen from "../screens/ChallengesScreen";
+import ToDoScreen from "../screens/Challenges/ToDoScreen";
+import SubmissionsScreen from "../screens/Challenges/SubmissionsScreen";
 import KitButtonSupreme from "../components/KitButtonSupreme";
 import Colors from "../constants/Colors";
 
 const tabNavigator = createMaterialTopTabNavigator(
   {
     ToDo: {
-      screen: ChallengesScreen,
+      screen: ToDoScreen,
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
           return (
@@ -23,7 +24,7 @@ const tabNavigator = createMaterialTopTabNavigator(
       }
     },
     Submissions: {
-      screen: ChallengesScreen,
+      screen: SubmissionsScreen,
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
           return (
