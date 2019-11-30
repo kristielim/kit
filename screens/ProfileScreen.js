@@ -1,14 +1,14 @@
-import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import React from "react";
 
-export default function SettingsScreen() {
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
-  return <ExpoConfigView />;
+import { View } from "react-native";
+import KitButtonSupreme from "../components/KitButtonSupreme";
+
+import { signOut } from "../utils/auth/auth";
+
+export default function ProfileScreen() {
+  return (
+    <View>
+      <KitButtonSupreme onPress={signOut}>Sign Out</KitButtonSupreme>
+    </View>
+  );
 }
-
-SettingsScreen.navigationOptions = {
-  title: 'app.json',
-};

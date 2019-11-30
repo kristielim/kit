@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.KIT_GREEN
   },
   button: {
-    margin: 12
+    margin: 8
   },
   addTeamText: {
     paddingLeft: 8,

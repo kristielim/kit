@@ -1,3 +1,7 @@
+/* Use this button for any round buttons, either filled or outlined
+If you want text that acts as a button, do not use KitButtonSupreme.
+Use KitText wrapped by TouchableOpacity instead */
+
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
@@ -11,6 +15,7 @@ export default function KitButtonSupreme({
   type = "filled",
   width,
   height
+  style,
 }) {
   const styles = StyleSheet.create({
     button: {
@@ -31,8 +36,12 @@ export default function KitButtonSupreme({
     text: {
       textAlign: "center"
     },
+    text: {
+      textAlign: "center",
+      paddingTop: 8
+    },
     textContainer: {
-      alignContent: "center",
+      alignItems: "center",
       flexDirection: "row"
     },
     image: {
@@ -40,20 +49,22 @@ export default function KitButtonSupreme({
     }
   });
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <View style={styles.textContainer}>
-        {image && <Image source={image} style={styles.image} />}
-        <KitText
-          style={styles.text}
-          color={
-            type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE
-          }
-          size={16}
-          fontWeight="medium"
-        >
-          {children}
-        </KitText>
-      </View>
-    </TouchableOpacity>
+    <View style={style}>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+        <View style={styles.textContainer}>
+          {image && <Image source={image} style={styles.image} />}
+          <KitText
+            style={styles.text}
+            color={
+              type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE
+            }
+            size={16}
+            fontWeight="medium"
+          >
+            {children}
+          </KitText>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 }

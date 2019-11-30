@@ -4,6 +4,7 @@ import KitButtonSupreme from "../../components/KitButtonSupreme";
 import KitText from "../../components/KitText";
 import Colors from "../../constants/Colors";
 import FontStyles from "../../constants/FontStyles";
+import Fonts from "../../constants/Fonts";
 import { createTeam } from "../../utils/db/teams";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     marginBottom: 32,
     fontSize: 24,
+    fontFamily: Fonts.REGULAR,
     color: Colors.KIT_DARK_GREY,
     textAlign: "center"
   },
