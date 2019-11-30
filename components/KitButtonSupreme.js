@@ -14,8 +14,8 @@ export default function KitButtonSupreme({
   image,
   type = "filled",
   width,
-  height
-  style,
+  height,
+  style
 }) {
   const styles = StyleSheet.create({
     button: {
@@ -37,15 +37,15 @@ export default function KitButtonSupreme({
       textAlign: "center"
     },
     text: {
-      textAlign: "center",
-      paddingTop: 8
+      textAlign: "center"
     },
     textContainer: {
       alignItems: "center",
       flexDirection: "row"
     },
     image: {
-      marginRight: 10
+      marginRight: 10,
+      paddingBottom: 10
     }
   });
   return (

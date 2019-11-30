@@ -42,7 +42,7 @@ export default function ChallengeCard(props) {
     },
     button: {
       position: "absolute",
-      bottom: 80,
+      bottom: 40,
       alignSelf: "center"
     },
     icon: {
