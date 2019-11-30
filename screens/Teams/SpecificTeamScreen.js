@@ -64,11 +64,11 @@ export default function SpecificTeamsScreen(props) {
           <View style={styles.botBar}>
             <View style={styles.superlatives}>
               <Image source={placeholderImage} />
-              <KitText>◆ most woahed ◆</KitText>
+              <KitText>◆ most wooed ◆</KitText>
             </View>
             <View style={styles.superlatives}>
               <Image source={placeholderImage} />
-              <KitText>◆ most loved ◆</KitText>
+              <KitText>◆ most awwed ◆</KitText>
             </View>
             <View style={styles.superlatives}>
               <Image source={placeholderImage} />
