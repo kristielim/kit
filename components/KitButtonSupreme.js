@@ -12,22 +12,23 @@ export default function KitButtonSupreme({
   children,
   color,
   image,
-  style,
+  type = "filled",
   width,
-  type = "filled"
+  height
+  style,
 }) {
   const styles = StyleSheet.create({
     button: {
       backgroundColor:
         type === "filled" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE,
       width: width || 268,
-      height: 48,
+      height: height || 48,
       paddingTop: 8,
       marginTop: 8,
       marginBottom: 8,
       borderRadius: 20,
       borderColor:
-        type === "outlined" ? color || Colors.KIT_Green : Colors.KIT_WHITE,
+        type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE,
       justifyContent: "center",
       alignItems: "center",
       alignSelf: "center"
