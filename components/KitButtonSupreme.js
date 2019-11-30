@@ -14,6 +14,7 @@ export default function KitButtonSupreme({
   image,
   style,
   width,
+  height,
   type = "filled"
 }) {
   const styles = StyleSheet.create({
@@ -22,9 +23,7 @@ export default function KitButtonSupreme({
         type === "filled" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE,
       width: width || 268,
       height: 48,
-      paddingTop: 8,
-      marginTop: 8,
-      marginBottom: 8,
+      height: height || 48,
       borderRadius: 20,
       borderColor:
         type === "outlined" ? color || Colors.KIT_Green : Colors.KIT_WHITE,

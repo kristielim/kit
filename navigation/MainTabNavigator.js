@@ -16,6 +16,8 @@ import ChallengesScreen from "../screens/ChallengesScreen";
 import Colors from "../constants/Colors";
 import Fonts from "../constants/Fonts";
 
+import ChallengeTabNavigator from "./ChallengeTabNavigator";
+
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
@@ -30,7 +32,10 @@ const config = { defaultNavigationOptions: { headerStyle, headerTitleStyle } };
 
 const ChallengesStack = createStackNavigator(
   {
-    Challenges: ChallengesScreen
+    Challenges: {
+      screen: ChallengeTabNavigator,
+      navigationOptions: { headerTitle: "Challenges" }
+    }
   },
   config
 );
