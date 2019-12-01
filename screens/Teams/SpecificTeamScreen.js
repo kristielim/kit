@@ -26,6 +26,7 @@ export default function SpecificTeamsScreen(props) {
   const Woos = require('../../assets/images/specificTeamsPage/woos.png')
   const Flag = require('../../assets/images/specificTeamsPage/flag.png')
   const Superlatives = require('../../assets/images/specificTeamsPage/supperlative.png')
+  const Bunny = require('../../assets/images/specificTeamsPage/bunny.png')
 
   useEffect(() => { // componentDidMount
     const teamToDisplay = props.navigation.getParam('team')
@@ -37,6 +38,9 @@ export default function SpecificTeamsScreen(props) {
     // EVAN TODO: use navigation.back instead of specific 
     <KitBackgroundScreen color={Colors.KIT_ORANGE} title={team.name} onPressBack={() => {props.navigation.navigate("Teams")}}> 
       <View style={styles.inner}>
+          <View style={styles.topBar}>
+            <Image source={Bunny}/>
+          </View>
           <View style={styles.midBar}>
             <View style={styles.midBarSub}>
               <View style={styles.row}>
@@ -52,7 +56,7 @@ export default function SpecificTeamsScreen(props) {
             <View style={styles.midBarSub}>
               <View style={styles.numCompleted}>
                 <Image source={Foxtail}/>
-                <KitText size={48} fontWeight={FontStyles.FONT_WEIGHT_BOLD} style={{paddingTop: 6}}>12</KitText>
+                <KitText size={48} fontWeight={FontStyles.FONT_WEIGHT_SEMIBOLD} style={{paddingTop: 6}}>12</KitText>
               </View>
               <View>
                 <KitText size={14} color={Colors.KIT_DARKEST_BLACK}>challenges</KitText>
@@ -62,9 +66,7 @@ export default function SpecificTeamsScreen(props) {
 
             <View style={styles.midBarSub}>
               <Image source={Flag} style={{alignSelf: "center"}}/>
-              <KitText size={12} color={"#848383"}>created</KitText>
-              <KitText size={12} color={"#848383"}>October 10,</KitText>
-              <KitText size={12} color={"#848383"}>2019</KitText>
+              <KitText size={12} color={"#848383"}>created October 10, 2019</KitText>
             </View>
           </View>
 
@@ -119,6 +121,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.KIT_WHITE,
     borderRadius: 10,
     margin: 15,
+  },
+  topBar: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    // borderWidth: 1,
   },
   midBar: {
     flexDirection: 'row',
