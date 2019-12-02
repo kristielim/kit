@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import KitText from "../../components/KitText";
-import { MyTeams } from "../../components/team-codes/MyTeams";
+import MyTeams from "../../components/team-codes/MyTeams";
 import Colors from "../../constants/Colors";
+import FontStyles from "../../constants/FontStyles";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
 
 export default function TeamsScreen(props) {
@@ -14,6 +15,14 @@ export default function TeamsScreen(props) {
 
   return (
     <View style={styles.container}>
+      <KitText
+        style={styles.header}
+        size={24}
+        fontWeight={FontStyles.FONT_WEIGHT_BOLD}
+        color={Colors.KIT_BLACK}
+      >
+        My Teams
+      </KitText>
       <TouchableOpacity
         onPress={() => {
           setShowAddTeamMenu(!showAddTeamMenu);
@@ -89,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.KIT_GREEN
   },
   button: {
-    margin: 8
+    margin: 12
   },
   addTeamText: {
     paddingLeft: 8,

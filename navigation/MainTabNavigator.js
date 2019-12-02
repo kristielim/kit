@@ -59,7 +59,15 @@ const TeamsStack = createStackNavigator(
   {
     Teams: {
       screen: TeamsScreen,
-      navigationOptions: { headerTitle: "My Teams" }
+      navigationOptions: { headerTitle: "My Teams" },
+    },
+    Team: {
+      screen: SpecificTeamScreen,
+      navigationOptions: () => {
+        return {
+          headerLeft: <></>
+        };
+      }
     },
     Join: {
       screen: JoinScreen,
