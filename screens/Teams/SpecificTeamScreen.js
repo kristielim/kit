@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {
   Image,
-  Platform,
-  ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 
 import KitText from '../../components/KitText';
-import KitButton from '../../components/KitButton';
 
 import Colors from '../../constants/Colors';
 import FontStyles from '../../constants/FontStyles';
