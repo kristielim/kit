@@ -5,47 +5,62 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
-import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
-import LoginScreen from "../screens/LoginScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import KitIcon from "../components/KitIcon";
+
 import TeamsScreen from "../screens/Teams/TeamsScreen";
-import SpecificTeamScreen from '../screens/Teams/SpecificTeamScreen';
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
 
-const config = Platform.select({
-  web: { headerMode: "screen" },
-  default: {}
-});
+import ProfileScreen from "../screens/ProfileScreen";
+import ChallengesScreen from "../screens/ChallengesScreen";
+import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
-const HomeStack = createStackNavigator(
+import ChallengeTabNavigator from "./ChallengeTabNavigator";
+
+const headerStyle = {
+  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+};
+
+const headerTitleStyle = {
+  fontFamily: Fonts.BOLD,
+  fontSize: 24,
+  color: Colors.KIT_BLACK
+};
+
+const config = { defaultNavigationOptions: { headerStyle, headerTitleStyle } };
+
+const ChallengesStack = createStackNavigator(
   {
-    Home: HomeScreen
+    Challenges: {
+      screen: ChallengeTabNavigator,
+      navigationOptions: { headerTitle: "Challenges" }
+    }
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
+ChallengesStack.navigationOptions = {
+  tabBarLabel: "Challenges",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <KitIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
+      activeImage={require("../assets/images/foxtail.png")}
+      inactiveImage={require("../assets/images/grayfoxtail.png")}
+      label="Challenges"
+      color={Colors.KIT_RED}
     />
   )
 };
 
-HomeStack.path = "";
+ChallengesStack.path = "";
 
 const TeamsStack = createStackNavigator(
   {
-    Teams: TeamsScreen,
+    Teams: {
+      screen: TeamsScreen,
+      navigationOptions: { headerTitle: "My Teams" },
+    },
     Team: {
       screen: SpecificTeamScreen,
       navigationOptions: () => {
@@ -56,19 +71,11 @@ const TeamsStack = createStackNavigator(
     },
     Join: {
       screen: JoinScreen,
-      navigationOptions: () => {
-        return {
-          headerLeft: <></>
-        };
-      }
+      navigationOptions: { headerLeft: <></>, headerTitle: "Join Team" }
     },
     Create: {
       screen: CreateScreen,
-      navigationOptions: () => {
-        return {
-          headerLeft: <></>
-        };
-      }
+      navigationOptions: { headerLeft: <></>, headerTitle: "Create New Team" }
     }
   },
   config
@@ -77,64 +84,54 @@ const TeamsStack = createStackNavigator(
 TeamsStack.navigationOptions = {
   tabBarLabel: "Teams",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <KitIcon
       focused={focused}
-      // EVAN TODO: Design hand-off for icon
-      // name={
-      //   Platform.OS === 'ios'
-      //     ? `ios-information-circle${focused ? '' : '-outline'}`
-      //     : 'md-information-circle'
-      // }
+      activeImage={require("../assets/images/teams.png")}
+      inactiveImage={require("../assets/images/grayteams.png")}
+      label="Teams"
+      color={Colors.KIT_GREEN}
     />
   )
 };
 
 TeamsStack.path = "";
 
-const LoginStack = createStackNavigator(
+const ProfileStack = createStackNavigator(
   {
-    Login: LoginScreen
+    Profile: ProfileScreen
   },
   config
 );
 
-LoginStack.navigationOptions = {
-  tabBarLabel: "Login",
+ProfileStack.navigationOptions = {
+  tabBarLabel: "Profile",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <KitIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      activeImage={require("../assets/images/profile.png")}
+      inactiveImage={require("../assets/images/grayprofile.png")}
+      label="Profile"
+      color={Colors.KIT_ORANGE}
     />
   )
 };
 
-LoginStack.path = "";
+ProfileStack.path = "";
 
-const SettingsStack = createStackNavigator(
+const tabNavigator = createBottomTabNavigator(
   {
-    Settings: SettingsScreen
+    TeamsStack,
+    ChallengesStack,
+    ProfileStack
   },
-  config
+  {
+    tabBarOptions: {
+      style: { height: 82 },
+      showLabel: false
+    },
+    initialRouteName: "ChallengesStack"
+  }
 );
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  )
-};
-
-SettingsStack.path = "";
-
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LoginStack,
-  SettingsStack,
-  TeamsStack
-});
 
 tabNavigator.path = "";
 
