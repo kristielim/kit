@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
   View,
+  ScrollView
 } from 'react-native';
 
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
@@ -11,6 +12,7 @@ import KitText from '../../components/KitText';
 
 import Colors from '../../constants/Colors';
 import FontStyles from '../../constants/FontStyles';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 export default function SpecificTeamsScreen(props) {
   const [team, setTeam] = useState(null);
@@ -80,7 +82,7 @@ export default function SpecificTeamsScreen(props) {
             </View>
           </View>
 
-          <View style={styles.pastChallengeWrapper}>
+          <ScrollView contentContainerStyle={styles.pastChallengeWrapper}>
             <KitText style={{alignSelf: 'flex-start'}} size={18}>Past Challenges</KitText>
             
             <View style={styles.pastChallengeCardWrapper}>
@@ -104,7 +106,7 @@ export default function SpecificTeamsScreen(props) {
                 <Image source={placeholderImage} />
               </View>
             </View>
-          </View>
+          </ScrollView>
         </View>
     </KitBackgroundScreen>
   );
