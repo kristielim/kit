@@ -16,7 +16,7 @@ export default function SpecificTeamsScreen(props) {
   const [team, setTeam] = useState(null);
 
   const placeholderImage = require('../../assets/images/40by40.png')
-  const Foxtail = require('../../assets/images/Foxtail.png')
+  const Foxtail = require('../../assets/images/grayfoxtail.png')
   const Awws = require('../../assets/images/specificTeamsPage/awws.png')
   const Woos = require('../../assets/images/specificTeamsPage/woos.png')
   const Flag = require('../../assets/images/specificTeamsPage/flag.png')

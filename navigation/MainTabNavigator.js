@@ -8,6 +8,8 @@ import {
 import KitIcon from "../components/KitIcon";
 
 import TeamsScreen from "../screens/Teams/TeamsScreen";
+import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
+
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
 
