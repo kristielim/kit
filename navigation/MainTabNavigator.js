@@ -47,7 +47,7 @@ ChallengesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <KitIcon
       focused={focused}
-      activeImage={require("../assets/images/foxtail.png")}
+      activeImage={require("../assets/images/redfoxtail.png")}
       inactiveImage={require("../assets/images/grayfoxtail.png")}
       label="Challenges"
       color={Colors.KIT_RED}
