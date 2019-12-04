@@ -16,7 +16,7 @@ export default function KitBackgroundScreen(props) {
       backgroundColor: Colors.KIT_WHITE
     },
     container: {
-      padding: props.paddinglol || 16,
+      padding: props.padding || 16,
       flex: 1
     },
     backButton: {
@@ -28,7 +28,7 @@ export default function KitBackgroundScreen(props) {
     title: {
       width: "100%",
       textAlign: "center",
-      padding: props.paddinglol || 16,
+      padding: props.padding || 16,
       paddingTop: 16
     },
     number: {

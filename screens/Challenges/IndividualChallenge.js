@@ -20,7 +20,7 @@ export default function IndividualChallenge(props) {
       onPressBack={() => {
         props.navigation.navigate("Teams");
       }}
-      paddinglol={1}
+      padding={1}
       title={props.username}
       number={"1/5"}
     >
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 370,
     borderRadius: 15,
+    margin: 15,
     alignSelf: "center"
   },
   inputContainer: {
