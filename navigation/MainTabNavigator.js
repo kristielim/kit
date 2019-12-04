@@ -9,25 +9,36 @@ import {
 import KitIcon from "../components/KitIcon";
 
 import TeamsScreen from "../screens/Teams/TeamsScreen";
+import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
+
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import ChallengesScreen from "../screens/ChallengesScreen";
 import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
-import TabBarIcon from "../components/TabBarIcon";
-import ImageScreen from "../screens/ImageScreen";
-import TextScreen from "../screens/TextScreen";
+import ChallengeTabNavigator from "./ChallengeTabNavigator";
 
-const config = Platform.select({
-  web: { headerMode: "screen" },
-  default: {}
-});
+const headerStyle = {
+  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+};
+
+const headerTitleStyle = {
+  fontFamily: Fonts.BOLD,
+  fontSize: 24,
+  color: Colors.KIT_BLACK
+};
+
+const config = { defaultNavigationOptions: { headerStyle, headerTitleStyle } };
 
 const ChallengesStack = createStackNavigator(
   {
-    Challenges: ChallengesScreen
+    Challenges: {
+      screen: ChallengeTabNavigator,
+      navigationOptions: { headerTitle: "Challenges" }
+    }
   },
   config
 );
@@ -37,7 +48,7 @@ ChallengesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <KitIcon
       focused={focused}
-      activeImage={require("../assets/images/foxtail.png")}
+      activeImage={require("../assets/images/redfoxtail.png")}
       inactiveImage={require("../assets/images/grayfoxtail.png")}
       label="Challenges"
       color={Colors.KIT_RED}
@@ -49,22 +60,25 @@ ChallengesStack.path = "";
 
 const TeamsStack = createStackNavigator(
   {
-    Teams: TeamsScreen,
-    Join: {
-      screen: JoinScreen,
+    Teams: {
+      screen: TeamsScreen,
+      navigationOptions: { headerTitle: "My Teams" },
+    },
+    Team: {
+      screen: SpecificTeamScreen,
       navigationOptions: () => {
         return {
           headerLeft: <></>
         };
       }
     },
+    Join: {
+      screen: JoinScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Join Team" }
+    },
     Create: {
       screen: CreateScreen,
-      navigationOptions: () => {
-        return {
-          headerLeft: <></>
-        };
-      }
+      navigationOptions: { headerLeft: <></>, headerTitle: "Create New Team" }
     }
   },
   config
@@ -135,7 +149,8 @@ const tabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       style: { height: 82 },
       showLabel: false
-    }
+    },
+    initialRouteName: "ChallengesStack"
   }
 );
 
