@@ -4,6 +4,7 @@ import ToDoScreen from "../screens/Challenges/ToDoScreen";
 import SubmissionsScreen from "../screens/Challenges/SubmissionsScreen";
 import KitButtonSupreme from "../components/KitButtonSupreme";
 import Colors from "../constants/Colors";
+import { StyleSheet } from "react-native";
 
 const tabNavigator = createMaterialTopTabNavigator(
   {
@@ -16,6 +17,7 @@ const tabNavigator = createMaterialTopTabNavigator(
               width={160}
               height={40}
               color={focused ? Colors.KIT_RED : Colors.KIT_DARK_GREY}
+              style={styles.shadows}
             >
               To Do
             </KitButtonSupreme>
@@ -32,6 +34,7 @@ const tabNavigator = createMaterialTopTabNavigator(
               width={160}
               height={40}
               color={focused ? Colors.KIT_GREEN : Colors.KIT_DARK_GREY}
+              style={styles.shadows}
             >
               Submissions
             </KitButtonSupreme>
@@ -52,11 +55,19 @@ const tabNavigator = createMaterialTopTabNavigator(
         display: "none"
       },
       tabStyle: {
-        height: 60
+        height: 70
       }
     }
   }
 );
+
+const styles = StyleSheet.create({
+  shadows: {
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 1,
+    shadowColor: Colors.KIT_DARK_GREY
+  }
+});
 
 tabNavigator.path = "";
 

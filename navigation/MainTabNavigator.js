@@ -8,6 +8,8 @@ import {
 import KitIcon from "../components/KitIcon";
 
 import TeamsScreen from "../screens/Teams/TeamsScreen";
+import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
+
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
 
@@ -45,7 +47,7 @@ ChallengesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <KitIcon
       focused={focused}
-      activeImage={require("../assets/images/foxtail.png")}
+      activeImage={require("../assets/images/redfoxtail.png")}
       inactiveImage={require("../assets/images/grayfoxtail.png")}
       label="Challenges"
       color={Colors.KIT_RED}
@@ -59,7 +61,15 @@ const TeamsStack = createStackNavigator(
   {
     Teams: {
       screen: TeamsScreen,
-      navigationOptions: { headerTitle: "My Teams" }
+      navigationOptions: { headerTitle: "My Teams" },
+    },
+    Team: {
+      screen: SpecificTeamScreen,
+      navigationOptions: () => {
+        return {
+          headerLeft: <></>
+        };
+      }
     },
     Join: {
       screen: JoinScreen,

@@ -22,16 +22,6 @@ export default class ChallengesScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <KitText
-            style={styles.header}
-            size={24}
-            fontWeight={"bold"}
-            color={Colors.KIT_BLACK}
-          >
-            Challenges
-          </KitText>
-        </View>
         <FlipComponent
           isFlipped={this.state.isFlipped}
           frontView={

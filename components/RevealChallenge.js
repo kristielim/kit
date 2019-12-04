@@ -1,5 +1,6 @@
+/* this component shows card that asks the user to reveal the next challenge */
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 import KitButtonSupreme from "../components/KitButtonSupreme";
@@ -12,6 +13,9 @@ export default function RevealChallenge(props) {
       height: 509,
       marginBottom: 40,
       backgroundColor: props.color || Colors.KIT_LIGHT_GREY,
+      shadowOffset: { height: 2, width: 2 },
+      shadowOpacity: 0.5,
+      shadowColor: Colors.KIT_BLACK,
       alignSelf: "center"
     },
     container: {
@@ -39,7 +43,7 @@ export default function RevealChallenge(props) {
     },
     button: {
       position: "absolute",
-      paddingTop: 400,
+      bottom: 40,
       alignSelf: "center"
     },
     icon: {
@@ -83,18 +87,17 @@ export default function RevealChallenge(props) {
           {props.deadline}
         </KitText>
       </View>
+
+      <View style={styles.container}>{props.children}</View>
       <View style={styles.button}>
         <KitButtonSupreme
           onPress={props.flip}
-          // onPress={() => alert("pressed!")}
-          style={styles.button}
           width={200}
           height={50}
           color={Colors.KIT_GREEN}
         >
           REVEAL
         </KitButtonSupreme>
-        <View style={styles.container}>{props.children}</View>
       </View>
     </View>
   );
