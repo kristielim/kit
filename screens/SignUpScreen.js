@@ -185,7 +185,7 @@ export default function SignUpScreen(props) {
                 passwordOk &&
                 reenteredPasswordOk
               ) {
-                signUp(email, password);
+                signUp(email, password, displayName);
               }
             }}
             color={Colors.KIT_LIGHT_ORANGE}
