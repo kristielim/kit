@@ -16,7 +16,8 @@ async function addUserToTeam(teamId, userId) {
   // Filter for uniqueness just in case
   const newTeams = teamIds
     ? [teamId, ...teamIds].filter(
-        (value, index, self) => self.indexOf(value) === index
+        (teamId, index, teamIds) =>
+          teamIds.indexOf(teamId) === index && teamId !== undefined
       )
     : [teamId];
   firebase
@@ -63,6 +64,13 @@ async function _createTeam(teamName, userId) {
 
   // Use the last six digits of team id for the team code
   let teamCode = teamId.slice(-6);
+
+  // Add code field to team
+  await firebase
+    .database()
+    .ref(`/teams/${teamId}`)
+    .update({ code: teamCode });
+
   return [teamId, teamCode];
 }
 
@@ -99,11 +107,11 @@ export async function createTeam(teamName, userId) {
   return teamCode;
 }
 
-export async function getTeamsForUserId(userId) {
-  let teams = [];
-
-  const teamIds = await getCurrentValue(`/users/${userId}/teams`);
-  teams = await Promise.all(
+async function getTeams(teamIds) {
+  if (!teamIds) {
+    return [];
+  }
+  return Promise.all(
     teamIds.map(teamId => {
       //Using Promise.all avoids making the _.map an async function
       return firebase
@@ -115,7 +123,12 @@ export async function getTeamsForUserId(userId) {
         });
     })
   );
-  //Augment team objects with user's names, can be isolated to helper function in future
+}
+
+async function augmentTeamsWithUserNames(teams) {
+  if (!teams) {
+    return [];
+  }
   await Promise.all(
     teams.map(async team => {
       const augmentedUsersArr = await Promise.all(
@@ -135,6 +148,27 @@ export async function getTeamsForUserId(userId) {
       team.users = augmentedUsersArr;
     })
   );
-  // console.log(teams)
   return teams;
+}
+
+// callback runs whenever teams changes
+// callback is passed an array of teams
+export async function getTeamsForUserId(userId, callback) {
+  let teams = [];
+
+  // Call callback whenever teams change
+  const teamIdsSnapshot = firebase.database().ref(`/users/${userId}/teams`);
+
+  teamIdsSnapshot.on("value", async snapshot => {
+    let teamIds = snapshot.val();
+    if (!teamIds) {
+      callback([]);
+      return;
+    }
+    // Workaround for weird issue that had some teamIds set as undefined
+    teamIds = teamIds.filter(teamId => teamId != undefined);
+    teams = await getTeams(teamIds);
+    teams = await augmentTeamsWithUserNames(teams);
+    callback(teams);
+  });
 }
