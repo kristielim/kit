@@ -41,13 +41,29 @@ export const signIn = (email, password, setError) => {
     });
 };
 
-export const signUp = (email, password) => {
+export const signUp = (email, password, name) => {
   try {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        signIn(email, password);
+      .then(({ user }) => {
+        // See https://firebase.google.com/docs/reference/js/firebase.auth.Auth.html#createuserwithemailandpassword
+        // for what createUserWithEmailAndPassword returns
+        firebase
+          .database()
+          .ref(`/users/${user.uid}`)
+          .set(
+            {
+              name
+            },
+            error => {
+              if (error) {
+                console.log(error.toString(error));
+              } else {
+                signIn(email, password);
+              }
+            }
+          );
       });
   } catch (error) {
     console.log(error.toString(error));
