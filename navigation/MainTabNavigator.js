@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Platform } from "react-native";
 import {
@@ -5,13 +6,19 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
+import KitIcon from "../components/KitIcon";
+
+import TeamsScreen from "../screens/Teams/TeamsScreen";
+import JoinScreen from "../screens/Teams/JoinScreen";
+import CreateScreen from "../screens/Teams/CreateScreen";
+
+import ProfileScreen from "../screens/ProfileScreen";
+import ChallengesScreen from "../screens/ChallengesScreen";
+import Colors from "../constants/Colors";
+
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
 import ImageScreen from "../screens/ImageScreen";
-import LoginScreen from "../screens/LoginScreen";
-import SettingsScreen from "../screens/SettingsScreen";
-import TeamsScreen from "../screens/team-codes/TeamsScreen";
+import TextScreen from "../screens/TextScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -36,7 +43,7 @@ ChallengesStack.navigationOptions = {
       color={Colors.KIT_RED}
     />
   )
-};gi
+};
 
 ChallengesStack.path = "";
 
@@ -102,12 +109,10 @@ ProfileStack.path = "";
 
 const ImageStack = createStackNavigator(
   {
-    Image: ImageScreen
+    Image: TextScreen //change here
   },
   config
 );
-
-
 
 ImageStack.navigationOptions = {
   tabBarLabel: "Image",
@@ -119,7 +124,7 @@ ImageStack.navigationOptions = {
   )
 };
 
-const SettingsStack = createStackNavigator(
+const tabNavigator = createBottomTabNavigator(
   {
     TeamsStack,
     ChallengesStack,

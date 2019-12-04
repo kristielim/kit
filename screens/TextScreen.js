@@ -4,9 +4,11 @@ import {
   Button,
   Clipboard,
   Image,
+  
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -21,17 +23,10 @@ import uuid from 'uuid';
 
 export default class ImageScreen extends React.Component{
   state = {
-    image: null,
-    //TODO: SUBMIT BUTTON CHANGE COLOR BASED ON IF PHOTO WAS SELECTED
+    text: '',
   };
-  
-  async componentDidMount() {
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-  }
 
   render() {
-    let { image } = this.state;
-
     return (
       <View style={styles.container}>
 
@@ -53,19 +48,14 @@ export default class ImageScreen extends React.Component{
 
         <View
           style={styles.mainBody}>
-          <Image source={{ uri: image }} style={styles.imageFormat} />
+          <TextInput
+          style={styles.textBox}
+          keyboardType = 'default'
+          placeholder= "Type away . . ."
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+        />
         </View>
-
-        <KitButton
-          onPress={this._pickImage}
-          style={{button: styles.photoButton}} 
-          buttonTextColor={Colors.KIT_WHITE} 
-          buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
-          buttonFontSize={22} 
-          buttonTextStyle={styles.photoButtonText}
-          buttonBackgroundColor={Colors.KIT_GREEN} >
-          CHOOSE PHOTO
-        </KitButton>
 
         <View style = {styles.submitButton}>
 
@@ -86,61 +76,20 @@ export default class ImageScreen extends React.Component{
     );
   }
 
-  _pickImage = async () => {
-    let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-    });
-    this.setState({ image: pickerResult.uri });
-  };
-
-  _handleImagePicked = async image => {
-    try {
-      this.setState({ uploading: true });
-
-      if (!image.cancelled) {
-        uploadUrl = await uploadImageAsync(image);
-        this.setState({image: uploadUrl})
-        alert('Submitted! :D')
-      }
-    } catch (e) {
-      console.log(e);
-      alert('Upload failed, sorry :(');
-    } finally {
-      this.setState({ uploading: false });
-    }
-  };
-}
-
-async function uploadImageAsync(uri) {
-  // Why are we using XMLHttpRequest? See:
-  // https://github.com/expo/expo/issues/2402#issuecomment-443726662
-  const blob = await new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      resolve(xhr.response);
-    };
-    xhr.onerror = function(e) {
-      console.log(e);
-      reject(new TypeError('Network request failed'));
-    };
-    xhr.responseType = 'blob';
-    xhr.open('GET', uri, true);
-    xhr.send(null);
-  });
-
-  const ref = firebase
-    .storage()
-    .ref()
-    .child(uuid.v4());
-  const snapshot = await ref.put(blob);
-
-  // We're done with the blob, close and release it
-  blob.close();
-
-  return await snapshot.ref.getDownloadURL();
 }
 
 const styles = StyleSheet.create({
+
+  textBox:{
+    fontSize: 14,
+    lineHeight: 18,
+    marginTop: 10,
+    marginLeft: 10,
+    marginBottom: 10,
+    marginRight: 10,
+    textAlign: 'left',
+    alignContent: "flex-start",
+  },
 
     container: {
       paddingTop: 15, 
@@ -166,7 +115,6 @@ const styles = StyleSheet.create({
             shadowOffset: { width: 4, height: 4 },
             shadowRadius: 5,
             overflow: 'hidden',
-            alignItems: 'center',
             flex: 4
       },
 
@@ -204,3 +152,9 @@ const styles = StyleSheet.create({
         right: 0,
       }
 });
+
+
+
+
+
+
