@@ -4,8 +4,7 @@ import { View, Image } from "react-native";
 import Colors from "../../constants/Colors";
 
 import KitText from "../KitText";
-import Circle from "./Circle";
-import Rectangle from "./Rectangle";
+import CompletionBar from "./CompletionBar";
 
 export default function ChallengeTodo(props){
   return (
@@ -22,17 +21,8 @@ export default function ChallengeTodo(props){
             <KitText style={{textAlign: "left"}} size={12} color={Colors.KIT_DARKEST_BLACK}>Self Portraits Let out your inner DaVince and make a portrait of your partner! #MonaLisaWho?</KitText>
           </View>
 
-          <View style={{flexDirection: "row", alignItems: "center", marginTop: 5}}>
-            {/* The progress bar goes here */}
-            <Circle filled={true}/>
-              <Rectangle filled={true}/>
-            <Circle filled={true}/>
-              <Rectangle filled={true}/>
-            <Circle filled={true}/>
-              <Rectangle filled={false}/>
-            <Circle filled={false}/>
-              <Rectangle filled={false}/>
-            <Circle filled={false}/>
+          <View style={{marginTop: 5}}>
+            <CompletionBar/>
           </View>
         </View>
         <View style={{flex: 2, alignItems: "flex-end"}}>
