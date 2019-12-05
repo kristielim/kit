@@ -27,8 +27,6 @@ export default function ChallengeTodo(props){
           </View>
         </View>
         <View style={{flex: 2, alignItems: "flex-end"}}>
-          {/* This is the timer component */}
-          <Image style={{maxWidth: 95, maxHeight: 95,}} source={require("../../assets/images/timer-placeholder.png")}/>
           <TimerClock/>
         </View>
       </View>
