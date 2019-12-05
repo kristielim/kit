@@ -105,11 +105,23 @@ export default function ProfileScreen() {
           <KitText style={styles.text} fontWeight={"light"}>
             Donate to KIT
           </KitText>
+          <View style={styles.arrowContainer}>
+            <Image
+              style={styles.arrow}
+              source={require("../assets/images/rightarrow.png")}
+            />
+          </View>
         </View>
         <View style={styles.textContainer}>
           <KitText style={styles.text} fontWeight={"light"}>
             FAQ
           </KitText>
+          <View style={styles.arrowContainer}>
+            <Image
+              style={styles.arrow}
+              source={require("../assets/images/rightarrow.png")}
+            />
+          </View>
         </View>
       </View>
       <View style={styles.signout}>
@@ -184,6 +196,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "left",
     paddingTop: 8,
+    paddingLeft: 15,
     margin: 20
   },
   info: {
@@ -196,14 +209,21 @@ const styles = StyleSheet.create({
     borderColor: Colors.KIT_LIGHT_GREY,
     borderWidth: 1,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    alignSelf: "center"
   },
   arrow: {
-    height: 8,
-    width: 8
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: "contain"
   },
   arrowContainer: {
-    marginLeft: 80
+    position: "absolute",
+    right: 40,
+    height: 12,
+    width: 12
+
     // borderColor: Colors.KIT_LIGHT_GREEN,
     // borderWidth: 2
   }
