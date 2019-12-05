@@ -196,8 +196,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "left",
     paddingTop: 8,
-    paddingLeft: 15,
-    margin: 20
+    margin: 25
   },
   info: {
     textAlign: "left",
@@ -205,7 +204,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     height: 230 / 6,
-    width: "110%",
+    width: "100%",
     borderColor: Colors.KIT_LIGHT_GREY,
     borderWidth: 1,
     flexDirection: "row",
@@ -220,7 +219,7 @@ const styles = StyleSheet.create({
   },
   arrowContainer: {
     position: "absolute",
-    right: 40,
+    right: 25,
     height: 12,
     width: 12
 
