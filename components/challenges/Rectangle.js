@@ -7,7 +7,7 @@ export default function Rectangle(props) {
       <View style={{
         width: 15,
         height: 2,
-        backgroundColor: props.filled ? Colors.KIT_LIGHT_ORANGE : "#C4C4C4",
+        backgroundColor: props.filled ? props.mainColor : "#C4C4C4",
       }} />
   );
 }

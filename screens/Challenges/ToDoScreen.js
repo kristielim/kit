@@ -17,7 +17,8 @@ export default function ToDoScreen() {
         <KitText style={styles.label} fontWeight="medium" size={24}>
           To Do
         </KitText>
-        <ChallengeTodo/>
+        <ChallengeTodo mainColor={Colors.KIT_LIGHT_ORANGE}/>
+        <ChallengeTodo mainColor={Colors.KIT_GREEN}/>
       </View>
     </ScrollView>
   );

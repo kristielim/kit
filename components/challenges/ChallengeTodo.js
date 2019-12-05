@@ -9,7 +9,7 @@ import TimerClock from "./TimerClock";
 
 export default function ChallengeTodo(props){
   return (
-    <View style={{backgroundColor: Colors.KIT_LIGHT_ORANGE, alignItems: "center"}}>  
+    <View style={{backgroundColor: props.mainColor, alignItems: "center", marginVertical: 10,}}>  
       <View style={{flexDirection: "row", alignItems: "center", borderRadius: 10, backgroundColor: Colors.KIT_WHITE, margin: 15, padding: 15, paddingLeft: 30, paddingRight: 30,}}>
         <View style={{flex: 3, flexDirection: "column", marginTop: 5, marginBottom: 5,}}>
           <View style={{flexDirection: "row"}}>
@@ -23,7 +23,7 @@ export default function ChallengeTodo(props){
           </View>
 
           <View style={{marginTop: 5}}>
-            <CompletionBar/>
+            <CompletionBar numCompleted={4} mainColor={props.mainColor}/>
           </View>
         </View>
         <View style={{flex: 2, alignItems: "flex-end"}}>

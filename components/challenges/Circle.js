@@ -9,7 +9,7 @@ export default function Circle(props) {
         width: diameter,
         height: diameter,
         borderRadius: diameter/2,
-        backgroundColor: props.filled ? Colors.KIT_LIGHT_ORANGE : "#C4C4C4",
+        backgroundColor: props.filled ? props.mainColor : "#C4C4C4",
       }} />
   );
 }
