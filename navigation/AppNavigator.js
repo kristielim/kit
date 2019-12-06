@@ -9,10 +9,16 @@ import SignUp from "../screens/SignUpScreen";
 import SignIn from "../screens/SignInScreen";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 import TutorialScreen1 from '../screens/Tutorials/TutorialScreen1';
+import TutorialScreen2 from '../screens/Tutorials/TutorialScreen2';
+import TutorialScreen3 from '../screens/Tutorials/TutorialScreen3';
+import TutorialScreen4 from '../screens/Tutorials/TutorialScreen4';
 
 export const SignedOut = createStackNavigator({
   Tutorial: {
-    screen: TutorialScreen1
+    screen: TutorialScreen4
+  },
+  Tutorial2: {
+    screen: TutorialScreen2
   },
   SignUp: {
     screen: SignUp

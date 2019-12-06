@@ -10,15 +10,16 @@ import CompletionBar from "../../components/challenges/CompletionBar";
 export default function TeamsScreen(props) {
   const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
   const { navigation } = props;
+
   const goToNext = () => {
-    navigation.navigate("Tutorial2");
+    navigation.navigate("Tutorial3");
   };
 
-  const kitglobeImage = require("../../assets/images/kitglobe.png");
+  const kitglobeImage = require("../../assets/images/tutorial2.png");
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress = { () => {this.goToNext} }>
+      <TouchableHighlight onPress = {this.goToNext}>
         <View style={styles.card}>
         <View style={styles.textContainer}>
           <KitText
@@ -27,21 +28,30 @@ export default function TeamsScreen(props) {
             size={30}
             fontWeight="bold"
           >
-            Welcome to kit!
+            Challenges
           </KitText>
           <KitText
             style={styles.text} 
             color={Colors.KIT_BLACK}
             size={16}
           >
-            An app to foster long distance friendships.
+            Kit will assign teams {"\n"}time-sensitive challenges to encourage you to connect.
           </KitText>
         </View>
         <View style={styles.imageContainer}>
         <Image source={kitglobeImage}/>
         </View>
+        <View style={styles.textContainer}>
+          <KitText
+            style={styles.text} 
+            color={Colors.KIT_BLACK}
+            size={16}
+          >
+            But watch out! These challenges will disappear if not opened on time.
+          </KitText>
+        </View>
         <View style={styles.challengeContainer}>
-        <CompletionBar numCompleted={1} numInTeam={4} mainColor={"#569684"}/>
+        <CompletionBar numCompleted={2} numInTeam={4} mainColor={"#569684"}/>
         </View>
       </View>
       </TouchableHighlight>
