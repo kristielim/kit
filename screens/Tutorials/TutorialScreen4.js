@@ -7,6 +7,7 @@ import CompletionBar from "../../components/challenges/CompletionBar";
 
 export default function Tutorial4Screen(props) {
   const kitglobeImage = require("../../assets/images/tutorial4teamcode.png");
+  const kitglobeImage2 = require("../../assets/images/tutorial4friends.png");
 
   return (
     <View style={styles.container}>
@@ -41,7 +42,10 @@ export default function Tutorial4Screen(props) {
           </KitText>
         </View>
         <View style={styles.imageContainer}>
-        <Image source={kitglobeImage}/>
+        <Image source={kitglobeImage2}
+               style ={{height: 80}}
+               resizeMode = "contain"
+        />
         </View>
         <View style={styles.challengeContainer}>
         <CompletionBar numCompleted={4} numInTeam={4} mainColor={"#569684"}/>
@@ -105,6 +109,7 @@ const styles = StyleSheet.create({
     alignItems: "center", 
   },
   challengeContainer: {
+    margin: 25,
     alignItems: "center"
   },
   card: {
