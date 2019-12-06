@@ -17,13 +17,14 @@ export default function SubmissionsScreen(props) {
     let todos = []
     let alternator = true;
     for (challenge of challenges) {
-      if((challenge.submissions && !challenge.submissions[currentUser]) || !challenges.submissions) continue; //If the user has no submission for this challenge, filter it out from Todo
-      todos.push(
-        <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
-          props.navigation.navigate("IndividualChallenge", {challenge: challenge, submission: challenge.submissions[currentUser], currentUser: currentUser})
-        }}/>
-      )
-      alternator = !alternator;
+      if(challenge.submissions && challenge.submissions[currentUser]) { //If user has submissions, add it.
+        todos.push(
+          <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
+            props.navigation.navigate("IndividualChallenge", {challenge: challenge, submission: challenge.submissions[currentUser], currentUser: currentUser})
+          }}/>
+        )
+        alternator = !alternator;
+      }
     }
     return todos
   }
