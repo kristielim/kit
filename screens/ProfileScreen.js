@@ -1,9 +1,9 @@
 /* profile screen shows user data and has option to edit user data
 also has links to change pw, donate, faq*/
 
-/* replace later with actual display name component -> link to firebase */
-/* replace later with actual email component -> link to firebase */
-/* replace later with actual image component -> link to firebase */
+// TODO: BIANCA
+// fix image cancel bug -> update image url
+// pull email from firebase and display
 
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image, TextInput } from "react-native";
@@ -15,14 +15,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import KitText from "../components/KitText";
 import Colors from "../constants/Colors";
 import ToggleSwitch from "toggle-switch-react-native";
-import { getUsername, updateUsername, updatePicture } from "../utils/db/users";
+import {
+  getUsername,
+  updateUsername,
+  updatePicture,
+  getPicture
+} from "../utils/db/users";
 import { getUserId } from "../utils/auth/auth";
 import uuid from "uuid";
-
-// async componentDidMount() {
-//   //TODO
-//   await Permissions.askAsync(Permissions.CAMERA_ROLL);
-// }
 
 export default function ProfileScreen() {
   const [mode, setMode] = useState("done");
@@ -30,6 +30,7 @@ export default function ProfileScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   useEffect(() => {
     const currentUser = getUserId();
     console.log("current", currentUser);
@@ -40,7 +41,24 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     Permissions.askAsync(Permissions.CAMERA_ROLL);
+    console.log("current", currentUser);
+    getPicture(currentUser).then(image => {
+      console.log("image", image);
+      setImageUrl(image);
+    });
   }, []);
+
+  // imageUrl === ""
+  //                 ? require("../assets/images/avatar.png")
+  //                 : { uri: imageUrl }
+
+  if (image) {
+    imgSrc = { uri: image };
+  } else if (!imageUrl) {
+    imgSrc = require("../assets/images/avatar.png");
+  } else {
+    imgSrc = { uri: imageUrl };
+  }
 
   _pickImage = async () => {
     //allows user to select image from image library
@@ -76,29 +94,29 @@ export default function ProfileScreen() {
         <View style={styles.photoContainer}>
           <Image
             // source={require("../assets/images/avatar.png")}
-            source={{ uri: image }}
+            source={imgSrc}
             style={styles.profilePhoto}
           />
         </View>
       ) : (
-        <TouchableOpacity
-          onPress={() => {
-            setMode("edit");
-            _pickImage(image);
-          }}
-        >
-          <View style={styles.photoContainer}>
+        <View style={styles.photoContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setMode("edit");
+              _pickImage(image);
+            }}
+          >
             <Image
               // source={require("../assets/images/avatar.png")}
-              source={{ uri: image }}
+              source={imgSrc}
               style={styles.profilePhotoDark}
             />
             <Image
               source={require("../assets/images/cameraicon.png")}
               style={styles.cameraicon}
             />
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       )}
 
       <View style={styles.headerContainer}>
@@ -128,12 +146,12 @@ export default function ProfileScreen() {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              onPress={() => {
+              onPress={async () => {
                 setMode("done");
                 updateUsername(getUserId(), name);
                 setName(name);
                 _handleImagePicked(image);
-                updatePicture(getUserId(), image);
+                updatePicture(getUserId(), await uploadImageAsync(image));
               }}
             >
               <KitText
