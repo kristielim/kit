@@ -18,8 +18,9 @@ export default function TimerClock(props) {
     const timeOpened = opened[currentUser]
     const currentTime = new Date().getTime() / 1000; //Adjusting to seconds
   
-    // console.log((currentTime - timeOpened) / minutesGiven)
-    return (currentTime - timeOpened) / minutesGiven;
+    // console.log((currentTime - timeOpened)/60)
+    // console.log((currentTime - timeOpened) / (minutesGiven * 60))
+    return (currentTime - timeOpened) / (minutesGiven * 60) * 100; //Converting minutes to seconds, then converting decimal to percent
   }
 
   function calculateHoursLeft() {
