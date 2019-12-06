@@ -1,26 +1,59 @@
 /* profile screen shows user data and has option to edit user data
 also has links to change pw, donate, faq*/
 
-import React, { useState } from "react";
+/* replace later with actual display name component -> link to firebase */
+/* replace later with actual email component -> link to firebase */
+/* replace later with actual image component -> link to firebase */
 
-import { View, StyleSheet, Image } from "react-native";
-import KitButtonSupreme from "../components/KitButtonSupreme";
+import React, { useState, useEffect } from "react";
+import * as ImagePicker from "expo-image-picker";
+import * as firebase from "firebase";
+import * as Permissions from "expo-permissions";
+import { View, StyleSheet, Image, TextInput } from "react-native";
 
 import { signOut } from "../utils/auth/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import KitText from "../components/KitText";
 import Colors from "../constants/Colors";
+import ToggleSwitch from "toggle-switch-react-native";
+import { getUsername, updateUsername } from "../utils/db/users";
+import { getUserId } from "../utils/auth/auth";
 
 export default function ProfileScreen() {
   const [mode, setMode] = useState("done");
+  const [ifOn, setOn] = useState("isOff");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    const currentUser = getUserId();
+    console.log("current", currentUser);
+    getUsername(currentUser).then(name => {
+      setName(name);
+    });
+  }, []);
   return (
     <View style={styles.container}>
-      <View style={styles.photoContainer}>
-        <Image
-          source={require("../assets/images/avatar.png")}
-          style={styles.profilePhoto}
-        />
-      </View>
+      {mode === "done" ? (
+        <View style={styles.photoContainer}>
+          <Image
+            source={require("../assets/images/avatar.png")}
+            style={styles.profilePhoto}
+          />
+        </View>
+      ) : (
+        <TouchableOpacity>
+          <View style={styles.photoContainer}>
+            <Image
+              source={require("../assets/images/avatar.png")}
+              style={styles.profilePhotoDark}
+            />
+            <Image
+              source={require("../assets/images/cameraicon.png")}
+              style={styles.cameraicon}
+            />
+          </View>
+        </TouchableOpacity>
+      )}
 
       <View style={styles.headerContainer}>
         <KitText
@@ -31,6 +64,7 @@ export default function ProfileScreen() {
         >
           Settings
         </KitText>
+
         <View style={styles.edit}>
           {mode === "done" ? (
             <TouchableOpacity
@@ -50,6 +84,8 @@ export default function ProfileScreen() {
             <TouchableOpacity
               onPress={() => {
                 setMode("done");
+                updateUsername(getUserId(), name);
+                setName(name);
               }}
             >
               <KitText
@@ -63,16 +99,25 @@ export default function ProfileScreen() {
           )}
         </View>
       </View>
-      <View style={styles.edit}></View>
+
       <View style={styles.inputContainer}>
         <View style={styles.textContainer}>
           <KitText style={styles.text} fontWeight={"light"}>
             Display Name
           </KitText>
-          <KitText style={styles.info} fontWeight={"bold"}>
-            Vanessa
-          </KitText>
+          {mode === "done" ? (
+            <KitText style={styles.info} fontWeight={"bold"}>
+              {name}
+            </KitText>
+          ) : (
+            <TextInput
+              style={styles.textInput}
+              value={name}
+              onChangeText={setName}
+            />
+          )}
         </View>
+
         <View style={styles.textContainer}>
           <KitText style={styles.text} fontWeight={"light"}>
             Email
@@ -85,44 +130,76 @@ export default function ProfileScreen() {
             vanessahristyta@gmail.com
           </KitText>
         </View>
+
         <View style={styles.textContainer}>
           <KitText style={styles.text} fontWeight={"light"}>
             Notifications
           </KitText>
-        </View>
-        <View style={styles.textContainer}>
-          <KitText style={styles.text} fontWeight={"light"}>
-            Change Password
-          </KitText>
-          <View style={styles.arrowContainer}>
-            <Image
-              style={styles.arrow}
-              source={require("../assets/images/rightarrow.png")}
-            />
+
+          <View style={styles.switch}>
+            {ifOn === "isOff" ? (
+              <ToggleSwitch
+                isOn={false}
+                onColor={Colors.KIT_ORANGE}
+                offColor={Colors.KIT_GREY}
+                onToggle={() => {
+                  setOn("isOn");
+                }}
+              />
+            ) : (
+              <ToggleSwitch
+                isOn={true}
+                onColor={Colors.KIT_ORANGE}
+                offColor={Colors.KIT_GREY}
+                onToggle={() => {
+                  setOn("isOff");
+                }}
+              />
+            )}
           </View>
         </View>
-        <View style={styles.textContainer}>
-          <KitText style={styles.text} fontWeight={"light"}>
-            Donate to KIT
-          </KitText>
-          <View style={styles.arrowContainer}>
-            <Image
-              style={styles.arrow}
-              source={require("../assets/images/rightarrow.png")}
-            />
+
+        <TouchableOpacity>
+          <View style={styles.textContainer}>
+            <KitText style={styles.text} fontWeight={"light"}>
+              Change Password
+            </KitText>
+            <View style={styles.arrowContainer}>
+              <Image
+                style={styles.arrow}
+                source={require("../assets/images/rightarrow.png")}
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.textContainer}>
-          <KitText style={styles.text} fontWeight={"light"}>
-            FAQ
-          </KitText>
-          <View style={styles.arrowContainer}>
-            <Image
-              style={styles.arrow}
-              source={require("../assets/images/rightarrow.png")}
-            />
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.textContainer}>
+            <KitText style={styles.text} fontWeight={"light"}>
+              Donate to KIT
+            </KitText>
+            <View style={styles.arrowContainer}>
+              <Image
+                style={styles.arrow}
+                source={require("../assets/images/rightarrow.png")}
+              />
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.textContainer}>
+            <KitText style={styles.text} fontWeight={"light"}>
+              FAQ
+            </KitText>
+            <View style={styles.arrowContainer}>
+              <Image
+                style={styles.arrow}
+                source={require("../assets/images/rightarrow.png")}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.signout}>
         <TouchableOpacity onPress={signOut}>
@@ -162,11 +239,32 @@ const styles = StyleSheet.create({
     height: 230,
     width: 230,
     borderRadius: 230 / 2,
-    alignSelf: "center"
+    resizeMode: "contain",
+    opacity: 1
+  },
+  profilePhotoDark: {
+    height: 230,
+    width: 230,
+    borderRadius: 230 / 2,
+    resizeMode: "contain",
+    opacity: 0.75
+  },
+  cameraicon: {
+    position: "absolute",
+    alignSelf: "center",
+    top: 70,
+    width: 90,
+    height: 90,
+    opacity: 1
   },
   photoContainer: {
-    paddingTop: 18,
-    paddingBottom: 28
+    height: 230,
+    width: 230,
+    borderRadius: 230 / 2,
+    alignSelf: "center",
+    backgroundColor: Colors.KIT_BLACK,
+    marginTop: 18,
+    marginBottom: 28
   },
   headerContainer: {
     flexDirection: "row",
@@ -198,6 +296,10 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     margin: 25
   },
+  textInput: {
+    fontFamily: "poligon-medium-italic",
+    paddingTop: 5
+  },
   info: {
     textAlign: "left",
     paddingTop: 8
@@ -222,8 +324,9 @@ const styles = StyleSheet.create({
     right: 25,
     height: 12,
     width: 12
-
-    // borderColor: Colors.KIT_LIGHT_GREEN,
-    // borderWidth: 2
+  },
+  switch: {
+    position: "absolute",
+    right: 25
   }
 });
