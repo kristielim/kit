@@ -4,11 +4,34 @@ import ProgressCircle from 'react-native-progress-circle';
 
 import Colors from "../../constants/Colors";
 
+import { getUserId } from "../../utils/auth/auth";
+
 import KitText from "../KitText"
 const diameter = 96;
 export default function TimerClock(props) {
   function calculatePercent() {
-    return 35;
+    const minutesGiven = props.challenge.challengeDetails.minGiven;
+    const opened = props.challenge.opened || null; //In theory we should never pass an assignedChallenge to the TimerClock with the user not in the submissions array
+
+    if (!opened) return 35; //EVAN TODO: this should be an error
+    const currentUser = getUserId();
+    const timeOpened = opened[currentUser]
+    const currentTime = new Date().getTime() / 1000; //Adjusting to seconds
+  
+    // console.log((currentTime - timeOpened) / minutesGiven)
+    return (currentTime - timeOpened) / minutesGiven;
+  }
+
+  function calculateHoursLeft() {
+    const hourGiven = props.challenge.challengeDetails.minGiven / 60;
+    const opened = props.challenge.opened || null; //In theory we should never pass an assignedChallenge to the TimerClock with the user not in the submissions array
+
+    if (!opened) return 23; //EVAN TODO: this should be an error
+    const currentUser = getUserId();
+    const timeOpened = opened[currentUser]
+    const currentTime = new Date().getTime() / 1000; //Adjusting to seconds
+
+    return Math.trunc(hourGiven - ((currentTime - timeOpened) / (60*60)))
   }
   return (
     <ProgressCircle
@@ -22,7 +45,7 @@ export default function TimerClock(props) {
       shadowColor={Colors.KIT_WHITE}
       bgColor={Colors.KIT_LIGHT_GREY}
     >
-      <KitText size={48} color={Colors.KIT_BLACK} fontWeight={"extrabold"}>23</KitText>
+      <KitText size={48} color={Colors.KIT_BLACK} fontWeight={"extrabold"}>{calculateHoursLeft()}</KitText>
     </ProgressCircle>
   );
 }
