@@ -14,6 +14,8 @@ import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
 
+import TextScreen from "../screens/TextScreen";
+import ImageScreen from "../screens/ImageScreen";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import Colors from "../constants/Colors";
@@ -38,7 +40,15 @@ const ChallengesStack = createStackNavigator(
     Challenges: {
       screen: ChallengeTabNavigator,
       navigationOptions: { headerTitle: "Challenges" }
-    }
+    },
+    TextSubmit: {
+      screen: TextScreen,
+      navigationOptions: { headerLeft: <></> }
+    },
+    ImageSubmit: {
+      screen: ImageScreen,
+      navigationOptions: { headerLeft: <></> }
+    },
   },
   config
 );

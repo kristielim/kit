@@ -38,6 +38,9 @@ export default class ImageScreen extends React.Component{
       <View style={styles.container}>
 
         <View style = {styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={() =>{this.props.navigation.navigate("Challenges")}}>
+            <Image source={require("../assets/images/arrow.png")} />
+          </TouchableOpacity>
           <KitText 
           size={50} 
           fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
@@ -156,6 +159,7 @@ const styles = StyleSheet.create({
     },
 
       header: { 
+        flexDirection: "row",
         paddingTop: 10, 
         paddingBottom: 10,
         alignItems: "flex-start",

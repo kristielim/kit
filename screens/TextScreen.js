@@ -29,14 +29,18 @@ export default class ImageScreen extends React.Component{
   render() {
     return (
       <View style={styles.container}>
-
         <View style = {styles.header}>
-          <KitText 
-          size={50} 
-          fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
-          color={Colors.KIT_BLACK}>
-            Challenge Name
-        </KitText>
+          <View style={{flexDirection: "row"}}>
+            <TouchableOpacity style={styles.backButton} onPress={() =>{this.props.navigation.navigate("Challenges")}}>
+              <Image source={require("../assets/images/arrow.png")} />
+            </TouchableOpacity>
+            <KitText 
+            size={50} 
+            fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
+            color={Colors.KIT_BLACK}>
+              Challenge Name
+          </KitText>
+          </View>
 
         <KitText 
           size={17}
@@ -79,7 +83,6 @@ export default class ImageScreen extends React.Component{
 }
 
 const styles = StyleSheet.create({
-
   textBox:{
     fontSize: 14,
     lineHeight: 18,

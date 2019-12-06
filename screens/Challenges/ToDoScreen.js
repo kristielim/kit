@@ -11,8 +11,9 @@ import Fonts from "../../constants/Fonts";
 
 import { getAllAssignedChallenges } from "../../utils/db/challenges";
 import { getUserId } from "../../utils/auth/auth";
+import { setRecoveryProps } from "expo/build/ErrorRecovery/ErrorRecovery";
 
-export default function ToDoScreen() {
+export default function ToDoScreen(props) {
   const [challenges, setChallenges] = useState([]);
 
   function renderTodos() {
@@ -21,7 +22,14 @@ export default function ToDoScreen() {
     for (challenge of challenges) {
       // console.log(challenge)
       todos.push(
-        <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {alert("Hello")}}/>
+        <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
+          if(challenge.challengeDetails.mediaType === "STRING"){
+            props.navigation.navigate("TextSubmit")
+          }
+          else if(challenge.challengeDetails.mediaType === "IMAGE"){
+            props.navigation.navigate("ImageSubmit")
+          }
+        }}/>
       )
       alternator = !alternator;
     }
