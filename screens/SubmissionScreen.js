@@ -1,14 +1,7 @@
 import React from 'react';
 import {
-  ActivityIndicator,
-  Button,
-  Clipboard,
   Image,
-  StatusBar,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -16,14 +9,19 @@ import KitText from '../components/KitText';
 import KitButtonSupreme  from '../components/KitButtonSupreme';
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
-import uuid from 'uuid';
 
 export default class ImageScreen extends React.Component{
-  state = {
-    text: '',
-  };
+
+  constructor(props) {
+    super(props);
+    state = {
+      text: '',
+    };
+  }
+
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
 
@@ -61,6 +59,7 @@ export default class ImageScreen extends React.Component{
         <View style = {styles.submitButton}>
 
         <KitButtonSupreme
+          onPress = {() => {navigate("Challenges")}}
           buttonTextColor={Colors.KIT_WHITE} 
           buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
           buttonFontSize={22} 

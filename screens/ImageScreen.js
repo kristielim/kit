@@ -1,22 +1,13 @@
 import React from 'react';
 import {
-  ActivityIndicator,
-  Button,
-  Clipboard,
   Image,
-  StatusBar,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
 import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
-import SubmissionScreen from '../components/SubmissionScreen';
 import KitText from '../components/KitText';
 import KitButtonSupreme  from '../components/KitButtonSupreme';
 import KitButton  from '../components/KitButton';
@@ -24,22 +15,24 @@ import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
 import uuid from 'uuid';
 
-export default class ImageScreen extends React.Component{
-  state = {
-    image: null,
-    //TODO: SUBMIT BUTTON CHANGE COLOR BASED ON IF PHOTO WAS SELECTED
-    //TODO: upload image url and user to the actual database under assigned challenges - use push command??
-  };
+export default class ImageScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      image: null
+      //TODO: SUBMIT BUTTON CHANGE COLOR BASED ON IF PHOTO WAS SELECTED
+      //TODO: upload image url and user to the actual database under assigned challenges - use push command??
+      //TODO: rewrite this in react hooks oops
+    };
+  }
+
   
   async componentDidMount() {
     //TODO
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
-
-  const SubmitImageNavigator = createStackNavigator({
-    Upload: {screen: ImageScreen},
-    Submitted: {screen: SubmissionScreen},
-  });
 
   render() {
     let { image } = this.state;
@@ -82,7 +75,9 @@ export default class ImageScreen extends React.Component{
         <View style = {styles.submitButton}>
 
         <KitButton
-          onPress={() => this._handleImagePicked(image)}
+          onPress={ () =>
+           this._handleImagePicked(image)
+          }
           image={require("../assets/images/submitArrow.png")}
           imageFormat={styles.submitButton}
           style={{button: styles.submitButtonFormat}} 
@@ -107,22 +102,20 @@ export default class ImageScreen extends React.Component{
   };
 
   _handleImagePicked = async image => {
+    const {navigate} = this.props.navigation;
     //uploads image to firebase storage
     try {
-      this.setState({ uploading: true });
-
       if (!image.cancelled) {
         //image url saved and stored
         uploadUrl = await uploadImageAsync(image); 
         this.setState({image: uploadUrl})
-        alert('Submitted! :D')
       }
     } catch (e) {
       console.log(e);
       //TODO: Implement Error Screen in place of this
       alert('Upload failed, sorry :(');
     } finally {
-      this.setState({ uploading: false });
+      navigate("Submitted")
     }
   };
 }

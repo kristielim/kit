@@ -42,6 +42,20 @@ const ChallengesStack = createStackNavigator(
     Challenges: {
       screen: ChallengeTabNavigator,
       navigationOptions: { headerTitle: "Challenges" }
+    },
+
+    UploadImage: {
+      screen: ImageScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Upload Image" }
+    },
+    UploadText: {
+      screen: TextScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Upload Text" }
+    },
+
+    Submitted: {
+      screen: SubmissionScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Submitted" }
     }
   },
   config
@@ -125,28 +139,10 @@ ProfileStack.navigationOptions = {
 
 ProfileStack.path = "";
 
-const ImageStack = createStackNavigator(
-  {
-    Image: ImageScreen //change here
-  },
-  config
-);
-
-ImageStack.navigationOptions = {
-  tabBarLabel: "Image",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  )
-};
-
 const tabNavigator = createBottomTabNavigator(
   {
     TeamsStack,
     ChallengesStack,
-    ImageStack,
     ProfileStack
   },
   {
