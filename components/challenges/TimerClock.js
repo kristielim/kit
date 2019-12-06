@@ -7,12 +7,15 @@ import Colors from "../../constants/Colors";
 import KitText from "../KitText"
 const diameter = 96;
 export default function TimerClock(props) {
+  function calculatePercent() {
+    return 35;
+  }
   return (
     <ProgressCircle
       containerStyle={{
         paddingTop: 19,
       }}
-      percent={30}
+      percent={calculatePercent()}
       radius={diameter/2}
       borderWidth={3}
       color={Colors.KIT_RED}

@@ -59,7 +59,7 @@ export default function ChallengeTodo(props){
           </View>
         </View>
         <View style={styles.clockWrapper}>
-          <TimerClock/>
+          <TimerClock challenge={props.challenge}/>
         </View>
       </TouchableOpacity>
     </View>

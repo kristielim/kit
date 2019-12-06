@@ -19,7 +19,7 @@ export default function ToDoScreen() {
     let todos = []
     let alternator = true;
     for (challenge of challenges) {
-      console.log(challenge)
+      // console.log(challenge)
       todos.push(
         <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {alert("Hello")}}/>
       )
