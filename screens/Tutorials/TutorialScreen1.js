@@ -1,0 +1,113 @@
+import React, { useState } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+
+import KitText from "../../components/KitText";
+import MyTeams from "../../components/team-codes/MyTeams";
+import Colors from "../../constants/Colors";
+import KitButtonSupreme from "../../components/KitButtonSupreme";
+import CompletionBar from "../../components/challenges/CompletionBar";
+
+export default function TeamsScreen(props) {
+  const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
+  const kitglobeImage = require("../../assets/images/kitglobe.png");
+
+  return (
+    <View style={styles.container}>
+        <View style={styles.card}>
+        <View style={styles.textContainer}>
+          <KitText
+            style={styles.text}
+            color={Colors.KIT_BLACK}
+            size={30}
+            fontWeight="bold"
+          >
+            Welcome to kit!
+          </KitText>
+          <KitText
+            style={styles.text} 
+            color={Colors.KIT_BLACK}
+            size={16}
+          >
+            An app to foster long distance friendships.
+          </KitText>
+        </View>
+        <View style={styles.imageContainer}>
+        <Image source={kitglobeImage}/>
+        </View>
+        <View style={styles.challengeContainer}>
+        <CompletionBar numCompleted={1} numInTeam={4} mainColor={"#569684"}/>
+        </View>
+        <KitButtonSupreme
+              style={styles.button}
+              color={Colors.KIT_ORANGE}
+              backgroundColor={Colors.KIT_ORANGE}
+              onPress={() => {
+                props.navigation.navigate("Create");
+              }}
+            >
+                SIGN UP
+        </KitButtonSupreme>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 75,
+    backgroundColor: Colors.KIT_WHITE
+  },
+  header: {
+    paddingTop: 6,
+    paddingBottom: 6
+  },
+  mainBody: {
+    flex: 1,
+    backgroundColor: Colors.KIT_WHITE
+  },
+  addTeam: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 32,
+    paddingTop: 8,
+    paddingBottom: 8
+  },
+  addTeamMenu: {
+    display: "flex",
+    flexDirection: "column",
+    height: 168,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.KIT_GREEN
+  },
+  button: {
+    margin: 50
+  },
+  textContainer: {
+    margin: 32,
+    width: 221
+  },
+  text: {
+    textAlign: "left"
+  },
+  imageContainer: {
+    alignItems: "center", 
+  },
+  challengeContainer: {
+    margin: 50,
+    alignItems: "center"
+  },
+  card: {
+    borderRadius: 30,
+    width: 320,
+    height: 509,
+    marginBottom: 40,
+    backgroundColor: Colors.KIT_WHITE,
+    alignSelf: "center",
+    shadowOffset: { height: 2, width: 2 },
+    shadowOpacity: 0.5,
+    shadowColor: Colors.KIT_BLACK
+  }
+});
