@@ -1,30 +1,33 @@
 import React from 'react';
 import {
-  ActivityIndicator,
-  Button,
-  Clipboard,
   Image,
-  StatusBar,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
+
 import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
 import KitText from '../components/KitText';
-import KitButton  from '../components/KitButton'
+import KitButtonSupreme  from '../components/KitButtonSupreme';
+import KitButton  from '../components/KitButton';
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
 import uuid from 'uuid';
 
-export default class ImageScreen extends React.Component{
-  state = {
-    image: null,
-    //TODO: SUBMIT BUTTON CHANGE COLOR BASED ON IF PHOTO WAS SELECTED
-    //TODO: upload image url and user to the actual database under assigned challenges - use push command??
-  };
+export default class ImageScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      image: null
+      //TODO: SUBMIT BUTTON CHANGE COLOR BASED ON IF PHOTO WAS SELECTED
+      //TODO: upload image url and user to the actual database under assigned challenges - use push command??
+      //TODO: rewrite this in react hooks oops
+    };
+  }
+
   
   async componentDidMount() {
     //TODO
@@ -58,7 +61,7 @@ export default class ImageScreen extends React.Component{
           <Image source={{ uri: image }} style={styles.imageFormat} />
         </View>
 
-        <KitButton
+        <KitButtonSupreme
           onPress={this._pickImage}
           style={{button: styles.photoButton}} 
           buttonTextColor={Colors.KIT_WHITE} 
@@ -67,12 +70,14 @@ export default class ImageScreen extends React.Component{
           buttonTextStyle={styles.photoButtonText}
           buttonBackgroundColor={Colors.KIT_GREEN} >
           CHOOSE PHOTO
-        </KitButton>
+        </KitButtonSupreme>
 
         <View style = {styles.submitButton}>
 
         <KitButton
-          onPress={() => this._handleImagePicked(image)}
+          onPress={ () =>
+           this._handleImagePicked(image)
+          }
           image={require("../assets/images/submitArrow.png")}
           imageFormat={styles.submitButton}
           style={{button: styles.submitButtonFormat}} 
@@ -97,22 +102,20 @@ export default class ImageScreen extends React.Component{
   };
 
   _handleImagePicked = async image => {
+    const {navigate} = this.props.navigation;
     //uploads image to firebase storage
     try {
-      this.setState({ uploading: true });
-
       if (!image.cancelled) {
         //image url saved and stored
         uploadUrl = await uploadImageAsync(image); 
         this.setState({image: uploadUrl})
-        alert('Submitted! :D')
       }
     } catch (e) {
       console.log(e);
       //TODO: Implement Error Screen in place of this
       alert('Upload failed, sorry :(');
     } finally {
-      this.setState({ uploading: false });
+      navigate("Submitted")
     }
   };
 }
@@ -182,14 +185,7 @@ const styles = StyleSheet.create({
       },
 
       photoButton: {
-        alignSelf: 'flex-end',
-        width: 200,
-        maxHeight: 50,
-        marginTop: -70,
-        borderTopRightRadius: 25,
-        borderTopLeftRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
+        marginTop: -50,
         zIndex: 5,
       },
 
