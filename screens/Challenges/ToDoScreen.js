@@ -10,6 +10,7 @@ import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 
 import { getAllAssignedChallenges } from "../../utils/db/challenges";
+import { getUserId } from "../../utils/auth/auth";
 
 export default function ToDoScreen() {
   const [challenges, setChallenges] = useState([]);
@@ -28,7 +29,8 @@ export default function ToDoScreen() {
   }
 
   useEffect(() => {
-    getAllAssignedChallenges("user_id_1").then(challenges => {
+    currentUser = getUserId();
+    getAllAssignedChallenges(currentUser).then(challenges => {
       setChallenges(challenges)
     })
   }, []);
