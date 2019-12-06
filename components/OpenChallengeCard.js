@@ -4,13 +4,45 @@ import FlipComponent from "react-native-flip-component";
 import ChallengeCard from "./ChallengeCard";
 import RevealChallenge from "./RevealChallenge";
 import { StyleSheet, View } from "react-native";
-import { openChallenge } from "../utils/db/challenges";
+import timer from "react-native-timer";
+import { millisecondsToString } from "../utils/time";
 
 export default class OpenChallengeCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isFlipped: false };
+    this.state = {
+      isFlipped: false,
+      timeLeftInMilliseconds: this.props.timeLeftInMilliseconds
+    };
     this.flip = this.flip.bind(this);
+  }
+
+  componentDidMount() {
+    timer.setTimeout(
+      this,
+      this.props.assignedChallengeId,
+      () => {
+        // TODO: Kristie replace with modal
+        // Also decide what to do if time is up
+        alert("Time's up!");
+      },
+      this.props.timeLeftInMilliseconds
+    );
+    timer.setInterval(
+      this,
+      this.props.assignedChallengeId,
+      () => {
+        this.setState({
+          timeLeftInMilliseconds: this.state.timeLeftInMilliseconds - 1000
+        });
+      },
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    timer.clearTimeout(this);
+    timer.clearInterval(this);
   }
 
   flip = () => {
@@ -30,7 +62,7 @@ export default class OpenChallengeCard extends React.Component {
                 this.flip();
               }}
               number={`1/${this.props.numberOfChallenges}`}
-              deadline={"24:24:24"}
+              deadline={millisecondsToString(this.state.timeLeftInMilliseconds)}
             />
           }
           backView={

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native";
+import moment from "moment";
 
 import KitText from "../../components/KitText";
 import OpenChallengeCard from "../../components/OpenChallengeCard";
@@ -68,6 +69,16 @@ export default function ToDoScreen() {
     });
   }, []);
 
+  const getTimeLeftInMilliseconds = assignedTime => {
+    // 24 hours in seconds
+    const TIME_TO_OPEN = 86400000;
+    const currTime = moment().valueOf(); // Gets unix time in milliseconds
+    // console.log(moment(assignedTime).format("HH:MM:SS"));
+    // console.log(moment(currTime).format("HH:MM:SS"));
+    // console.log(assignedTime + TIME_TO_OPEN - currTime);
+    return assignedTime + TIME_TO_OPEN - currTime;
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -81,6 +92,9 @@ export default function ToDoScreen() {
                   challengeTitle={challenge.challengeDetails.title}
                   challengeDescription={challenge.challengeDetails.description}
                   teamName={challenge.teamName}
+                  timeLeftInMilliseconds={getTimeLeftInMilliseconds(
+                    challenge.assignedTime
+                  )}
                   onReveal={() => {
                     openChallenge(challenge.assignedChallengeId, getUserId());
                   }}
