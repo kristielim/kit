@@ -10,9 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
+import SubmissionScreen from '../components/SubmissionScreen';
 import KitText from '../components/KitText';
 import KitButtonSupreme  from '../components/KitButtonSupreme';
 import KitButton  from '../components/KitButton';
@@ -31,6 +35,11 @@ export default class ImageScreen extends React.Component{
     //TODO
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
+
+  const SubmitImageNavigator = createStackNavigator({
+    Upload: {screen: ImageScreen},
+    Submitted: {screen: SubmissionScreen},
+  });
 
   render() {
     let { image } = this.state;
