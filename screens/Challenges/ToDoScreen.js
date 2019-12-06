@@ -17,8 +17,8 @@ export default function ToDoScreen() {
         <KitText style={styles.label} fontWeight="medium" size={24}>
           To Do
         </KitText>
-        <ChallengeTodo mainColor={Colors.KIT_LIGHT_ORANGE}/>
-        <ChallengeTodo mainColor={Colors.KIT_GREEN}/>
+        <ChallengeTodo mainColor={Colors.KIT_LIGHT_ORANGE} onPress={() => {alert("Hello")}}/>
+        <ChallengeTodo mainColor={Colors.KIT_GREEN} onPress={() => {alert("Hello")}}/>
       </View>
     </ScrollView>
   );

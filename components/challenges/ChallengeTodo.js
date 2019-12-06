@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import Colors from "../../constants/Colors";
 
@@ -42,7 +42,7 @@ export default function ChallengeTodo(props){
 
   return (
     <View style={styles.background}>  
-      <View style={styles.mainWrapper}>
+      <TouchableOpacity style={styles.mainWrapper} onPress={() => {props.onPress()}}>
         <View style={styles.textWrapper}>
           <View style={styles.topRow}>
             <Image style={styles.teamIcon} source={require("../../assets/images/specificTeamsPage/bunny.png")}/>
@@ -55,13 +55,13 @@ export default function ChallengeTodo(props){
           </View>
 
           <View style={styles.botRow}>
-            <CompletionBar numCompleted={4} mainColor={props.mainColor}/>
+            <CompletionBar numCompleted={4} numInTeam={5} mainColor={props.mainColor}/>
           </View>
         </View>
         <View style={styles.clockWrapper}>
           <TimerClock/>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

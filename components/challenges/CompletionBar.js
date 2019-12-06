@@ -8,7 +8,7 @@ import KitText from "../KitText";
 import Colors from "../../constants/Colors";
 
 export default function CompletionBar(props){
-  const MAX_NUM_USERS_PER_TEAM = 5; //This is currently the design, can consider expanding if/when we decide to expand team sizes beyond 5 people
+  const MAX_NUM_USERS_PER_TEAM = props.numInTeam; //This is currently the design, can consider expanding if/when we decide to expand team sizes beyond 5 people
 
   function renderLine(numCompleted) {
     let line = []
@@ -32,7 +32,7 @@ export default function CompletionBar(props){
   return(
     <View style={{flexDirection: "row", alignItems: "center"}}>
       {renderLine(props.numCompleted)}
-      <KitText style={{paddingLeft: 10, paddingTop: 3}} size={12} color={props.mainColor} fontCalligraphy={"italic"}>{props.numCompleted}/5</KitText>
+      <KitText style={{paddingLeft: 10, paddingTop: 3}} size={12} color={props.mainColor} fontCalligraphy={"italic"}>{props.numCompleted}/{props.numInTeam}</KitText>
     </View>
   );
 }
