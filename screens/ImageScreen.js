@@ -14,7 +14,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
 import KitText from '../components/KitText';
-import KitButton  from '../components/KitButton'
+import KitButtonSupreme  from '../components/KitButtonSupreme';
+import KitButton  from '../components/KitButton';
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
 import uuid from 'uuid';
@@ -58,7 +59,7 @@ export default class ImageScreen extends React.Component{
           <Image source={{ uri: image }} style={styles.imageFormat} />
         </View>
 
-        <KitButton
+        <KitButtonSupreme
           onPress={this._pickImage}
           style={{button: styles.photoButton}} 
           buttonTextColor={Colors.KIT_WHITE} 
@@ -67,7 +68,7 @@ export default class ImageScreen extends React.Component{
           buttonTextStyle={styles.photoButtonText}
           buttonBackgroundColor={Colors.KIT_GREEN} >
           CHOOSE PHOTO
-        </KitButton>
+        </KitButtonSupreme>
 
         <View style = {styles.submitButton}>
 
@@ -182,14 +183,7 @@ const styles = StyleSheet.create({
       },
 
       photoButton: {
-        alignSelf: 'flex-end',
-        width: 200,
-        maxHeight: 50,
-        marginTop: -70,
-        borderTopRightRadius: 25,
-        borderTopLeftRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
+        marginTop: -50,
         zIndex: 5,
       },
 

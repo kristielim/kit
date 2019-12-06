@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import KitText from '../components/KitText';
-import KitButton  from '../components/KitButton'
+import KitButtonSupreme  from '../components/KitButtonSupreme';
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
 import uuid from 'uuid';
@@ -60,15 +60,13 @@ export default class ImageScreen extends React.Component{
 
         <View style = {styles.submitButton}>
 
-        <KitButton
-          style={{button: styles.photoButton}} 
+        <KitButtonSupreme
           buttonTextColor={Colors.KIT_WHITE} 
           buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
           buttonFontSize={22} 
-          buttonTextStyle={styles.photoButtonText}
           buttonBackgroundColor={Colors.KIT_GREEN} >
           MORE CHALLENGES
-        </KitButton>
+        </KitButtonSupreme>
         </View>
       </View>
     );
@@ -117,23 +115,9 @@ const styles = StyleSheet.create({
             flex: 4
       },
 
-      photoButton: {
-        alignSelf: 'center',
-        maxHeight: 50,
-        borderTopRightRadius: 25,
-        borderTopLeftRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
-        marginTop: 20
-      },
-
-      photoButtonText:{
-        alignItems: 'center',
-        justifyContent:'center',
-      },
-
       submitButton: {
         alignSelf: 'center',
+        marginTop: 20,
         flex: 1,
       },
 });

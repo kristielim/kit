@@ -13,6 +13,9 @@ import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
 
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
+import ImageScreen from "../screens/ImageScreen";
+import TextScreen from "../screens/TextScreen";
+import SubmissionScreen from "../screens/SubmissionScreen";
 
 
 import ProfileScreen from "../screens/ProfileScreen";
@@ -121,10 +124,28 @@ ProfileStack.navigationOptions = {
 
 ProfileStack.path = "";
 
+const ImageStack = createStackNavigator(
+  {
+    Image: ImageScreen //change here
+  },
+  config
+);
+
+ImageStack.navigationOptions = {
+  tabBarLabel: "Image",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+    />
+  )
+};
+
 const tabNavigator = createBottomTabNavigator(
   {
     TeamsStack,
     ChallengesStack,
+    ImageStack,
     ProfileStack
   },
   {
