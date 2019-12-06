@@ -24,10 +24,10 @@ export default function ToDoScreen(props) {
       todos.push(
         <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
           if(challenge.challengeDetails.mediaType === "STRING"){
-            props.navigation.navigate("TextSubmit")
+            props.navigation.navigate("TextSubmit", {challenge})
           }
           else if(challenge.challengeDetails.mediaType === "IMAGE"){
-            props.navigation.navigate("ImageSubmit")
+            props.navigation.navigate("ImageSubmit", {challenge})
           }
         }}/>
       )

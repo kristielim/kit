@@ -26,6 +26,11 @@ export default class ImageScreen extends React.Component{
      //TODO: upload text and user to the actual database under assigned challenges - use push command ? maybe an array????
   };
 
+  componentDidMount(){
+    const challenge = this.props.navigation.getParam('challenge');
+    this.setState({challenge})
+  }
+
   render() {
     return (
       <View style={styles.container}>

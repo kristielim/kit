@@ -29,6 +29,8 @@ export default class ImageScreen extends React.Component{
   async componentDidMount() {
     //TODO
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const challenge = this.props.navigation.getParam('challenge');
+    this.setState({challenge})
   }
 
   render() {
