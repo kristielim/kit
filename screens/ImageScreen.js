@@ -23,9 +23,11 @@ export default class ImageScreen extends React.Component{
   state = {
     image: null,
     //TODO: SUBMIT BUTTON CHANGE COLOR BASED ON IF PHOTO WAS SELECTED
+    //TODO: upload image url and user to the actual database under assigned challenges - use push command??
   };
   
   async componentDidMount() {
+    //TODO
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
 
@@ -87,6 +89,7 @@ export default class ImageScreen extends React.Component{
   }
 
   _pickImage = async () => {
+    //allows user to select image from image library
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
     });
@@ -94,16 +97,19 @@ export default class ImageScreen extends React.Component{
   };
 
   _handleImagePicked = async image => {
+    //uploads image to firebase storage
     try {
       this.setState({ uploading: true });
 
       if (!image.cancelled) {
-        uploadUrl = await uploadImageAsync(image);
+        //image url saved and stored
+        uploadUrl = await uploadImageAsync(image); 
         this.setState({image: uploadUrl})
         alert('Submitted! :D')
       }
     } catch (e) {
       console.log(e);
+      //TODO: Implement Error Screen in place of this
       alert('Upload failed, sorry :(');
     } finally {
       this.setState({ uploading: false });

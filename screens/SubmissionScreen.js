@@ -11,9 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import * as firebase from 'firebase';
-import * as Permissions from 'expo-permissions';
+
 import KitText from '../components/KitText';
 import KitButton  from '../components/KitButton'
 import Colors from '../constants/Colors';
@@ -23,7 +21,6 @@ import uuid from 'uuid';
 export default class ImageScreen extends React.Component{
   state = {
     text: '',
-     //TODO: upload text and user to the actual database under assigned challenges - use push command ? maybe an array????
   };
 
   render() {
@@ -32,44 +29,45 @@ export default class ImageScreen extends React.Component{
 
         <View style = {styles.header}>
           <KitText 
-          size={50} 
+          size={30}
           fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
           color={Colors.KIT_BLACK}>
             Challenge Name
         </KitText>
-
-        <KitText 
-          size={17}
-          fontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
-          color={Colors.KIT_BLACK}>
-            Challenge Description
-        </KitText>
         </View>
 
-        <View
-          style={styles.mainBody}>
-          <TextInput
-          style={styles.textBox}
-          keyboardType = 'default'
-          placeholder= "Type away . . ."
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
+        <View style={styles.mainBody}>
+
+          <KitText 
+          size={50} 
+          fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
+          color={Colors.KIT_BLACK}>
+            Submitted!
+        </KitText>
+
+        <Image 
+        source={require("../assets/images/redfoxtailbig.png")}
         />
+
+        <KitText 
+          size={17} 
+          fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
+          color={Colors.KIT_BLACK}>
+            You just helped your team earn{"\n"} +1 foxtails!
+        </KitText>
+
         </View>
 
         <View style = {styles.submitButton}>
 
         <KitButton
-          onPress={() => this._handleImagePicked(image)}
-          image={require("../assets/images/submitArrow.png")}
-          imageFormat={styles.submitButton}
-          style={{button: styles.submitButtonFormat}} 
-          buttonTextColor={Colors.KIT_BLACK} 
+          style={{button: styles.photoButton}} 
+          buttonTextColor={Colors.KIT_WHITE} 
           buttonFontWeight={FontStyles.FONT_WEIGHT_REGULAR} 
-          buttonFontSize={17} 
+          buttonFontSize={22} 
           buttonTextStyle={styles.photoButtonText}
-          buttonBackgroundColor={Colors.KIT_WHITE} >
-          SUBMIT
+          buttonBackgroundColor={Colors.KIT_GREEN} >
+          MORE CHALLENGES
         </KitButton>
         </View>
       </View>
@@ -114,25 +112,19 @@ const styles = StyleSheet.create({
             shadowOpacity: 0.2,
             shadowOffset: { width: 4, height: 4 },
             shadowRadius: 5,
+            alignItems: 'center',
             overflow: 'hidden',
             flex: 4
       },
 
-      imageFormat: {
-        alignSelf:'stretch',
-        flex:1
-      },
-
       photoButton: {
-        alignSelf: 'flex-end',
-        width: 200,
+        alignSelf: 'center',
         maxHeight: 50,
-        marginTop: -70,
         borderTopRightRadius: 25,
         borderTopLeftRadius: 25,
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
-        zIndex: 5,
+        marginTop: 20
       },
 
       photoButtonText:{
@@ -141,20 +133,7 @@ const styles = StyleSheet.create({
       },
 
       submitButton: {
-        alignSelf: 'flex-end',
-        marginBottom: 10,
+        alignSelf: 'center',
         flex: 1,
       },
-
-      submitButtonFormat:{
-        position: 'absolute',
-        bottom: 50,
-        right: 0,
-      }
 });
-
-
-
-
-
-

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Platform } from "react-native";
 import {
@@ -7,6 +6,7 @@ import {
 } from "react-navigation";
 
 import KitIcon from "../components/KitIcon";
+import TabBarIcon from "../components/TabBarIcon";
 
 import TeamsScreen from "../screens/Teams/TeamsScreen";
 import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
@@ -14,8 +14,8 @@ import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
 
+
 import ProfileScreen from "../screens/ProfileScreen";
-import ChallengesScreen from "../screens/ChallengesScreen";
 import Colors from "../constants/Colors";
 import Fonts from "../constants/Fonts";
 
@@ -121,28 +121,10 @@ ProfileStack.navigationOptions = {
 
 ProfileStack.path = "";
 
-const ImageStack = createStackNavigator(
-  {
-    Image: TextScreen //change here
-  },
-  config
-);
-
-ImageStack.navigationOptions = {
-  tabBarLabel: "Image",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  )
-};
-
 const tabNavigator = createBottomTabNavigator(
   {
     TeamsStack,
     ChallengesStack,
-    ImageStack,
     ProfileStack
   },
   {
