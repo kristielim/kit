@@ -1,11 +1,40 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import KitText from "../../components/KitText";
-import ChallengesScreen from "../ChallengesScreen";
-import Colors from "../../constants/Colors";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native";
 
+import KitText from "../../components/KitText";
+import ChallengesScreen from "../ChallengesScreen";
+import ChallengeTodo from "../../components/challenges/ChallengeTodo";
+
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
+
+import { getAllAssignedChallenges } from "../../utils/db/challenges";
+import { getUserId } from "../../utils/auth/auth";
+
 export default function ToDoScreen() {
+  const [challenges, setChallenges] = useState([]);
+
+  function renderTodos() {
+    let todos = []
+    let alternator = true;
+    for (challenge of challenges) {
+      // console.log(challenge)
+      todos.push(
+        <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {alert("Hello")}}/>
+      )
+      alternator = !alternator;
+    }
+    return todos
+  }
+
+  useEffect(() => {
+    currentUser = getUserId();
+    getAllAssignedChallenges(currentUser).then(challenges => {
+      setChallenges(challenges)
+    })
+  }, []);
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -13,7 +42,7 @@ export default function ToDoScreen() {
         <KitText style={styles.label} fontWeight="medium" size={24}>
           To Do
         </KitText>
-        <KitText>add challenge cards here yaga yee haw</KitText>
+        {challenges.length > 0 && renderTodos()}
       </View>
     </ScrollView>
   );
