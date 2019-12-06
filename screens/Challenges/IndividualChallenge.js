@@ -1,6 +1,6 @@
 /* this screen shows individual challenges and their submissions */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
   View,
@@ -13,12 +13,17 @@ import Colors from "../../constants/Colors";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 export default function IndividualChallenge(props) {
   const [rating, setRating] = useState("");
+  const [challenge, setChallenge] = useState({});
+
+  useEffect(()=>{
+    setChallenge(props.navigation.getParam('challenge'))
+  }, []);
 
   return (
     <KitBackgroundScreen
       color={Colors.KIT_RED}
       onPressBack={() => {
-        props.navigation.navigate("Teams");
+        props.navigation.navigate("Submissions");
       }}
       padding={1}
       title={props.username}
