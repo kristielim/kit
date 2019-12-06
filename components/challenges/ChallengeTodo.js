@@ -46,16 +46,16 @@ export default function ChallengeTodo(props){
         <View style={styles.textWrapper}>
           <View style={styles.topRow}>
             <Image style={styles.teamIcon} source={require("../../assets/images/specificTeamsPage/bunny.png")}/>
-            <KitText size={20} color={Colors.KIT_DARKEST_BLACK} fontWeight={"extrabold"}>APUSH HOES</KitText>
+            <KitText size={20} color={Colors.KIT_DARKEST_BLACK} fontWeight={"extrabold"}>{props.challenge.teamName}</KitText>
           </View>
 
           <View style={styles.midRow}>
-            <KitText style={styles.leftText} size={12} color={Colors.KIT_DARKEST_BLACK} fontWeight={"semibold"}>Challenge: Self Portrait</KitText>
-            <KitText style={styles.leftText} size={12} color={Colors.KIT_DARKEST_BLACK}>Self Portraits Let out your inner DaVince and make a portrait of your partner! #MonaLisaWho?</KitText>
+            <KitText style={styles.leftText} size={12} color={Colors.KIT_DARKEST_BLACK} fontWeight={"semibold"}>Challenge: {props.challenge.challengeDetails.title}</KitText>
+            <KitText style={styles.leftText} size={12} color={Colors.KIT_DARKEST_BLACK}>{props.challenge.challengeDetails.description}</KitText>
           </View>
 
           <View style={styles.botRow}>
-            <CompletionBar numCompleted={4} numInTeam={5} mainColor={props.mainColor}/>
+            <CompletionBar numCompleted={props.challenge.submissions ? props.challenge.submissions.length : 0} numInTeam={props.challenge.users ? props.challenge.users.length : 0} mainColor={props.mainColor}/>
           </View>
         </View>
         <View style={styles.clockWrapper}>

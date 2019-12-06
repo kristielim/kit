@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native";
 
@@ -9,7 +9,30 @@ import ChallengeTodo from "../../components/challenges/ChallengeTodo";
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 
+import { getAllAssignedChallenges } from "../../utils/db/challenges";
+
 export default function ToDoScreen() {
+  const [challenges, setChallenges] = useState([]);
+
+  function renderTodos() {
+    let todos = []
+    let alternator = true;
+    for (challenge of challenges) {
+      console.log(challenge)
+      todos.push(
+        <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {alert("Hello")}}/>
+      )
+      alternator = !alternator;
+    }
+    return todos
+  }
+
+  useEffect(() => {
+    getAllAssignedChallenges("user_id_1").then(challenges => {
+      setChallenges(challenges)
+    })
+  }, []);
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -17,8 +40,7 @@ export default function ToDoScreen() {
         <KitText style={styles.label} fontWeight="medium" size={24}>
           To Do
         </KitText>
-        <ChallengeTodo mainColor={Colors.KIT_LIGHT_ORANGE} onPress={() => {alert("Hello")}}/>
-        <ChallengeTodo mainColor={Colors.KIT_GREEN} onPress={() => {alert("Hello")}}/>
+        {challenges.length > 0 && renderTodos()}
       </View>
     </ScrollView>
   );
