@@ -76,8 +76,18 @@ export async function getAllAssignedChallenges(userId) {
       //Augment assignedChallenges with associated challenge details (like name of challenge, description etc)
       assignedChallenge["challengeDetails"] = challengeDetails;
       
+      //Add the id
+      assignedChallenge["assignedChallengeId"] = assignedChallengeId.challengeId;
+      
       return assignedChallenge;
     }
   }));
   return assignedChallenges;
+}
+
+export async function submitChallenge(assignedChallengeId, userId, submission) {
+  firebase
+    .database()
+    .ref(`/assignedChallenges/${assignedChallengeId}/submissions`)
+    .push({[userId]: submission});
 }

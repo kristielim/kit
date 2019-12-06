@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import * as firebase from 'firebase';
+
+import { submitChallenge } from "../utils/db/challenges";
+import { getUserId } from "../utils/auth/auth";
+
 import KitText from '../components/KitText';
 import KitButton  from '../components/KitButton'
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
 
-export default class ImageScreen extends React.Component{
+export default class TextScreen extends React.Component{
   //TODO: Rewrite in Hooks oops
   constructor(props) {
     super(props);
@@ -21,7 +24,8 @@ export default class ImageScreen extends React.Component{
     };
   }
 
-  submit = () => {
+  submit = async () => {
+    await submitChallenge(this.state.challenge.assignedChallengeId, this.state.text, getUserId())
     const {navigate} = this.props.navigation;
     navigate("Submitted")
   };
@@ -70,7 +74,7 @@ export default class ImageScreen extends React.Component{
         <View style = {styles.submitButton}>
 
         <KitButton
-          onPress={() => {this.submit()}}
+          onPress={async () => {await this.submit()}}
           image={require("../assets/images/submitArrow.png")}
           imageFormat={styles.submitButton}
           style={{button: styles.submitButtonFormat}} 
