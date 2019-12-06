@@ -3,7 +3,7 @@ If you want text that acts as a button, do not use KitButtonSupreme.
 Use KitText wrapped by TouchableOpacity instead */
 
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 

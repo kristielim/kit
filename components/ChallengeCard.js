@@ -1,3 +1,4 @@
+/* this component shows card that reveals to the user the next challenge w/ deadlines + submission button */
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
@@ -12,7 +13,10 @@ export default function ChallengeCard(props) {
       height: 509,
       marginBottom: 40,
       backgroundColor: props.color || Colors.KIT_GREEN,
-      alignSelf: "center"
+      alignSelf: "center",
+      shadowOffset: { height: 2, width: 2 },
+      shadowOpacity: 0.5,
+      shadowColor: Colors.KIT_BLACK
     },
     container: {
       padding: 50,
@@ -42,13 +46,15 @@ export default function ChallengeCard(props) {
     },
     button: {
       position: "absolute",
-      bottom: 80,
+      bottom: 45,
       alignSelf: "center"
     },
     icon: {
-      top: 80,
+      top: 70,
       alignSelf: "center",
-      position: "absolute"
+      position: "absolute",
+      height: 80,
+      width: 80
     }
   });
   return (
