@@ -1,13 +1,12 @@
 import * as WebBrowser from "expo-web-browser";
 import React from "react";
 import FlipComponent from "react-native-flip-component";
-import ChallengeCard from "../components/ChallengeCard";
-import RevealChallenge from "../components/RevealChallenge";
-import KitText from "../components/KitText";
-import Colors from "../constants/Colors";
-import { StyleSheet, Text, View } from "react-native";
+import ChallengeCard from "./ChallengeCard";
+import RevealChallenge from "./RevealChallenge";
+import { StyleSheet, View } from "react-native";
+import { openChallenge } from "../utils/db/challenges";
 
-export default class ChallengesScreen extends React.Component {
+export default class OpenChallengeCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isFlipped: false };
@@ -26,17 +25,20 @@ export default class ChallengesScreen extends React.Component {
           isFlipped={this.state.isFlipped}
           frontView={
             <RevealChallenge
-              flip={this.flip}
-              number={"1/5"}
+              onReveal={() => {
+                this.props.onReveal();
+                this.flip();
+              }}
+              number={`1/${this.props.numberOfChallenges}`}
               deadline={"24:24:24"}
             />
           }
           backView={
             <ChallengeCard
-              flip={this.flip}
-              title={"CHALLENGE"}
-              body={"Challenges go here. Have fun!"}
-              team={"APUSH HOES"}
+              onClose={this.props.onClose}
+              title={this.props.challengeTitle}
+              body={this.props.challengeDescription}
+              team={this.props.teamName}
               deadline={"24 hrs"}
             />
           }
@@ -46,10 +48,6 @@ export default class ChallengesScreen extends React.Component {
     );
   }
 }
-
-ChallengesScreen.navigationOptions = {
-  header: null
-};
 
 const styles = StyleSheet.create({
   container: {

@@ -71,7 +71,7 @@ export default function RevealChallenge(props) {
             Ready for your next challenge?
           </KitText>
           <KitText size={14} color={Colors.KIT_BLACK} style={styles.number}>
-            {props.number}
+            {props.number !== "1/1" && props.number}
           </KitText>
         </View>
       </View>
@@ -91,7 +91,7 @@ export default function RevealChallenge(props) {
       <View style={styles.container}>{props.children}</View>
       <View style={styles.button}>
         <KitButtonSupreme
-          onPress={props.flip}
+          onPress={props.onReveal}
           width={200}
           height={50}
           color={Colors.KIT_GREEN}

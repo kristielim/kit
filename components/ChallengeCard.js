@@ -76,7 +76,7 @@ export default function ChallengeCard(props) {
           <KitText style={styles.body} size={28} color={Colors.KIT_WHITE}>
             {props.body}
           </KitText>
-          <TouchableOpacity style={styles.closeButton} onPress={props.flip}>
+          <TouchableOpacity style={styles.closeButton} onPress={props.onClose}>
             <Image source={require("../assets/images/x-mark.png")} />
           </TouchableOpacity>
         </View>
