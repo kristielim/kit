@@ -1,25 +1,15 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
-
 import KitText from "../../components/KitText";
-import MyTeams from "../../components/team-codes/MyTeams";
 import Colors from "../../constants/Colors";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
 import CompletionBar from "../../components/challenges/CompletionBar";
 
-export default function TeamsScreen(props) {
-  const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
-  const { navigation } = props;
-
-  const goToNext = () => {
-    navigation.navigate("Tutorial3");
-  };
-
+export default function Tutorial4Screen(props) {
   const kitglobeImage = require("../../assets/images/tutorial4teamcode.png");
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress = {this.goToNext}>
         <View style={styles.card}>
         <View style={styles.textContainer}>
           <KitText
@@ -47,14 +37,16 @@ export default function TeamsScreen(props) {
             color={Colors.KIT_BLACK}
             size={16}
           >
-            Review submissions, and {"\n"}react with an “aww” {"\n"}to show your love!
+            Or, create your own team, and invite the whole gang.
           </KitText>
         </View>
+        <View style={styles.imageContainer}>
+        <Image source={kitglobeImage}/>
+        </View>
         <View style={styles.challengeContainer}>
-        <CompletionBar numCompleted={3} numInTeam={4} mainColor={"#569684"}/>
+        <CompletionBar numCompleted={4} numInTeam={4} mainColor={"#569684"}/>
         </View>
       </View>
-      </TouchableHighlight>
       <KitButtonSupreme
               style={styles.button}
               color={Colors.KIT_ORANGE}

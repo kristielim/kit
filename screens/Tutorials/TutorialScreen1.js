@@ -1,24 +1,17 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
-
 import KitText from "../../components/KitText";
-import MyTeams from "../../components/team-codes/MyTeams";
 import Colors from "../../constants/Colors";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
 import CompletionBar from "../../components/challenges/CompletionBar";
 
-export default function TeamsScreen(props) {
-  const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
+export default function Tutorial1Screen(props) {
   const { navigation } = props;
-  const goToNext = () => {
-    navigation.navigate("Tutorial2");
-  };
-
   const kitglobeImage = require("../../assets/images/kitglobe.png");
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress = { () => {this.goToNext} }>
+      <TouchableHighlight onPress = {() => {navigation.navigate("Tutorial2")}}>
         <View style={styles.card}>
         <View style={styles.textContainer}>
           <KitText

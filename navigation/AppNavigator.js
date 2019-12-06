@@ -15,10 +15,16 @@ import TutorialScreen4 from '../screens/Tutorials/TutorialScreen4';
 
 export const SignedOut = createStackNavigator({
   Tutorial: {
-    screen: TutorialScreen4
+    screen: TutorialScreen1
   },
   Tutorial2: {
     screen: TutorialScreen2
+  },
+  Tutorial3: {
+    screen: TutorialScreen3
+  },
+  Tutorial4: {
+    screen: TutorialScreen4
   },
   SignUp: {
     screen: SignUp

@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
-
 import KitText from "../../components/KitText";
-import MyTeams from "../../components/team-codes/MyTeams";
 import Colors from "../../constants/Colors";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
 import CompletionBar from "../../components/challenges/CompletionBar";
 
-export default function TeamsScreen(props) {
-  const [showAddTeamMenu, setShowAddTeamMenu] = useState(false);
+export default function Tutorial2Screen(props) {
   const { navigation } = props;
-
-  const goToNext = () => {
-    navigation.navigate("Tutorial3");
-  };
-
   const kitglobeImage = require("../../assets/images/tutorial2.png");
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress = {this.goToNext}>
+      <TouchableHighlight onPress = {() => {navigation.navigate("Tutorial3")}}>
         <View style={styles.card}>
         <View style={styles.textContainer}>
           <KitText
@@ -39,14 +31,16 @@ export default function TeamsScreen(props) {
           </KitText>
         </View>
         <View style={styles.imageContainer}>
-        <Image source={kitglobeImage}/>
+        <Image source={kitglobeImage}
+                style ={{height: 175}}
+                resizeMode = "contain"
+        />
         </View>
         <View style={styles.textContainer}>
           <KitText
             style={styles.text} 
             color={Colors.KIT_BLACK}
-            size={16}
-          >
+            size={16}>
             But watch out! These challenges will disappear if not opened on time.
           </KitText>
         </View>
@@ -113,7 +107,6 @@ const styles = StyleSheet.create({
     alignItems: "center", 
   },
   challengeContainer: {
-    margin: 50,
     alignItems: "center"
   },
   card: {
