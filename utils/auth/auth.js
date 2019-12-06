@@ -1,12 +1,20 @@
 import firebase from "../firebase/firebase";
 
 export const getCurrentUser = () => {
-  return firebase.auth().currentUser;
+  try {
+    return firebase.auth().currentUser;
+  } catch {
+    signOut();
+  }
 };
 
 export const getUserId = () => {
-  const { currentUser } = firebase.auth();
-  return currentUser.uid;
+  try {
+    const { currentUser } = firebase.auth();
+    return currentUser.uid;
+  } catch {
+    signOut();
+  }
 };
 
 // TODO: Kristie actually handle all the errors

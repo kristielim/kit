@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput
-} from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 import { getTeamIdFromTeamCode, getTeam, joinTeam } from "../../utils/db/teams";
 import KitText from "../../components/KitText";
 import Colors from "../../constants/Colors";
 import FontStyles from "../../constants/FontStyles";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
+import { getUserId } from "../../utils/auth/auth";
 
 export default function JoinScreen(props) {
   const [textValue, setTextValue] = useState("");
@@ -31,7 +25,7 @@ export default function JoinScreen(props) {
           style={styles.textInput}
           onChangeText={async text => {
             setTextValue(text);
-            if (text.length == 6) {
+            if (text.length >= 6) {
               const teamId = await getTeamIdFromTeamCode(text);
               if (teamId) {
                 const team = await getTeam(teamId);
@@ -64,7 +58,7 @@ export default function JoinScreen(props) {
               </KitText>
               <KitButtonSupreme
                 onPress={() => {
-                  joinTeam(textValue, "TODO: real user").then(() => {
+                  joinTeam(textValue, getUserId()).then(() => {
                     setTextValue("");
                     setTeamFound(false);
                     props.navigation.navigate("Teams");
