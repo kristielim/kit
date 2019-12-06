@@ -6,9 +6,6 @@ also has links to change pw, donate, faq*/
 /* replace later with actual image component -> link to firebase */
 
 import React, { useState, useEffect } from "react";
-import * as ImagePicker from "expo-image-picker";
-import * as firebase from "firebase";
-import * as Permissions from "expo-permissions";
 import { View, StyleSheet, Image, TextInput } from "react-native";
 
 import { signOut } from "../utils/auth/auth";
