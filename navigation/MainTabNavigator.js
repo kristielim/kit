@@ -13,9 +13,9 @@ import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
 
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
-
-import TextScreen from "../screens/TextScreen";
 import ImageScreen from "../screens/ImageScreen";
+import TextScreen from "../screens/TextScreen";
+import SubmissionScreen from "../screens/SubmissionScreen";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import Colors from "../constants/Colors";
@@ -41,14 +41,19 @@ const ChallengesStack = createStackNavigator(
       screen: ChallengeTabNavigator,
       navigationOptions: { headerTitle: "Challenges" }
     },
-    TextSubmit: {
-      screen: TextScreen,
-      navigationOptions: { headerLeft: <></> }
-    },
-    ImageSubmit: {
+    UploadImage: {
       screen: ImageScreen,
-      navigationOptions: { headerLeft: <></> }
+      navigationOptions: { headerLeft: <></>, headerTitle: "Upload Image" }
     },
+    UploadText: {
+      screen: TextScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Upload Text" }
+    },
+
+    Submitted: {
+      screen: SubmissionScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Submitted" }
+    }
   },
   config
 );

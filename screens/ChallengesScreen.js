@@ -14,11 +14,14 @@ export default class ChallengesScreen extends React.Component {
     this.flip = this.flip.bind(this);
   }
 
+
   flip = () => {
     this.setState({
       isFlipped: !this.state.isFlipped
     });
   };
+
+
   render() {
     return (
       <View style={styles.container}>
