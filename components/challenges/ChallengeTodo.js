@@ -55,7 +55,7 @@ export default function ChallengeTodo(props){
           </View>
 
           <View style={styles.botRow}>
-            <CompletionBar numCompleted={props.challenge.submissions ? props.challenge.submissions.length : 0} numInTeam={props.challenge.users ? props.challenge.users.length : 0} mainColor={props.mainColor}/>
+            <CompletionBar numCompleted={props.challenge.submissions ? Object.values(props.challenge.submissions).length : 0} numInTeam={props.challenge.users ? props.challenge.users.length : 0} mainColor={props.mainColor}/>
           </View>
         </View>
         <View style={styles.clockWrapper}>
