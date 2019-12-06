@@ -6,15 +6,20 @@ import {
 } from "react-navigation";
 
 import KitIcon from "../components/KitIcon";
+import TabBarIcon from "../components/TabBarIcon";
 
 import TeamsScreen from "../screens/Teams/TeamsScreen";
 import SpecificTeamScreen from "../screens/Teams/SpecificTeamScreen";
 
 import JoinScreen from "../screens/Teams/JoinScreen";
 import CreateScreen from "../screens/Teams/CreateScreen";
+import ImageScreen from "../screens/ImageScreen";
+import TextScreen from "../screens/TextScreen";
+import SubmissionScreen from "../screens/SubmissionScreen";
+
+
 
 import ProfileScreen from "../screens/ProfileScreen";
-import ChallengesScreen from "../screens/ChallengesScreen";
 import Colors from "../constants/Colors";
 import Fonts from "../constants/Fonts";
 
@@ -37,6 +42,20 @@ const ChallengesStack = createStackNavigator(
     Challenges: {
       screen: ChallengeTabNavigator,
       navigationOptions: { headerTitle: "Challenges" }
+    },
+
+    UploadImage: {
+      screen: ImageScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Upload Image" }
+    },
+    UploadText: {
+      screen: TextScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Upload Text" }
+    },
+
+    Submitted: {
+      screen: SubmissionScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Submitted" }
     }
   },
   config

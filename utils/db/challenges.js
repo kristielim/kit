@@ -1,5 +1,7 @@
 import firebase from "../firebase/firebase";
+
 import { getCurrentValue } from "./helper";
+import { getTeam } from "./teams";
 
 export async function getCurrentChallengeId(teamId) {
   return await getCurrentValue(`/teams/${teamId}/currentChallenge`);
@@ -52,4 +54,30 @@ export async function setCurrentChallenge(teamId) {
     .update({
       currentChallenge: assignedChallengeId
     });
+}
+
+export async function getAllAssignedChallenges(userId) {
+  const teamIds = await getCurrentValue(`/users/${userId}/teams`);
+  const data = await Promise.all(teamIds.map(async(teamId) => {
+    return {
+      challengeId: await getCurrentChallengeId(teamId),
+      team: await getTeam(teamId)
+    }
+  }));
+
+  const assignedChallenges = await Promise.all(data.map(async (assignedChallengeId) => {
+    let assignedChallenge = await getCurrentValue(`/assignedChallenges/${assignedChallengeId.challengeId}`);
+    let challengeDetails = await getCurrentValue(`/challenges/${assignedChallenge.challengeId}`);
+    if (assignedChallenge){
+      //Augment assignedChallenges with various team information
+      assignedChallenge["users"] = assignedChallengeId.team.users;
+      assignedChallenge["teamName"] = assignedChallengeId.team.name;
+
+      //Augment assignedChallenges with associated challenge details (like name of challenge, description etc)
+      assignedChallenge["challengeDetails"] = challengeDetails;
+      
+      return assignedChallenge;
+    }
+  }));
+  return assignedChallenges;
 }
