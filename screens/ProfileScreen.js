@@ -7,20 +7,29 @@ also has links to change pw, donate, faq*/
 
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image, TextInput } from "react-native";
-
+import * as ImagePicker from "expo-image-picker";
+import * as firebase from "firebase";
+import * as Permissions from "expo-permissions";
 import { signOut } from "../utils/auth/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import KitText from "../components/KitText";
 import Colors from "../constants/Colors";
 import ToggleSwitch from "toggle-switch-react-native";
-import { getUsername, updateUsername } from "../utils/db/users";
+import { getUsername, updateUsername, updatePicture } from "../utils/db/users";
 import { getUserId } from "../utils/auth/auth";
+import uuid from "uuid";
+
+// async componentDidMount() {
+//   //TODO
+//   await Permissions.askAsync(Permissions.CAMERA_ROLL);
+// }
 
 export default function ProfileScreen() {
   const [mode, setMode] = useState("done");
   const [ifOn, setOn] = useState("isOff");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState(null);
   useEffect(() => {
     const currentUser = getUserId();
     console.log("current", currentUser);
@@ -28,20 +37,60 @@ export default function ProfileScreen() {
       setName(name);
     });
   }, []);
+
+  useEffect(() => {
+    Permissions.askAsync(Permissions.CAMERA_ROLL);
+  }, []);
+
+  _pickImage = async () => {
+    //allows user to select image from image library
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true
+    });
+    // this.setState({ image: pickerResult.uri });
+    setImage(pickerResult.uri);
+  };
+
+  _handleImagePicked = async image => {
+    const { navigate } = props.navigation;
+    //uploads image to firebase storage
+    try {
+      if (!image.cancelled) {
+        //image url saved and stored
+        uploadUrl = await uploadImageAsync(image);
+        // this.setState({image: uploadUrl})
+        setImage(uploadURL);
+      }
+    } catch (e) {
+      console.log(e);
+      //TODO: Implement Error Screen in place of this
+      alert("Upload failed, sorry :(");
+    } finally {
+      navigate("Submitted");
+    }
+  };
+
   return (
     <View style={styles.container}>
       {mode === "done" ? (
         <View style={styles.photoContainer}>
           <Image
-            source={require("../assets/images/avatar.png")}
+            // source={require("../assets/images/avatar.png")}
+            source={{ uri: image }}
             style={styles.profilePhoto}
           />
         </View>
       ) : (
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setMode("edit");
+            _pickImage(image);
+          }}
+        >
           <View style={styles.photoContainer}>
             <Image
-              source={require("../assets/images/avatar.png")}
+              // source={require("../assets/images/avatar.png")}
+              source={{ uri: image }}
               style={styles.profilePhotoDark}
             />
             <Image
@@ -83,6 +132,8 @@ export default function ProfileScreen() {
                 setMode("done");
                 updateUsername(getUserId(), name);
                 setName(name);
+                _handleImagePicked(image);
+                updatePicture(getUserId(), image);
               }}
             >
               <KitText
@@ -212,6 +263,35 @@ export default function ProfileScreen() {
       </View>
     </View>
   );
+}
+
+async function uploadImageAsync(uri) {
+  // Why are we using XMLHttpRequest? See:
+  // https://github.com/expo/expo/issues/2402#issuecomment-443726662
+  const blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      resolve(xhr.response);
+    };
+    xhr.onerror = function(e) {
+      console.log(e);
+      reject(new TypeError("Network request failed"));
+    };
+    xhr.responseType = "blob";
+    xhr.open("GET", uri, true);
+    xhr.send(null);
+  });
+
+  const ref = firebase
+    .storage()
+    .ref()
+    .child(uuid.v4());
+  const snapshot = await ref.put(blob);
+
+  // We're done with the blob, close and release it
+  blob.close();
+
+  return await snapshot.ref.getDownloadURL();
 }
 
 ProfileScreen.navigationOptions = {
