@@ -89,5 +89,5 @@ export async function submitChallenge(assignedChallengeId, userId, submission) {
   firebase
     .database()
     .ref(`/assignedChallenges/${assignedChallengeId}/submissions`)
-    .push({[userId]: submission});
+    .update({[userId]: submission});
 }

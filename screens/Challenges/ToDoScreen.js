@@ -11,16 +11,16 @@ import Fonts from "../../constants/Fonts";
 
 import { getAllAssignedChallenges } from "../../utils/db/challenges";
 import { getUserId } from "../../utils/auth/auth";
-import { setRecoveryProps } from "expo/build/ErrorRecovery/ErrorRecovery";
 
 export default function ToDoScreen(props) {
   const [challenges, setChallenges] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   function renderTodos() {
     let todos = []
     let alternator = true;
     for (challenge of challenges) {
-      // console.log(challenge)
+      if(challenge.submissions && challenge.submissions[currentUser]) continue; //If the user has a submission for this challenge, filter it out from Todo
       todos.push(
         <ChallengeTodo key={challenge.teamId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
           if(challenge.challengeDetails.mediaType === "STRING"){
@@ -37,8 +37,9 @@ export default function ToDoScreen(props) {
   }
 
   useEffect(() => {
-    currentUser = getUserId();
-    getAllAssignedChallenges(currentUser).then(challenges => {
+    currUser = getUserId();
+    setCurrentUser(currUser);
+    getAllAssignedChallenges(currUser).then(challenges => {
       setChallenges(challenges)
     })
   }, []);

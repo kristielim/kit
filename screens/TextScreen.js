@@ -25,7 +25,7 @@ export default class TextScreen extends React.Component{
   }
 
   submit = async () => {
-    await submitChallenge(this.state.challenge.assignedChallengeId, this.state.text, getUserId())
+    await submitChallenge(this.state.challenge.assignedChallengeId, getUserId(), this.state.text)
     const {navigate} = this.props.navigation;
     navigate("Submitted")
   };
