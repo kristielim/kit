@@ -7,6 +7,7 @@ import FontStyles from "../../constants/FontStyles";
 import Fonts from "../../constants/Fonts";
 import { createTeam } from "../../utils/db/teams";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
+import { getUserId } from "../../utils/auth/auth";
 
 export default function Create(props) {
   const [teamName, setTeamName] = useState("");
@@ -29,7 +30,7 @@ export default function Create(props) {
         />
         <KitButtonSupreme
           onPress={async () => {
-            const teamCode = await createTeam(teamName, "TODO: add userid");
+            const teamCode = await createTeam(teamName, getUserId());
             setTeamCode(teamCode);
           }}
         >
