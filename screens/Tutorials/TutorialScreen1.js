@@ -11,7 +11,10 @@ export default function Tutorial1Screen(props) {
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress = {() => {navigation.navigate("Tutorial2")}}>
+      <TouchableHighlight 
+      onPress = {() => {navigation.navigate("Tutorial2")}}
+      underlayColor='none'
+      >
         <View style={styles.card}>
         <View style={styles.textContainer}>
           <KitText
