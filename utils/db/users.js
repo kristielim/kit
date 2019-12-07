@@ -13,3 +13,16 @@ export async function updateUsername(userId, currentName) {
       name: currentName
     });
 }
+
+export async function getPicture(userId) {
+  return getCurrentValue(`/users/${userId}/pictureUrl`);
+}
+
+export async function updatePicture(userId, pictureUrl) {
+  firebase
+    .database()
+    .ref(`/users/${userId}`)
+    .update({
+      pictureUrl
+    });
+}
