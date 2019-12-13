@@ -32,16 +32,13 @@ export default function ProfileScreen() {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   useEffect(() => {
+    Permissions.askAsync(Permissions.CAMERA_ROLL);
     const currentUser = getUserId();
     console.log("current", currentUser);
+
     getUsername(currentUser).then(name => {
       setName(name);
     });
-  }, []);
-
-  useEffect(() => {
-    Permissions.askAsync(Permissions.CAMERA_ROLL);
-    console.log("current", currentUser);
     getPicture(currentUser).then(image => {
       console.log("image", image);
       setImageUrl(image);
