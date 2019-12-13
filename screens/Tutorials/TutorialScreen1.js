@@ -3,7 +3,7 @@ import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
 import KitText from "../../components/KitText";
 import Colors from "../../constants/Colors";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
-import CompletionBar from "../../components/challenges/CompletionBar";
+import SignupProgressBar from "../../components/SignupProgressBar";
 
 export default function Tutorial1Screen(props) {
   const { navigation } = props;
@@ -37,7 +37,7 @@ export default function Tutorial1Screen(props) {
         <Image source={kitglobeImage}/>
         </View>
         <View style={styles.challengeContainer}>
-        <CompletionBar numCompleted={1} numInTeam={4} mainColor={"#569684"}/>
+        <SignupProgressBar currentStage={1} numStages={4} mainColor={"#569684"}/>
         </View>
       </View>
       </TouchableHighlight>
