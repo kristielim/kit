@@ -13,7 +13,7 @@ export default function Tutorial2Screen(props) {
     <View style={styles.container}>
       <TouchableHighlight 
       onPress = {() => {navigation.navigate("Tutorial3")}}
-      underlayColor='none'
+      underlayColor={"transparent"}
       >
         <View style={styles.card}>
         <View style={styles.textContainer}>

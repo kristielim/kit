@@ -14,20 +14,26 @@ import TutorialScreen3 from '../screens/Tutorials/TutorialScreen3';
 import TutorialScreen4 from '../screens/Tutorials/TutorialScreen4';
 
 export const SignedOut = createStackNavigator({
+  //EVAN TODO: Find a better way to do the multiple tutorial screens
   Tutorial: {
-    screen: TutorialScreen1
+    screen: TutorialScreen1,
+    navigationOptions: { headerLeft: <></> }
   },
   Tutorial2: {
-    screen: TutorialScreen2
+    screen: TutorialScreen2,
+    navigationOptions: { headerLeft: <></> }
   },
   Tutorial3: {
-    screen: TutorialScreen3
+    screen: TutorialScreen3,
+    navigationOptions: { headerLeft: <></> }
   },
   Tutorial4: {
-    screen: TutorialScreen4
+    screen: TutorialScreen4,
+    navigationOptions: { headerLeft: <></> }
   },
   SignUp: {
-    screen: SignUp
+    screen: SignUp,
+    navigationOptions: { headerLeft: <></> }
   },
   SignIn: {
     screen: SignIn,
