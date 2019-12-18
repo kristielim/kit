@@ -1,32 +1,31 @@
 import React from 'react';
 import {
-  ActivityIndicator,
-  Button,
-  Clipboard,
-  Image,
-  StatusBar,
   StyleSheet,
-  Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
-import * as Permissions from 'expo-permissions';
 import KitText from '../components/KitText';
 import KitButton  from '../components/KitButton'
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
-import uuid from 'uuid';
 
 export default class ImageScreen extends React.Component{
-  state = {
-    text: '',
-     //TODO: upload text and user to the actual database under assigned challenges - use push command ? maybe an array????
+  //TODO: Rewrite in Hooks oops
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
+  }
+
+  submit = () => {
+    const {navigate} = this.props.navigation;
+    navigate("Submitted")
   };
 
   render() {
+    
     return (
       <View style={styles.container}>
 
@@ -60,7 +59,7 @@ export default class ImageScreen extends React.Component{
         <View style = {styles.submitButton}>
 
         <KitButton
-          onPress={() => this._handleImagePicked(image)}
+          onPress={() => {this.submit()}}
           image={require("../assets/images/submitArrow.png")}
           imageFormat={styles.submitButton}
           style={{button: styles.submitButtonFormat}} 
@@ -71,6 +70,7 @@ export default class ImageScreen extends React.Component{
           buttonBackgroundColor={Colors.KIT_WHITE} >
           SUBMIT
         </KitButton>
+        
         </View>
       </View>
     );
