@@ -18,6 +18,8 @@ import { getUserId } from "../../utils/auth/auth";
 export default function ToDoScreen() {
   const [openedChallenges, setOpenedChallenges] = useState([]);
   const [unopenedChallenges, setUnopenedChallenges] = useState([]);
+
+  // Challenges in the challenge cards. Considered open right after the open button is pressed.
   const [challengeCards, setChallengeCards] = useState([]);
 
   function renderTodos() {
@@ -70,12 +72,10 @@ export default function ToDoScreen() {
   }, []);
 
   const getTimeLeftInMilliseconds = assignedTime => {
-    // 24 hours in seconds
-    const TIME_TO_OPEN = 86400000;
+    // Users will have 24 hours from time of assignment in order to open the challenge
+    // This allows friends in different time zones to fairly submit challenges
+    const TIME_TO_OPEN = 86400000; // 24 hours in seconds
     const currTime = moment().valueOf(); // Gets unix time in milliseconds
-    // console.log(moment(assignedTime).format("HH:MM:SS"));
-    // console.log(moment(currTime).format("HH:MM:SS"));
-    // console.log(assignedTime + TIME_TO_OPEN - currTime);
     return assignedTime + TIME_TO_OPEN - currTime;
   };
 
@@ -99,6 +99,7 @@ export default function ToDoScreen() {
                     openChallenge(challenge.assignedChallengeId, getUserId());
                   }}
                   onClose={() => {
+                    // Remove this card from the list of challengeCards
                     setChallengeCards(
                       challengeCards.filter((card, i) => i !== index)
                     );
