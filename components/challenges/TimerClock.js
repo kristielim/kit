@@ -8,22 +8,23 @@ import Colors from "../../constants/Colors";
 
 const diameter = 96;
 export default function TimerClock(props) {
-  const [assignedMoment, setAssignedMoment] = useState(null);
+  const [openedMoment, setOpenedMoment] = useState(null);
   const [expireMoment, setExpireMoment] = useState(null);
   const [minGiven, setMinGiven] = useState(null);
 
   useEffect(() => {
+    const currentUser = getUserId();
+    const openedTimeForUser = props.challenge.opened[currentUser]
     const minsGivenForChallenge = props.challenge.challengeDetails.minGiven;
-    const assignedTime = props.challenge.assignedTime;
-    if (!minsGivenForChallenge || !assignedTime) return; //Should instead do error handling here, but TimerClock should never be used without passing a challenge to it
+    if (!minsGivenForChallenge || !openedTimeForUser) return; //Should instead do error handling here, but TimerClock should never be used without passing a challenge to it
     
-    setAssignedMoment(moment(assignedTime));
-    setExpireMoment(moment(assignedTime).add(minsGivenForChallenge, "minutes"));
-    setMinGiven(minsGivenForChallenge)
+    setOpenedMoment(moment(openedTimeForUser));
+    setExpireMoment(moment(openedTimeForUser).add(minsGivenForChallenge, "minutes")); //The challenge should expire after minGiven minutes after the user has opened the challenge
+    setMinGiven(minsGivenForChallenge);
   }, [])
 
   function calculatePercent() {
-    const differenceInMinutes = expireMoment.diff(assignedMoment, "minutes");
+    const differenceInMinutes = expireMoment.diff(openedMoment, "minutes");
     return (differenceInMinutes / minGiven) * 100
   }
 
@@ -34,7 +35,7 @@ export default function TimerClock(props) {
   }
 
   return (
-    (assignedMoment && expireMoment && minGiven &&
+    (openedMoment && expireMoment && minGiven &&
       <ProgressCircle
         containerStyle={{
           paddingTop: 19,
