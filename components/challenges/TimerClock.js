@@ -1,28 +1,53 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useState, useEffect } from "react";
 import ProgressCircle from 'react-native-progress-circle';
+import moment from 'moment';
+import KitText from "../KitText"
 
+import { getUserId } from "../../utils/auth/auth";
 import Colors from "../../constants/Colors";
 
-import KitText from "../KitText"
 const diameter = 96;
 export default function TimerClock(props) {
+  const [assignedMoment, setAssignedMoment] = useState(null);
+  const [expireMoment, setExpireMoment] = useState(null);
+  const [minGiven, setMinGiven] = useState(null);
+
+  useEffect(() => {
+    const minsGivenForChallenge = props.challenge.challengeDetails.minGiven;
+    const assignedTime = props.challenge.assignedTime;
+    if (!minsGivenForChallenge || !assignedTime) return; //Should instead do error handling here, but TimerClock should never be used without passing a challenge to it
+    
+    setAssignedMoment(moment(assignedTime));
+    setExpireMoment(moment(assignedTime).add(minsGivenForChallenge, "minutes"));
+    setMinGiven(minsGivenForChallenge)
+  }, [])
+
   function calculatePercent() {
-    return 35;
+    const differenceInMinutes = expireMoment.diff(assignedMoment, "minutes");
+    return (differenceInMinutes / minGiven) * 100
   }
+
+  function calculateHoursLeft() {
+    const currentMoment = moment()
+    const differenceInHours = expireMoment.diff(currentMoment, "hours");
+    return differenceInHours;
+  }
+
   return (
-    <ProgressCircle
-      containerStyle={{
-        paddingTop: 19,
-      }}
-      percent={calculatePercent()}
-      radius={diameter/2}
-      borderWidth={3}
-      color={Colors.KIT_RED}
-      shadowColor={Colors.KIT_WHITE}
-      bgColor={Colors.KIT_LIGHT_GREY}
-    >
-      <KitText size={48} color={Colors.KIT_BLACK} fontWeight={"extrabold"}>23</KitText>
-    </ProgressCircle>
+    (assignedMoment && expireMoment && minGiven &&
+      <ProgressCircle
+        containerStyle={{
+          paddingTop: 19,
+        }}
+        percent={calculatePercent()}
+        radius={diameter/2}
+        borderWidth={3}
+        color={Colors.KIT_RED}
+        shadowColor={Colors.KIT_WHITE}
+        bgColor={Colors.KIT_LIGHT_GREY}
+      >
+        <KitText size={48} color={Colors.KIT_BLACK} fontWeight={"extrabold"}>{calculateHoursLeft()}</KitText>
+      </ProgressCircle>
+    )
   );
 }
