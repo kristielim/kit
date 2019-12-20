@@ -102,3 +102,10 @@ export async function getAllAssignedChallenges(userId) {
   );
   return assignedChallenges;
 }
+
+export async function submitChallenge(assignedChallengeId, userId, submission) {
+  firebase
+    .database()
+    .ref(`/assignedChallenges/${assignedChallengeId}/submissions`)
+    .update({[userId]: submission});
+}

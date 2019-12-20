@@ -15,7 +15,7 @@ import {
 } from "../../utils/db/challenges";
 import { getUserId } from "../../utils/auth/auth";
 
-export default function ToDoScreen() {
+export default function ToDoScreen(props) {
   const [openedChallenges, setOpenedChallenges] = useState([]);
   const [unopenedChallenges, setUnopenedChallenges] = useState([]);
 
@@ -26,16 +26,20 @@ export default function ToDoScreen() {
     let todos = [];
     let alternator = true;
     for (challenge of openedChallenges) {
-      // console.log(challenge)
+      let screentoNav;
+      if(challenge.challengeDetails.mediaType === "STRING"){
+        screentoNav = "UploadText";
+      }
+      else if(challenge.challengeDetails.mediaType === "IMAGE"){
+        screentoNav = "UploadImage";
+      }
+      else{
+        //Do some error handling
+      }
       todos.push(
-        <ChallengeTodo
-          key={challenge.teamId}
-          challenge={challenge}
-          mainColor={alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN}
-          onPress={() => {
-            alert("Hello");
-          }}
-        />
+        <ChallengeTodo key={challenge.assignedChallengeId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
+          props.navigation.navigate(screentoNav, {challenge})
+        }}/>
       );
       alternator = !alternator;
     }
