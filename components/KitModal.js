@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, View, StyleSheet } from "react-native";
 
+// KitModal is a wrapper on the React Native Modal component that grays out the background on open
 export default function KitBackgroundScreen(props) {
   const styles = StyleSheet.create({
     background: {

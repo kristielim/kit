@@ -15,10 +15,16 @@ import Fonts from "../../constants/Fonts";
 import { createTeam } from "../../utils/db/teams";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 import { getUserId } from "../../utils/auth/auth";
+import KitImagePicker from "../../components/KitImagePicker";
 
 export default function Create(props) {
   const [teamName, setTeamName] = useState("");
   const [teamCode, setTeamCode] = useState("");
+  // Icon can either be a photo or an animal
+  const [teamIcon, setTeamIcon] = useState({
+    type: "ANIMAL",
+    path: "~/assets/images/animals/bunny.png"
+  });
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -26,16 +32,25 @@ export default function Create(props) {
       onPressBack={() => {
         props.navigation.navigate("Teams");
       }}
-      style={{ borderColor: "red", borderWidth: 1, opacity: 0.5 }} //modalVisible ? { opacity: 0.75 } : { opacity: 1 }}
     >
       <KitModal visible={modalVisible}>
-        <KitButtonSupreme
-          onPress={() => {
-            setModalVisible(false);
-          }}
-        >
-          Hide Modal
-        </KitButtonSupreme>
+        <View style={styles.modalBody}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(false);
+            }}
+            style={styles.closeModal}
+          >
+            <Image source={require("../../assets/images/grayx.png")} />
+          </TouchableOpacity>
+          <KitImagePicker
+            title="Set Icon"
+            onSave={uploadUrl => {
+              setTeamIcon({});
+              setModalVisible(false);
+            }}
+          />
+        </View>
       </KitModal>
       <View style={styles.container}>
         <KitText size={26}>Set Team Name:</KitText>
@@ -53,7 +68,7 @@ export default function Create(props) {
             }}
           >
             <Image
-              source={require("../../assets/images/animals/bunny.png")}
+              source={require("~/assets/images/animals/bunny.png")}
               // source={imgSrc}
               style={styles.photoDark}
             />
@@ -94,6 +109,18 @@ export default function Create(props) {
 }
 
 const styles = StyleSheet.create({
+  modalBody: {
+    height: 500,
+    width: 340,
+    borderRadius: 20,
+    backgroundColor: "white",
+    padding: 40
+  },
+  closeModal: {
+    position: "absolute",
+    top: 20,
+    left: 20
+  },
   textInput: {
     backgroundColor: "white",
     width: 268,
