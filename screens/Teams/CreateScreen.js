@@ -16,16 +16,27 @@ import { createTeam } from "../../utils/db/teams";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 import { getUserId } from "../../utils/auth/auth";
 import KitImagePicker from "../../components/KitImagePicker";
+import bunny from "../../assets/images/animals/bunny.png";
 
-export default function Create(props) {
+const animals = { BUNNY: bunny };
+
+export default function CreateScreen(props) {
   const [teamName, setTeamName] = useState("");
   const [teamCode, setTeamCode] = useState("");
   // Icon can either be a photo or an animal
   const [teamIcon, setTeamIcon] = useState({
     type: "ANIMAL",
-    path: "~/assets/images/animals/bunny.png"
+    path: "BUNNY"
   });
   const [modalVisible, setModalVisible] = useState(false);
+
+  //let previewSource = require("~/assets/images/animals/bunny.png");
+  let previewSource;
+  if (teamIcon.type === "ANIMAL") {
+    previewSource = animals[teamIcon.path];
+  } else {
+    previewSource = { uri: teamIcon.path };
+  }
 
   return (
     <KitBackgroundScreen
@@ -46,7 +57,7 @@ export default function Create(props) {
           <KitImagePicker
             title="Set Icon"
             onSave={uploadUrl => {
-              setTeamIcon({});
+              setTeamIcon({ type: "PHOTO", path: uploadUrl });
               setModalVisible(false);
             }}
           />
@@ -67,11 +78,7 @@ export default function Create(props) {
               setModalVisible(true);
             }}
           >
-            <Image
-              source={require("~/assets/images/animals/bunny.png")}
-              // source={imgSrc}
-              style={styles.photoDark}
-            />
+            <Image source={previewSource} style={styles.photoDark} />
             <Image
               source={require("../../assets/images/cameraicon.png")}
               style={styles.cameraicon}
