@@ -18,7 +18,7 @@ export default function IndividualChallenge(props) {
     <KitBackgroundScreen
       color={Colors.KIT_RED}
       onPressBack={() => {
-        props.navigation.navigate("Teams");
+        props.navigation.goBack();
       }}
       padding={1}
       title={props.username}

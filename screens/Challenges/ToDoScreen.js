@@ -26,22 +26,29 @@ export default function ToDoScreen(props) {
     let todos = [];
     let alternator = true;
     for (challenge of openedChallenges) {
-      let screentoNav;
-      if(challenge.challengeDetails.mediaType === "STRING"){
-        screentoNav = "UploadText";
+      let hasUserSubmitted = false;
+      if(challenge.hasOwnProperty("submissions")){
+        console.log(challenge.submissions.hasOwnProperty(getUserId()))
+        hasUserSubmitted = challenge.submissions.hasOwnProperty(getUserId())
       }
-      else if(challenge.challengeDetails.mediaType === "IMAGE"){
-        screentoNav = "UploadImage";
+      if(!hasUserSubmitted){
+        let screentoNav;
+        if(challenge.challengeDetails.mediaType === "STRING"){
+          screentoNav = "UploadText";
+        }
+        else if(challenge.challengeDetails.mediaType === "IMAGE"){
+          screentoNav = "UploadImage";
+        }
+        else{
+          //Do some error handling
+        }
+        todos.push(
+          <ChallengeTodo key={challenge.assignedChallengeId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
+            props.navigation.navigate(screentoNav, {challenge})
+          }}/>
+        );
+        alternator = !alternator;
       }
-      else{
-        //Do some error handling
-      }
-      todos.push(
-        <ChallengeTodo key={challenge.assignedChallengeId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
-          props.navigation.navigate(screentoNav, {challenge})
-        }}/>
-      );
-      alternator = !alternator;
     }
     return todos;
   }
