@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 
-import { getAllAssignedChallenges } from "../../utils/db/challenges";
+import { listenAllAssignedChallenges } from "../../utils/db/challenges";
 import { getUserId } from "../../utils/auth/auth";
 
 import ChallengeTodo from "../../components/challenges/ChallengeTodo";
@@ -17,7 +17,7 @@ export default function SubmissionsScreen(props) {
     for (challenge of challenges) {
       let hasUserSubmitted = false;
       if(challenge.hasOwnProperty("submissions")){
-        console.log(challenge.submissions.hasOwnProperty(getUserId()))
+        // console.log(challenge.submissions.hasOwnProperty(getUserId()))
         hasUserSubmitted = challenge.submissions.hasOwnProperty(getUserId())
       }
       if(hasUserSubmitted){
@@ -34,9 +34,7 @@ export default function SubmissionsScreen(props) {
 
   useEffect(() => {
     const currentUser = getUserId();
-    getAllAssignedChallenges(currentUser).then(assignedChallenges => {
-      setChallenges(assignedChallenges)
-    });
+    listenAllAssignedChallenges(currentUser, setChallenges);
   }, []);
 
   return (

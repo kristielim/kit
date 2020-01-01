@@ -10,7 +10,7 @@ import ChallengeTodo from "../../components/challenges/ChallengeTodo";
 import Colors from "../../constants/Colors";
 
 import {
-  getAllAssignedChallenges,
+  listenAllAssignedChallenges,
   openChallenge
 } from "../../utils/db/challenges";
 import { getUserId } from "../../utils/auth/auth";
@@ -25,13 +25,17 @@ export default function ToDoScreen(props) {
   function renderTodos() {
     let todos = [];
     let alternator = true;
+    console.log("\n\n\nEntered renderTodos")
+    // console.log(openedChallenges)
     for (challenge of openedChallenges) {
+      console.log(challenge)
       let hasUserSubmitted = false;
       if(challenge.hasOwnProperty("submissions")){
-        console.log(challenge.submissions.hasOwnProperty(getUserId()))
+        // console.log(challenge.submissions.hasOwnProperty(getUserId()))
         hasUserSubmitted = challenge.submissions.hasOwnProperty(getUserId())
       }
       if(!hasUserSubmitted){
+        console.log("^rendering this todo\n\n")
         let screentoNav;
         if(challenge.challengeDetails.mediaType === "STRING"){
           screentoNav = "UploadText";
@@ -50,12 +54,13 @@ export default function ToDoScreen(props) {
         alternator = !alternator;
       }
     }
+    console.log(todos)
     return todos;
   }
 
   useEffect(() => {
     const currentUser = getUserId();
-    getAllAssignedChallenges(currentUser).then(challenges => {
+    listenAllAssignedChallenges(currentUser, challenges => {
       const openedChallenges = [];
       const unopenedChallenges = [];
       // Filter opened and unopened challenges
