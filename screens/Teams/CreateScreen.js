@@ -16,6 +16,7 @@ import { createTeam } from "../../utils/db/teams";
 import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 import { getUserId } from "../../utils/auth/auth";
 import KitImagePicker from "../../components/KitImagePicker";
+import KitIconPicker from "../../components/KitIconPicker";
 import bunny from "../../assets/images/animals/bunny.png";
 
 const animals = { BUNNY: bunny };
@@ -28,7 +29,10 @@ export default function CreateScreen(props) {
     type: "ANIMAL",
     path: "BUNNY"
   });
+  // Modal opens to set team icon
   const [modalVisible, setModalVisible] = useState(false);
+  // Team icon modal is either an image picker or an animal icon picker
+  const [isImagePicker, setIsImagePicker] = useState(false);
 
   //let previewSource = require("~/assets/images/animals/bunny.png");
   let previewSource;
@@ -54,13 +58,34 @@ export default function CreateScreen(props) {
           >
             <Image source={require("../../assets/images/grayx.png")} />
           </TouchableOpacity>
-          <KitImagePicker
-            title="Set Icon"
-            onSave={uploadUrl => {
-              setTeamIcon({ type: "PHOTO", path: uploadUrl });
-              setModalVisible(false);
+          <TouchableOpacity
+            onPress={() => {
+              setIsImagePicker(!isImagePicker);
             }}
-          />
+            style={styles.changePicker}
+          >
+            <KitText
+              style={styles.changePickerText}
+              size={22}
+              color={Colors.KIT_DARK_GREY}
+            >
+              {isImagePicker ? "ICONS" : "PHOTO"}
+            </KitText>
+            <Image
+              source={require("../../assets/images/arrows/grayrightarrow.png")}
+            />
+          </TouchableOpacity>
+          {isImagePicker ? (
+            <KitImagePicker
+              title="Set Icon"
+              onSave={uploadUrl => {
+                setTeamIcon({ type: "PHOTO", path: uploadUrl });
+                setModalVisible(false);
+              }}
+            />
+          ) : (
+            <KitIconPicker />
+          )}
         </View>
       </KitModal>
       <View style={styles.container}>
@@ -128,6 +153,14 @@ const styles = StyleSheet.create({
     top: 20,
     left: 20
   },
+  changePicker: {
+    position: "absolute",
+    top: 20,
+    right: 20,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  changePickerText: { paddingTop: 8, marginRight: 8 },
   textInput: {
     backgroundColor: "white",
     width: 268,
