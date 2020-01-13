@@ -75,16 +75,27 @@ export default function CreateScreen(props) {
               source={require("../../assets/images/arrows/grayrightarrow.png")}
             />
           </TouchableOpacity>
+          <KitText
+            size={28}
+            fontWeight={FontStyles.FONT_WEIGHT_BOLD}
+            color={Colors.KIT_BLACK}
+          >
+            Set Icon
+          </KitText>
           {isImagePicker ? (
             <KitImagePicker
-              title="Set Icon"
               onSave={uploadUrl => {
                 setTeamIcon({ type: "PHOTO", path: uploadUrl });
                 setModalVisible(false);
               }}
             />
           ) : (
-            <KitIconPicker />
+            <KitIconPicker
+              onSave={animalName => {
+                setTeamIcon({ type: "ANIMAL", path: animalName });
+                setModalVisible(false);
+              }}
+            />
           )}
         </View>
       </KitModal>
