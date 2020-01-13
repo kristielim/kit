@@ -123,7 +123,7 @@ export default function CreateScreen(props) {
         </View>
         <KitButtonSupreme
           onPress={async () => {
-            const teamCode = await createTeam(teamName, getUserId());
+            const teamCode = await createTeam(teamName, getUserId(), teamIcon);
             setTeamCode(teamCode);
           }}
         >
