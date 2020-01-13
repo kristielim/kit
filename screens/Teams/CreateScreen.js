@@ -96,63 +96,76 @@ export default function CreateScreen(props) {
           )}
         </View>
       </KitModal>
-      <View style={styles.container}>
-        <KitText size={26}>Set Team Name:</KitText>
-        <KitTextInput
-          style={styles.textInput}
-          placeholder="Ex) Team One"
-          onChangeText={setTeamName}
-          value={teamName}
-          errorMsg={errorMsg}
-        />
-        <KitText size={26}>Set Team Icon:</KitText>
-        <View style={styles.photoContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setModalVisible(true);
+      {/* Before and after code creation */
+      teamCode === "" ? (
+        <View style={styles.container}>
+          <KitText size={26}>Set Team Name:</KitText>
+          <KitTextInput
+            style={styles.textInput}
+            placeholder="Ex) Team One"
+            onChangeText={setTeamName}
+            value={teamName}
+            errorMsg={errorMsg}
+          />
+          <KitText size={26}>Set Team Icon:</KitText>
+          <View style={styles.photoContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true);
+              }}
+            >
+              <Image source={previewSource} style={styles.photoDark} />
+              <Image
+                source={require("../../assets/images/cameraicon.png")}
+                style={styles.cameraicon}
+              />
+            </TouchableOpacity>
+          </View>
+          <KitButtonSupreme
+            onPress={async () => {
+              if (teamName === "") {
+                setErrorMsg("A team name is required.");
+              } else {
+                const teamCode = await createTeam(
+                  teamName,
+                  getUserId(),
+                  teamIcon
+                );
+                setTeamCode(teamCode);
+              }
             }}
           >
-            <Image source={previewSource} style={styles.photoDark} />
-            <Image
-              source={require("../../assets/images/cameraicon.png")}
-              style={styles.cameraicon}
-            />
-          </TouchableOpacity>
+            CREATE CODE
+          </KitButtonSupreme>
         </View>
-        <KitButtonSupreme
-          onPress={async () => {
-            if (teamName === "") {
-              setErrorMsg("A team name is required.");
-            } else {
-              const teamCode = await createTeam(
-                teamName,
-                getUserId(),
-                teamIcon
-              );
-              setTeamCode(teamCode);
-            }
-          }}
-        >
-          CREATE CODE
-        </KitButtonSupreme>
-      </View>
-      <View style={styles.teamCodeContainer}>
-        {teamCode !== "" && (
-          <>
-            <KitText
-              style={styles.teamCode}
-              fontWeight={FontStyles.FONT_WEIGHT_BOLD}
-              color={Colors.KIT_DARKEST_BLACK}
-              size={53}
-            >
-              {teamCode}
-            </KitText>
-            <KitButtonSupreme onPress={() => alert("pressed!")}>
-              COPY
-            </KitButtonSupreme>
-          </>
-        )}
-      </View>
+      ) : (
+        <View style={styles.teamCodeContainer}>
+          <KitText
+            style={styles.teamCode}
+            color={Colors.KIT_DARKEST_BLACK}
+            size={24}
+          >
+            Your team code:
+          </KitText>
+          <KitText
+            style={styles.teamCode}
+            fontWeight={FontStyles.FONT_WEIGHT_BOLD}
+            color={Colors.KIT_DARKEST_BLACK}
+            size={53}
+          >
+            {teamCode}
+          </KitText>
+          <KitButtonSupreme
+            style={styles.teamCode}
+            onPress={() => alert("pressed!")}
+          >
+            SHARE
+          </KitButtonSupreme>
+          <KitButtonSupreme type="outlined" onPress={() => alert("pressed!")}>
+            COPY
+          </KitButtonSupreme>
+        </View>
+      )}
     </KitBackgroundScreen>
   );
 }

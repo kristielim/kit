@@ -12,7 +12,7 @@ export default function KitButtonSupreme({
   children,
   color,
   image,
-  type = "filled",
+  type = "filled", // can be either "filled" or "outlined"
   width,
   height,
   style,
@@ -27,6 +27,7 @@ export default function KitButtonSupreme({
       borderRadius: 20,
       borderColor:
         type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE,
+      borderWidth: 2,
       justifyContent: "center",
       alignItems: "center",
       alignSelf: "center"
