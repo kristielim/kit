@@ -1,13 +1,7 @@
 // Pick one of the animal icons
 
 import React, { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Colors from "../constants/Colors";
 import FontStyles from "../constants/FontStyles";
 import KitText from "./KitText";
@@ -34,6 +28,12 @@ const animals = {
   YELLOW_CAT: yellowcat
 };
 
+const iconRows = [
+  ["BUNNY", "BEAR", "BLACK_CAT"],
+  ["DOG", "PANDA_BEAR", "PENGUIN"],
+  ["POLAR_BEAR", "SHIBA", "YELLOW_CAT"]
+];
+
 export default function KitIconPicker(props) {
   const [selectedIcon, setSelectedIcon] = useState("BUNNY");
   return (
@@ -41,21 +41,20 @@ export default function KitIconPicker(props) {
       <View style={styles.mainBody}>
         <Image style={styles.selectedIcon} source={animals[selectedIcon]} />
         <View style={styles.icons}>
-          <View style={styles.iconRow}>
-            <Image style={styles.icon} source={bunny} />
-            <Image style={styles.icon} source={bear} />
-            <Image style={styles.icon} source={blackcat} />
-          </View>
-          <View style={styles.iconRow}>
-            <Image style={styles.icon} source={dog} />
-            <Image style={styles.icon} source={pandabear} />
-            <Image style={styles.icon} source={penguin} />
-          </View>
-          <View style={styles.iconRow}>
-            <Image style={styles.icon} source={polarbear} />
-            <Image style={styles.icon} source={shiba} />
-            <Image style={styles.icon} source={yellowcat} />
-          </View>
+          {iconRows.map((iconRow, index) => (
+            <View key={index} style={styles.iconRow}>
+              {iconRow.map(iconName => (
+                <TouchableOpacity
+                  key={iconName}
+                  onPress={() => {
+                    setSelectedIcon(iconName);
+                  }}
+                >
+                  <Image style={styles.icon} source={animals[iconName]} />
+                </TouchableOpacity>
+              ))}
+            </View>
+          ))}
         </View>
       </View>
       <KitButtonSupreme
