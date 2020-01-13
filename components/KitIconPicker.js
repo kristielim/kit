@@ -74,9 +74,7 @@ export default function KitIconPicker(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    borderColor: "orange",
-    borderWidth: 1
+    flex: 1
   },
   icon: {
     height: 60,
@@ -85,9 +83,7 @@ const styles = StyleSheet.create({
     margin: 4
   },
   icons: {
-    padding: 8,
-    borderColor: "blue",
-    borderWidth: 1
+    padding: 8
   },
   iconRow: {
     flexDirection: "row"

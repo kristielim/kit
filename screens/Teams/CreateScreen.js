@@ -66,12 +66,14 @@ export default function CreateScreen(props) {
           >
             <KitText
               style={styles.changePickerText}
-              size={22}
+              size={16}
+              fontWeight={FontStyles.FONT_WEIGHT_BOLD}
               color={Colors.KIT_DARK_GREY}
             >
               {isImagePicker ? "ICONS" : "PHOTO"}
             </KitText>
             <Image
+              style={styles.changePickerArrow}
               source={require("../../assets/images/arrows/grayrightarrow.png")}
             />
           </TouchableOpacity>
@@ -171,7 +173,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  changePickerText: { paddingTop: 8, marginRight: 8 },
+  changePickerArrow: {
+    height: 18,
+    width: 18,
+    resizeMode: "contain"
+  },
+  changePickerText: { marginBottom: -6, marginRight: 2 },
   textInput: {
     backgroundColor: "white",
     width: 268,
