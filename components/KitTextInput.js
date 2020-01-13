@@ -45,7 +45,7 @@ export default function KitTextInput(props) {
     statusImage = successImage;
   }
   return (
-    <View>
+    <View style={props.style}>
       <View style={styles.textInputContainer}>
         <Image style={styles.image} source={props.image} />
         <TextInput

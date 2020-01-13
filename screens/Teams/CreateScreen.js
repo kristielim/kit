@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import KitButtonSupreme from "../../components/KitButtonSupreme";
 import KitModal from "../../components/KitModal";
 import KitText from "../../components/KitText";
@@ -18,10 +12,13 @@ import { getUserId } from "../../utils/auth/auth";
 import KitImagePicker from "../../components/KitImagePicker";
 import KitIconPicker from "../../components/KitIconPicker";
 import { animals } from "../../constants/AnimalIcons";
+import KitTextInput from "../../components/KitTextInput";
 
 export default function CreateScreen(props) {
   const [teamName, setTeamName] = useState("");
   const [teamCode, setTeamCode] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
   // Icon can either be a photo or an animal
   const [teamIcon, setTeamIcon] = useState({
     type: "ANIMAL",
@@ -101,11 +98,12 @@ export default function CreateScreen(props) {
       </KitModal>
       <View style={styles.container}>
         <KitText size={26}>Set Team Name:</KitText>
-        <TextInput
+        <KitTextInput
           style={styles.textInput}
           placeholder="Ex) Team One"
           onChangeText={setTeamName}
           value={teamName}
+          errorMsg={errorMsg}
         />
         <KitText size={26}>Set Team Icon:</KitText>
         <View style={styles.photoContainer}>
@@ -123,8 +121,16 @@ export default function CreateScreen(props) {
         </View>
         <KitButtonSupreme
           onPress={async () => {
-            const teamCode = await createTeam(teamName, getUserId(), teamIcon);
-            setTeamCode(teamCode);
+            if (teamName === "") {
+              setErrorMsg("A team name is required.");
+            } else {
+              const teamCode = await createTeam(
+                teamName,
+                getUserId(),
+                teamIcon
+              );
+              setTeamCode(teamCode);
+            }
           }}
         >
           CREATE CODE
@@ -178,33 +184,17 @@ const styles = StyleSheet.create({
   },
   changePickerText: { marginBottom: -6, marginRight: 2 },
   textInput: {
-    backgroundColor: "white",
-    width: 268,
-    height: 48,
-    borderWidth: 2,
-    borderColor: Colors.KIT_LIGHT_GREY,
-    borderRadius: 20,
-    paddingLeft: 15,
     marginTop: 28,
-    marginBottom: 32,
-    fontSize: 24,
-    fontFamily: Fonts.REGULAR,
-    color: Colors.KIT_DARK_GREY,
-    textAlign: "center"
+    marginBottom: 32
   },
   container: {
     alignItems: "center"
     // borderWidth: 1,
     // borderColor: "green"
   },
-  textInputContainer: {
-    borderWidth: 1,
-    borderColor: "red",
-    alignItems: "center"
-  },
   teamCodeContainer: {
-    borderWidth: 1,
-    borderColor: "blue",
+    // borderWidth: 1,
+    // borderColor: "blue",
     alignItems: "center",
     justifyContent: "center"
   },
