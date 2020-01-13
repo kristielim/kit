@@ -3,30 +3,8 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Colors from "../constants/Colors";
-import FontStyles from "../constants/FontStyles";
-import KitText from "./KitText";
 import KitButtonSupreme from "./KitButtonSupreme";
-import bunny from "../assets/images/animals/bunny.png";
-import bear from "../assets/images/animals/bear.png";
-import blackcat from "../assets/images/animals/blackcat.png";
-import dog from "../assets/images/animals/dog.png";
-import pandabear from "../assets/images/animals/pandabear.png";
-import penguin from "../assets/images/animals/penguin.png";
-import polarbear from "../assets/images/animals/polarbear.png";
-import shiba from "../assets/images/animals/shiba.png";
-import yellowcat from "../assets/images/animals/yellowcat.png";
-
-const animals = {
-  BUNNY: bunny,
-  BEAR: bear,
-  BLACK_CAT: blackcat,
-  DOG: dog,
-  PANDA_BEAR: pandabear,
-  PENGUIN: penguin,
-  POLAR_BEAR: polarbear,
-  SHIBA: shiba,
-  YELLOW_CAT: yellowcat
-};
+import { animals } from "../constants/AnimalIcons";
 
 const iconRows = [
   ["BUNNY", "BEAR", "BLACK_CAT"],

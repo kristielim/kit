@@ -17,9 +17,7 @@ import KitBackgroundScreen from "../../components/KitBackgroundScreen";
 import { getUserId } from "../../utils/auth/auth";
 import KitImagePicker from "../../components/KitImagePicker";
 import KitIconPicker from "../../components/KitIconPicker";
-import bunny from "../../assets/images/animals/bunny.png";
-
-const animals = { BUNNY: bunny };
+import { animals } from "../../constants/AnimalIcons";
 
 export default function CreateScreen(props) {
   const [teamName, setTeamName] = useState("");
