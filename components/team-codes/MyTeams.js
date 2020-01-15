@@ -13,11 +13,10 @@ import KitText from "../KitText";
 import FontStyles from "../../constants/FontStyles";
 import Colors from "../../constants/Colors";
 import { getUserId } from "../../utils/auth/auth";
+import { getIcon } from "../../constants/AnimalIcons";
 
 function MyTeams(props) {
   const [myTeams, setMyTeams] = useState([]);
-
-  const placeholderImage = require("../../assets/images/40by40.png");
 
   useEffect(() => {
     const myUserId = getUserId();
@@ -29,8 +28,6 @@ function MyTeams(props) {
     if (myTeams.length > 0) {
       let counter = 0;
       for (let myTeam of myTeams) {
-        // console.log(myTeam);
-
         //Extract user's names for display
         const teamUsers = myTeam.users
           .map(user => {
@@ -51,7 +48,10 @@ function MyTeams(props) {
             ]}
           >
             <View style={styles.teamBarIcon}>
-              <Image source={placeholderImage}></Image>
+              <Image
+                style={styles.teamBarIconImage}
+                source={getIcon(myTeam)}
+              ></Image>
             </View>
 
             <View style={{ flex: 4, alignItems: "flex-start" }}>
@@ -137,6 +137,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
+  },
+  teamBarIconImage: {
+    height: 40,
+    width: 40,
+    resizeMode: "contain"
   }
 });
 

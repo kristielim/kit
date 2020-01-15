@@ -26,7 +26,7 @@ export default function KitButtonSupreme({
       height: height || 48,
       borderRadius: 20,
       borderColor:
-        type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE,
+        type === "outlined" ? color || Colors.KIT_GREEN : "transparent",
       borderWidth: 2,
       justifyContent: "center",
       alignItems: "center",

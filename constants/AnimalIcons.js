@@ -19,3 +19,16 @@ export const animals = {
   SHIBA: shiba,
   YELLOW_CAT: yellowcat
 };
+
+// Helper function to resolve team icon from team
+// Team should contain the icon field
+export const getIcon = team => {
+  // Default if team does not have icon
+  if (!team.hasOwnProperty("icon")) {
+    return animals["BUNNY"];
+  } else if (team.icon.type === "ANIMAL") {
+    return animals[team.icon.path];
+  } else {
+    return { uri: team.icon.path };
+  }
+};

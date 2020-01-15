@@ -6,8 +6,6 @@ export default function KitBackgroundScreen(props) {
   const styles = StyleSheet.create({
     background: {
       flex: 1,
-      borderColor: "red",
-      borderWidth: 1,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: "rgba(0, 0, 0, 0.5)"
