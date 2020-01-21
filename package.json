@@ -41,6 +41,7 @@
     "toggle-switch-react-native": "^2.1.0"
   },
   "devDependencies": {
+    "babel-plugin-root-import": "^6.4.1",
     "babel-preset-expo": "^7.0.0",
     "jest-expo": "^35.0.0",
     "react-native-dotenv": "^0.2.0"

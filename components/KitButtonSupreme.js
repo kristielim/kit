@@ -3,7 +3,7 @@ If you want text that acts as a button, do not use KitButtonSupreme.
 Use KitText wrapped by TouchableOpacity instead */
 
 import React from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import KitText from "./KitText";
 
@@ -12,10 +12,11 @@ export default function KitButtonSupreme({
   children,
   color,
   image,
-  type = "filled",
+  type = "filled", // can be either "filled" or "outlined"
   width,
   height,
-  style
+  style,
+  disabled
 }) {
   const styles = StyleSheet.create({
     button: {
@@ -25,7 +26,8 @@ export default function KitButtonSupreme({
       height: height || 48,
       borderRadius: 20,
       borderColor:
-        type === "outlined" ? color || Colors.KIT_GREEN : Colors.KIT_WHITE,
+        type === "outlined" ? color || Colors.KIT_GREEN : "transparent",
+      borderWidth: 2,
       justifyContent: "center",
       alignItems: "center",
       alignSelf: "center"
@@ -47,7 +49,11 @@ export default function KitButtonSupreme({
   });
   return (
     <View style={style}>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPress}
+        disabled={disabled}
+      >
         <View style={styles.textContainer}>
           {image && <Image source={image} style={styles.image} />}
           <KitText

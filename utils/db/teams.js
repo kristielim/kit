@@ -47,7 +47,7 @@ export async function joinTeam(teamCode, userId) {
 }
 
 // Helper create team function that creates a new team without any checks
-async function _createTeam(teamName, userId) {
+async function _createTeam(teamName, userId, icon) {
   const team = {
     name: teamName,
     score: 0,
@@ -69,13 +69,13 @@ async function _createTeam(teamName, userId) {
   await firebase
     .database()
     .ref(`/teams/${teamId}`)
-    .update({ code: teamCode });
+    .update({ code: teamCode, icon });
 
   return [teamId, teamCode];
 }
 
-export async function createTeam(teamName, userId) {
-  let [teamId, teamCode] = await _createTeam(teamName, userId);
+export async function createTeam(teamName, userId, icon) {
+  let [teamId, teamCode] = await _createTeam(teamName, userId, icon);
 
   // Race condition in the event that two users generate the same team code and check for existence at the same time
   // Very unlikely but might want to come up with a solution for this eventually
