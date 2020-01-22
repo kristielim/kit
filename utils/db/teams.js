@@ -10,35 +10,55 @@ export async function getTeam(teamId) {
   return getCurrentValue(`/teams/${teamId}/`);
 }
 
+// Returns an array of team ids given a user id
+async function getTeamIdsForUserId(userId) {
+  let teamIds = [];
+  try {
+    const teamIdsObj = await getCurrentValue(`/users/${userId}/teams`);
+    if (teamIdsObj) {
+      teamIds = Object.values(teamIdsObj);
+    }
+    return teamIds;
+  } catch {
+    console.log("Error: unable to get current teams for user");
+  }
+}
+
+// Returns an array of user ids given a team id
+async function getUserIdsForTeamId(teamId) {
+  let userIds = [];
+  try {
+    const userIdsObj = await getCurrentValue(`/teams/${teamId}/users`);
+    if (userIdsObj) {
+      userIds = Object.values(userIdsObj);
+    }
+    return userIds;
+  } catch {
+    console.log("Error: unable to get current users for teams");
+  }
+}
+
 async function addUserToTeam(teamId, userId) {
   // Add team to user
-  const teamIds = await getCurrentValue(`/users/${userId}/teams`);
-  // Filter for uniqueness just in case
-  const newTeams = teamIds
-    ? [teamId, ...teamIds].filter(
-        (teamId, index, teamIds) =>
-          teamIds.indexOf(teamId) === index && teamId !== undefined
-      )
-    : [teamId];
-  firebase
-    .database()
-    .ref(`/users/${userId}`)
-    .update({
-      teams: newTeams
-    });
 
-  // Add user to team
-  const userIds = await getCurrentValue(`/teams/${teamId}/users`);
-  // Filter for uniqueness just in case
-  const newUsers = userIds
-    ? [userId, ...userIds].filter((v, i, a) => a.indexOf(v) === i)
-    : [userId];
-  firebase
-    .database()
-    .ref(`/teams/${teamId}`)
-    .update({
-      users: newUsers
-    });
+  // Check that team is not in user already
+  const teamIds = await getTeamIdsForUserId(userId);
+  if (!teamIds.includes(userId)) {
+    firebase
+      .database()
+      .ref(`/users/${userId}/teams`)
+      .push(teamId)
+      .then(() => {
+        // Add user to team
+        firebase
+          .database()
+          .ref(`/teams/${teamId}/users`)
+          .push(userId);
+      })
+      .catch(() => {
+        console.log("Error: Failed to add team to user");
+      });
+  }
 }
 
 export async function joinTeam(teamCode, userId) {
@@ -50,8 +70,7 @@ export async function joinTeam(teamCode, userId) {
 async function _createTeam(teamName, userId, icon) {
   const team = {
     name: teamName,
-    score: 0,
-    users: [userId]
+    score: 0
   };
 
   // Create team
@@ -132,7 +151,7 @@ async function augmentTeamsWithUserNames(teams) {
   await Promise.all(
     teams.map(async team => {
       const augmentedUsersArr = await Promise.all(
-        team.users.map(async userId => {
+        Object.values(team.users).map(async userId => {
           let augmentedObj = {};
           augmentedObj["id"] = userId;
           augmentedObj["name"] = await firebase
@@ -160,14 +179,13 @@ export async function getTeamsForUserId(userId, callback) {
   const teamIdsSnapshot = firebase.database().ref(`/users/${userId}/teams`);
 
   teamIdsSnapshot.on("value", async snapshot => {
-    let teamIds = snapshot.val();
-    if (!teamIds) {
+    const teamIdObj = snapshot.val();
+    if (!teamIdObj) {
       callback([]);
       return;
     }
-    // Workaround for weird issue that had some teamIds set as undefined
-    teamIds = teamIds.filter(teamId => teamId != undefined);
-    teams = await getTeams(teamIds);
+    const teamIds = Object.values(teamIdObj);
+    let teams = await getTeams(teamIds);
     teams = await augmentTeamsWithUserNames(teams);
     callback(teams);
   });

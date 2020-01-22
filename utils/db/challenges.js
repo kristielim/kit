@@ -67,10 +67,12 @@ export async function setCurrentChallenge(teamId) {
 
 export async function getAllAssignedChallenges(userId) {
   try {
-    const teamIds = await getCurrentValue(`/users/${userId}/teams`);
-    if (!teamIds) {
+    const teamIdsObj = await getCurrentValue(`/users/${userId}/teams`);
+    if (!teamIdsObj) {
       return [];
     }
+    // Use Object.values since everything in firebase is stored as an object
+    const teamIds = Object.values(teamIdsObj);
     const data = await Promise.all(
       teamIds.map(async teamId => {
         return {
