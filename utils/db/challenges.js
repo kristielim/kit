@@ -1,7 +1,6 @@
 import firebase from "../firebase/firebase";
 
 import { getCurrentValue } from "./helper";
-import { getTeam } from "./teams";
 
 export async function openChallenge(assignedChallengeId, userId) {
   const openTime = firebase.database.ServerValue.TIMESTAMP;
@@ -77,7 +76,7 @@ export async function getAllAssignedChallenges(userId) {
       teamIds.map(async teamId => {
         return {
           challengeId: await getCurrentChallengeId(teamId),
-          team: await getTeam(teamId)
+          team: await getCurrentValue(`/teams/${teamId}/`)
         };
       })
     );
