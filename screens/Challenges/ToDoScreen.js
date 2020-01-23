@@ -10,12 +10,12 @@ import ChallengeTodo from "../../components/challenges/ChallengeTodo";
 import Colors from "../../constants/Colors";
 
 import {
-  getAllAssignedChallenges,
+  listenAllAssignedChallenges,
   openChallenge
 } from "../../utils/db/challenges";
 import { getUserId } from "../../utils/auth/auth";
 
-export default function ToDoScreen() {
+export default function ToDoScreen(props) {
   const [openedChallenges, setOpenedChallenges] = useState([]);
   const [unopenedChallenges, setUnopenedChallenges] = useState([]);
 
@@ -25,26 +25,42 @@ export default function ToDoScreen() {
   function renderTodos() {
     let todos = [];
     let alternator = true;
+    console.log("\n\n\nEntered renderTodos")
+    // console.log(openedChallenges)
     for (challenge of openedChallenges) {
-      // console.log(challenge)
-      todos.push(
-        <ChallengeTodo
-          key={challenge.teamId}
-          challenge={challenge}
-          mainColor={alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN}
-          onPress={() => {
-            alert("Hello");
-          }}
-        />
-      );
-      alternator = !alternator;
+      console.log(challenge)
+      let hasUserSubmitted = false;
+      if(challenge.hasOwnProperty("submissions")){
+        // console.log(challenge.submissions.hasOwnProperty(getUserId()))
+        hasUserSubmitted = challenge.submissions.hasOwnProperty(getUserId())
+      }
+      if(!hasUserSubmitted){
+        console.log("^rendering this todo\n\n")
+        let screentoNav;
+        if(challenge.challengeDetails.mediaType === "STRING"){
+          screentoNav = "UploadText";
+        }
+        else if(challenge.challengeDetails.mediaType === "IMAGE"){
+          screentoNav = "UploadImage";
+        }
+        else{
+          //Do some error handling
+        }
+        todos.push(
+          <ChallengeTodo key={challenge.assignedChallengeId} challenge={challenge} mainColor={(alternator ? Colors.KIT_LIGHT_ORANGE : Colors.KIT_GREEN)} onPress={() => {
+            props.navigation.navigate(screentoNav, {challenge})
+          }}/>
+        );
+        alternator = !alternator;
+      }
     }
+    console.log(todos)
     return todos;
   }
 
   useEffect(() => {
     const currentUser = getUserId();
-    getAllAssignedChallenges(currentUser).then(challenges => {
+    listenAllAssignedChallenges(currentUser, challenges => {
       const openedChallenges = [];
       const unopenedChallenges = [];
       // Filter opened and unopened challenges

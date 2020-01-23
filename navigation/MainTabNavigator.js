@@ -16,8 +16,7 @@ import CreateScreen from "../screens/Teams/CreateScreen";
 import ImageScreen from "../screens/ImageScreen";
 import TextScreen from "../screens/TextScreen";
 import SubmissionScreen from "../screens/SubmissionScreen";
-
-
+import IndividualChallengeScreen from "../screens/Challenges/IndividualChallenge";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import Colors from "../constants/Colors";
@@ -55,6 +54,11 @@ const ChallengesStack = createStackNavigator(
 
     Submitted: {
       screen: SubmissionScreen,
+      navigationOptions: { headerLeft: <></>, headerTitle: "Submitted" }
+    },
+
+    IndividualChallenge: {
+      screen: IndividualChallengeScreen,
       navigationOptions: { headerLeft: <></>, headerTitle: "Submitted" }
     }
   },

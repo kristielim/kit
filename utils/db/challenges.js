@@ -1,6 +1,6 @@
 import firebase from "../firebase/firebase";
 
-import { getCurrentValue } from "./helper";
+import { getCurrentValue, setLastUpdatedChallengesScreenForTeam } from "./helper";
 import { getTeam } from "./teams";
 
 export async function openChallenge(assignedChallengeId, userId) {
@@ -10,6 +10,9 @@ export async function openChallenge(assignedChallengeId, userId) {
     .database()
     .ref(`/assignedChallenges/${assignedChallengeId}/opened`)
     .update({ [userId]: openTime });
+  
+  const assignedChallenge = await getCurrentValue(`/assignedChallenges/${assignedChallengeId}`);
+  setLastUpdatedChallengesScreenForTeam(assignedChallenge.teamId); //Because this funciton mutates assignedChallenges, we must call this helper function so all users's screens re-render
 }
 
 export async function getCurrentChallengeId(teamId) {
@@ -63,6 +66,20 @@ export async function setCurrentChallenge(teamId) {
     .update({
       currentChallenge: assignedChallengeId
     });
+
+  setLastUpdatedChallengesScreenForTeam(teamId); //Because this funciton mutates assignedChallenges, we must call this helper function so all users's screens re-render
+}
+
+export async function listenAllAssignedChallenges(userId, callback) {
+  //This listener takes advantage of a specfic field set on each user object, which tracks the last time the user's challenges screen should have updated. It it set with a helper function whenever challenges that the user can interact with have mutated
+  const listener = firebase.database().ref(`/users/${userId}/lastUpdatedChallengesScreen`);
+  listener.on("value", async snapshot => {
+    const assignedChallenges = await getAllAssignedChallenges(userId);
+    console.log("listener has pulled:")
+    // console.log(assignedChallenges)
+    callback(assignedChallenges);
+    console.log("callback complete")
+  });
 }
 
 export async function getAllAssignedChallenges(userId) {
@@ -101,4 +118,21 @@ export async function getAllAssignedChallenges(userId) {
     })
   );
   return assignedChallenges;
+}
+
+export async function submitChallenge(assignedChallengeId, userId, submission) {
+  console.log(`\nenetered submitChallenge with assChallengeId: ${assignedChallengeId}`)
+  await firebase
+    .database()
+    .ref(`/assignedChallenges/${assignedChallengeId}/submissions`)
+    .update({[userId]: submission}, (error) => {
+      if (error) {
+        console.log(`The write failed with error: ${error}`)
+      } else {
+        console.log(`The write was a success`)
+      }
+    });
+  
+  const assignedChallenge = await getCurrentValue(`/assignedChallenges/${assignedChallengeId}`);
+  setLastUpdatedChallengesScreenForTeam(assignedChallenge.teamId); //Because this funciton mutates assignedChallenges, we must call this helper function so all users's screens re-render
 }

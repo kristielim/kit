@@ -3,14 +3,18 @@ import {
   StyleSheet,
   TextInput,
   View,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
-import * as firebase from 'firebase';
+import { submitChallenge } from "../utils/db/challenges";
+import { getUserId } from "../utils/auth/auth";
+
 import KitText from '../components/KitText';
 import KitButton  from '../components/KitButton'
 import Colors from '../constants/Colors';
 import FontStyles from '../constants/FontStyles';
 
-export default class ImageScreen extends React.Component{
+export default class TextScreen extends React.Component{
   //TODO: Rewrite in Hooks oops
   constructor(props) {
     super(props);
@@ -19,23 +23,34 @@ export default class ImageScreen extends React.Component{
     };
   }
 
-  submit = () => {
+  submit = async () => {
+    await submitChallenge(this.state.challenge.assignedChallengeId, getUserId(), this.state.text)
     const {navigate} = this.props.navigation;
     navigate("Submitted")
   };
 
+  componentDidMount(){
+    const challenge = this.props.navigation.getParam('challenge');
+    this.setState({challenge})
+  }
+
   render() {
-    
     return (
       <View style={styles.container}>
 
         <View style = {styles.header}>
-          <KitText 
-          size={50} 
-          fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
-          color={Colors.KIT_BLACK}>
-            Challenge Name
-        </KitText>
+          <View style={{flexDirection: "row"}}>
+            <TouchableOpacity style={styles.backButton} onPress={() =>{this.props.navigation.goBack()}}>
+              <Image source={require("../assets/images/arrow.png")} />
+            </TouchableOpacity>
+            
+            <KitText 
+              size={50} 
+              fontWeight={FontStyles.FONT_WEIGHT_BOLD} 
+              color={Colors.KIT_BLACK}>
+                Challenge Name
+            </KitText>
+          </View>
 
         <KitText 
           size={17}

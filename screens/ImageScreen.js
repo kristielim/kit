@@ -4,6 +4,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { submitChallenge } from "../utils/db/challenges";
+import { getUserId } from "../utils/auth/auth";
 
 import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
@@ -32,6 +34,8 @@ export default class ImageScreen extends React.Component {
   async componentDidMount() {
     //TODO
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const challenge = this.props.navigation.getParam('challenge');
+    this.setState({challenge})
   }
 
   render() {
@@ -107,7 +111,8 @@ export default class ImageScreen extends React.Component {
     try {
       if (!image.cancelled) {
         //image url saved and stored
-        uploadUrl = await uploadImageAsync(image); 
+        let uploadUrl = await uploadImageAsync(image);
+        await submitChallenge(this.state.challenge.assignedChallengeId, getUserId(), uploadUrl)
         this.setState({image: uploadUrl})
       }
     } catch (e) {
