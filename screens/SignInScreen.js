@@ -55,13 +55,13 @@ export default function SignInScreen(props) {
         <View style={styles.textInputContainer}>
           <View>
             <KitTextInput
-              image={require("../assets/images/onboardingemail.png")}
+              image={require("../assets/images/onboarding/email.png")}
               placeholder="Email"
               onChangeText={setEmail}
               value={email}
             />
             <KitTextInput
-              image={require("../assets/images/onboardingpassword.png")}
+              image={require("../assets/images/onboarding/password.png")}
               placeholder="Password"
               onChangeText={setPassword}
               value={password}

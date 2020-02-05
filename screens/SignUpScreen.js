@@ -123,7 +123,7 @@ export default function SignUpScreen(props) {
         </View>
         <View style={styles.textInputContainer}>
           <KitTextInput
-            image={require("../assets/images/onboardingname.png")}
+            image={require("../assets/images/onboarding/name.png")}
             placeholder="Display name"
             onBlur={checkDisplayName}
             onChangeText={displayName => {
@@ -135,7 +135,7 @@ export default function SignUpScreen(props) {
             success={displayNameSuccess}
           />
           <KitTextInput
-            image={require("../assets/images/onboardingemail.png")}
+            image={require("../assets/images/onboarding/email.png")}
             placeholder="Email"
             onBlur={checkEmail}
             onChangeText={email => {
@@ -147,7 +147,7 @@ export default function SignUpScreen(props) {
             success={emailSuccess}
           />
           <KitTextInput
-            image={require("../assets/images/onboardingpassword.png")}
+            image={require("../assets/images/onboarding/password.png")}
             placeholder="Password"
             onBlur={checkPassword}
             onChangeText={password => {
@@ -160,7 +160,7 @@ export default function SignUpScreen(props) {
             secureTextEntry
           />
           <KitTextInput
-            image={require("../assets/images/onboardingpassword.png")}
+            image={require("../assets/images/onboarding/password.png")}
             placeholder="Re-enter password"
             onBlur={checkReenteredPassword}
             onChangeText={password => {
