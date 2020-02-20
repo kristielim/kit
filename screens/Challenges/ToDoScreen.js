@@ -44,31 +44,35 @@ export default function ToDoScreen() {
 
   useEffect(() => {
     const currentUser = getUserId();
-    getAllAssignedChallenges(currentUser).then(challenges => {
-      const openedChallenges = [];
-      const unopenedChallenges = [];
-      // Filter opened and unopened challenges
-      for (const challenge of challenges) {
-        let opened = false;
-        if (challenge.hasOwnProperty("opened")) {
-          const openedUserObjects = challenge.opened;
-          for (const openedUser of Object.keys(openedUserObjects)) {
-            if (openedUser === currentUser) {
-              opened = true;
-              break;
+    getAllAssignedChallenges(currentUser)
+      .then(challenges => {
+        const openedChallenges = [];
+        const unopenedChallenges = [];
+        // Filter opened and unopened challenges
+        for (const challenge of challenges) {
+          let opened = false;
+          if (challenge.hasOwnProperty("opened")) {
+            const openedUserObjects = challenge.opened;
+            for (const openedUser of Object.keys(openedUserObjects)) {
+              if (openedUser === currentUser) {
+                opened = true;
+                break;
+              }
             }
           }
+          if (opened) {
+            openedChallenges.push(challenge);
+          } else {
+            unopenedChallenges.push(challenge);
+          }
         }
-        if (opened) {
-          openedChallenges.push(challenge);
-        } else {
-          unopenedChallenges.push(challenge);
-        }
-      }
-      setOpenedChallenges(openedChallenges);
-      setUnopenedChallenges(unopenedChallenges);
-      setChallengeCards(unopenedChallenges);
-    });
+        setOpenedChallenges(openedChallenges);
+        setUnopenedChallenges(unopenedChallenges);
+        setChallengeCards(unopenedChallenges);
+      })
+      .catch(() => {
+        console.log("Error: cannot get challenges for user");
+      });
   }, []);
 
   const getTimeLeftInMilliseconds = assignedTime => {
