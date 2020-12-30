@@ -37,9 +37,7 @@ export default function ProfileScreen() {
     getUsername(currentUser).then(name => {
       setName(name);
     });
-  }, []);
 
-  useEffect(() => {
     Permissions.askAsync(Permissions.CAMERA_ROLL);
     console.log("current", currentUser);
     getPicture(currentUser).then(image => {
