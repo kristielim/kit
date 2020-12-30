@@ -69,7 +69,6 @@ export default function Tutorial2Screen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 75,
     backgroundColor: Colors.KIT_WHITE
   },
   header: {
@@ -116,7 +115,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: 320,
     height: 509,
-    marginBottom: 40,
     backgroundColor: Colors.KIT_WHITE,
     alignSelf: "center",
     shadowOffset: { height: 2, width: 2 },

@@ -11,10 +11,16 @@ export default function KitTextInput(props) {
       marginTop: 4
     },
     image: {
-      marginLeft: 20
+      marginLeft: 20,
+      height: 20,
+      width: 20,
+      resizeMode: "contain"
     },
     statusImage: {
-      marginRight: 20
+      marginRight: 20,
+      height: 20,
+      width: 20,
+      resizeMode: "contain"
     },
     textInputContainer: {
       flexDirection: "row",
